@@ -1,69 +1,102 @@
 <script>
   import { onMount } from "svelte";
-  let navArray = [
-    8.77,
-    9.0,
-    8.24,
-    9.54,
-    10.0,
-    7.6,
-    9.7,
-    9.8,
-    9.0,
-    8.67,
-    8.5,
-    8.0,
-    8.34,
-    9.28,
-    10.0,
-    10.23,
-    10.5,
-    10.32,
-    10.73,
-    10.32,
-    11.0,
-    10.45,
-    10.34,
-    11.0,
-    10.7,
-    11.1,
-    11.12,
-    11.45
-  ];
-  let navToday = navArray[navArray.length - 1];
-  let navReturn = `${(navToday / 10 - 1).toFixed(2)}% ($${(
-    navToday - 10
-  ).toFixed(2)})`;
+  import { fade } from "svelte/transition";
   function goToSection(section) {
-    document.getElementById(section).scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    document.getElementById(section).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    });
   }
+  async function loadAPI(url) {
+    let data = await fetch("https://api.guardianbrothers.com/stats");
+    let response = await data.json();
+    return response;
+  }
+  var stats = loadAPI("https://api.guardianbrothers.com/stats");
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD"
+  });
+
+  onMount(() => {
+    setTimeout(() => {
+      stats.then(stats => {
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          let array = stats.map((obj, index) => [
+            new Date(obj.id),
+            +((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(
+              2
+            )
+          ]);
+          //console.log(array);
+          var chart = new window.google.visualization.LineChart(
+            document.getElementById("performanceChart")
+          );
+          let data = new google.visualization.DataTable();
+          data.addColumn("date", "Month");
+          data.addColumn("number", "Price");
+          data.addRows(array);
+          chart.draw(data, {
+            legend: { position: "none" },
+            backgroundColor: { fill: "transparent" },
+            chartArea: { left: 100, top: 20, width: "90%", height: "90%" },
+            vAxis: { format: "currency" },
+            hAxis: {
+              gridlines: {
+                units: {
+                  months: { format: ["MMM YYYY"] }
+                }
+              },
+              minorGridlines: {
+                units: {
+                  days: { format: [] }
+                }
+              }
+            }
+          });
+        }
+      });
+    }, 1000); //find way to detect google charts loaded instead of timeout
+  });
 </script>
 
 <div class="pageContainerTop">
   <div
     class="pageContainerInner"
     style="color:#ffffff;font-size:22px;height:400px;">
-    <div style="margin-top:25px;margin-bottom:25px;">
-      Guardian Brother Equity Fund (GBH)
-    </div>
-    <div style="display:flex;flex-direction:row;justify-content:space-between;">
-      <div>
-        <div>Fund Asset</div>
-        <div>$18.2k</div>
+    {#await stats}
+      <div />
+    {:then stats}
+      <div id="statsTitle">Guardian Brother Holdings - Investors Shares</div>
+      <div id="stats" in:fade>
+        <div class="statsContainer">
+          <div class="infoBorder">
+            <div>Fund Assets</div>
+            <div>{formatter.format(stats[0].value)}</div>
+          </div>
+          <div class="infoBorder">
+            <div>Shares Outstanding</div>
+            <div>{formatter.format(stats[0].shares).slice(1)}</div>
+          </div>
+        </div>
+        <div class="statsContainer">
+          <div class="infoBorder">
+            <div>NAV</div>
+            <div>{formatter.format(stats[0].value / stats[0].shares)}</div>
+          </div>
+          <div class="infoBorder">
+            <div>NAV Change</div>
+            <div>
+              {formatter.format(stats[0].value / stats[0].shares - stats[1].value / stats[1].shares)}
+              ({(((stats[0].value / stats[0].shares - stats[1].value / stats[1].shares) / (stats[1].value / stats[1].shares)) * 100).toFixed(2) + '%'})
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <div>Fund Strategy</div>
-        <div>US Mid-Large Cap Stocks</div>
-      </div>
-      <div>
-        <div>NAV (Today)</div>
-        <div>${navToday}</div>
-      </div>
-      <div>
-        <div>YTD Return</div>
-        <div>${navReturn}</div>
-      </div>
-    </div>
+    {/await}
   </div>
 </div>
 <div class="pageContainerMiddle">
@@ -78,6 +111,11 @@
       </a>
       <a
         href="javascript:void(0)"
+        on:click={() => goToSection('sectionHowItWorks')}>
+        How it works
+      </a>
+      <a
+        href="javascript:void(0)"
         on:click={() => goToSection('sectionPerformance')}>
         Performance
       </a>
@@ -88,18 +126,16 @@
       </a>
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionHoldings')}>
+        on:click={() => goToSection('sectionTopHoldings')}>
         Holdings
       </a>
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionPortfolioManagers')}>
-        Portfolio Managers
+        on:click={() => goToSection('sectionDiversification')}>
+        Diversification
       </a>
-      <a
-        href="javascript:void(0)"
-        on:click={() => goToSection('sectionFundAndExpenses')}>
-        Fund & Expenses
+      <a href="javascript:void(0)" on:click={() => goToSection('sectionTeam')}>
+        Team
       </a>
     </div>
   </div>
@@ -108,6 +144,7 @@
   <div class="pageContainerInner">
     <h1 id="sectionOverview">Overview</h1>
     <div class="textBlock">
+      <h2>How We Invest</h2>
       <p>
         We believe investing is about transparency, honesty, and accessibility
         for all our investors at any time. We created this fund with the goal of
@@ -115,9 +152,8 @@
         capital appreciation. Our number one goal is to provide exceptional
         returns while minimizing risk.
       </p>
+      <h2>Fund Strategy</h2>
       <p>
-        Fund Strategy:
-        <br />
         • Fund Title Invest is mid-large cap U.S companies with long-term
         competitive advantages and relevancy, quality management teams and
         positive performance on fund’s criteria.
@@ -129,63 +165,32 @@
         income in any circumstances. Our main goal is to always be on top of the
         markets.
       </p>
+    </div>
+    <h1 id="sectionHowItWorks">How it works</h1>
+    <div class="textBlock">
       <p>
-        Risk
-        <br />
-        • You may lose money by investing in the Fund. You should expect the
-        Fund's share price and total return to fluctuate within a wide range,
-        like the fluctuations of the overall stock market. The Fund's
-        performance could be hurt by: (read more)
+        We Buy: Guardian Brothers Holdings find opportunities in the stock
+        market. Creates a solid portfolio for all our investors
       </p>
-      <i>
-        <p>
-          Stock market risk: The chance that stock prices overall will decline.
-          Stock markets tend to move in cycles, with periods of rising prices
-          and periods of falling prices. Manager risk: The chance that, as a
-          result of poor security selection by the Advisor, the Fund may
-          underperform relative to benchmarks or other funds with similar
-          investment objectives. Investment style risk: The chance that returns
-          from the mix of small-, mid-, and large-cap stocks in the Fund's
-          portfolio will trail returns from the overall stock market.
-          Historically, small- and mid-cap stocks have been more volatile in
-          price than the large-cap stocks that dominate the overall stock
-          market, and they often perform quite differently. Additionally, from
-          time to time, growth stocks may be more volatile than the overall
-          stock market.
-        </p>
-        <p>
-          Sector-focus risk: The chance that investing a significant portion of
-          the Fund’s assets in one sector of the market exposes the Fund to
-          greater market risk and potential monetary losses than if those assets
-          were spread among various sectors.
-        </p>
-        <p>
-          Foreign securities risk: The chance that the value of foreign
-          securities will be adversely affected by the political and economic
-          environments and other overall economic conditions in the countries
-          where the Fund invests. Investing in foreign securities involves:
-          country risk, which is the chance that domestic events - such as
-          political upheaval, financial troubles, or natural disasters – will
-          weaken a country's securities markets; and currency risk, which is the
-          chance that the value of a foreign investment, measured in U.S.
-          dollars, will decrease because of unfavorable changes in currency
-          exchange rates. Small- and mid-cap stocks risk: The chance that small-
-          and mid-cap stocks may trade less frequently or in more limited volume
-          than those of larger, more established companies; may fluctuate in
-          value more; and, as a group, may suffer more severe price declines
-          during periods of generally declining stock prices.
-        </p>
-      </i>
     </div>
     <h1 id="sectionPerformance">Performance</h1>
     <div class="textBlock">
+      <div id="performanceChart" style="width: 100%; height: 500px" in:fade />
       <p>
         This chart illustrates the performance of a hypothetical $10,000
-        investment in the Fund since its inception on 11/01/2004. Assumes
+        investment in the Fund since its inception on 04/15/2020. Assumes
         investment of dividends and capital gains, but does not reflect the
         effect of any applicable sales charges or redemption fees. This chart
         does not imply any future performance.
       </p>
+    </div>
+    <h1 id="sectionTopHoldings">Top Holdings</h1>
+    <div class="textBlock">
+      <p>Work in progress.</p>
+    </div>
+    <h1 id="sectionDiversifcation">Diversifcation</h1>
+    <div class="textBlock">
+      <p>Work in progress.</p>
     </div>
     <h1 id="sectionFundFacts">Fund Facts</h1>
     <div class="textBlock">
@@ -214,27 +219,44 @@
         <br />
       </p>
     </div>
-    <h1 id="sectionHoldings">Holdings</h1>
+    <h1 id="sectionTeam">Team</h1>
     <div class="textBlock">
-      <p>Work in progress.</p>
-    </div>
-    <h1 id="sectionPortfolioManagers">Portfolio Managers</h1>
-    <div class="textBlock">
-      <p>
-        Fernando Guardia Virreira is President and Portfolio Manager of FMB.
-        SEC-Registered investment advisor CRD- 305744
-      </p>
-    </div>
-    <h1 id="sectionFundAndExpenses">Fund & Expenses</h1>
-    <div class="textBlock">
-      <p>
-        Management Fee – 1% (Investment entry fee)
-        <br />
-        Expense Ratio – 0.50% (Annual expense fee)
-        <br />
-        Performance fees - 10% over return (quarterly)
-        <br />
-      </p>
+      <div
+        style="display:flex;flex-direction:row;justify-content:space-around;align-items:flex-start;margin-bottom:50px;margin-top:50px;">
+        <div
+          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+          <div style="height:100px;width:100px;background-color:#AAAAAA" />
+          <span style="font-size:20px;font-weight:600">
+            Fernando Guardia Virreira
+          </span>
+          <span>Chief Executive Officer</span>
+          <span>Portfolio Manager</span>
+        </div>
+        <div
+          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+          <div style="height:100px;width:100px;background-color:#AAAAAA" />
+          <span style="font-size:20px;font-weight:600">
+            Chris Aitken
+          </span>
+          <span>Chief Technology Officer</span>
+        </div>
+        <div
+          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+          <div style="height:100px;width:100px;background-color:#AAAAAA" />
+          <span style="font-size:20px;font-weight:600">
+            Matias Martinez
+          </span>
+          <span>Director of Marketing & Sales</span>
+        </div>
+        <div
+          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+          <div style="height:100px;width:100px;background-color:#AAAAAA" />
+          <span style="font-size:20px;font-weight:600">
+            Juan Carlos Paniagua
+          </span>
+          <span>Executive Vice President</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
