@@ -9,56 +9,84 @@
     });
   }
   async function loadAPI(url) {
-    let data = await fetch("https://api.guardianbrothers.com/stats");
+    let data = await fetch(url);
     let response = await data.json();
     return response;
   }
   var stats = loadAPI("https://api.guardianbrothers.com/stats");
+  stats.then(innerStats => {
+    stats = innerStats;
+  });
+
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD"
   });
 
+  async function exportCsv() {
+    let array = stats.map((obj, index) => [
+      obj.id.substring(0, 10),
+      '$'+(obj.value/obj.shares).toFixed(2),
+      '$'+((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(2),
+      obj.shares,
+      '$'+obj.value
+    ]);
+    array.unshift([
+      "Date",
+      "NAV",
+      "10k Investment",
+      "Shares Outstanding",
+      "Net Liquidated Value & Trades"
+    ]);
+
+    let csvContent =
+      "data:text/csv;charset=utf-8," + array.map(e => e.join(",")).join("\n");
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "guardian_brothers_fund_export.csv");
+    document.body.appendChild(link);
+    link.click();
+  }
+
   onMount(() => {
     setTimeout(() => {
-      stats.then(stats => {
-        google.charts.load("current", { packages: ["corechart"] });
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-          let array = stats.map((obj, index) => [
-            new Date(obj.id),
-            +((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(
-              2
-            )
-          ]);
-          //console.log(array);
-          var chart = new window.google.visualization.LineChart(
-            document.getElementById("performanceChart")
-          );
-          let data = new google.visualization.DataTable();
-          data.addColumn("date", "Month");
-          data.addColumn("number", "Price");
-          data.addRows(array);
-          chart.draw(data, {
-            legend: { position: "none" },
-            backgroundColor: { fill: "transparent" },
-            chartArea: { left: 100, top: 20, width: "90%", height: "90%" },
-            vAxis: { format: "currency" },
-            hAxis: {
-              gridlines: {
-                units: {
-                  months: { format: ["MMM YYYY"] }
-                }
-              },
-              minorGridlines: {
-                units: {
-                  days: { format: [] }
-                }
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        let array = stats.map((obj, index) => [
+          new Date(obj.id),
+          +((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(2)
+          //parseFloat(obj.value)
+        ]);
+        //console.log(array);
+        var chart = new window.google.visualization.LineChart(
+          document.getElementById("performanceChart")
+        );
+        let data = new google.visualization.DataTable();
+        data.addColumn("date", "Month");
+        data.addColumn("number", "Price");
+        //data.addColumn("number", "NAV");
+        data.addRows(array);
+        chart.draw(data, {
+          legend: { position: "none" },
+          backgroundColor: { fill: "transparent" },
+          chartArea: { left: 100, top: 20, width: "90%", height: "90%" },
+          vAxis: { format: "currency" },
+          hAxis: {
+            gridlines: {
+              units: {
+                months: { format: ["MMM YYYY"] }
+              }
+            },
+            minorGridlines: {
+              units: {
+                days: { format: [] }
               }
             }
-          });
-        }
-      });
+          }
+        });
+      }
     }, 1000); //find way to detect google charts loaded instead of timeout
   });
 </script>
@@ -173,9 +201,21 @@
         market. Creates a solid portfolio for all our investors
       </p>
     </div>
-    <h1 id="sectionPerformance">Performance</h1>
+    <h1 id="sectionPerformance" style="display:flex;align-items:flex-end;justify-content:space-between">Performance    <a
+    style="float:right;font-size:14px;"
+          href="javascript:void(0)"
+          on:click={() => {
+            exportCsv();
+          }}>
+          Download CSV
+        </a></h1>        
+
     <div class="textBlock">
+      <p style="display:flex;flex-direction:row;justify-content:flex-end;">
+
+      </p>
       <div id="performanceChart" style="width: 100%; height: 500px" in:fade />
+
       <p>
         This chart illustrates the performance of a hypothetical $10,000
         investment in the Fund since its inception on 04/15/2020. Assumes
@@ -235,17 +275,13 @@
         <div
           style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
           <div style="height:100px;width:100px;background-color:#AAAAAA" />
-          <span style="font-size:20px;font-weight:600">
-            Chris Aitken
-          </span>
+          <span style="font-size:20px;font-weight:600">Chris Aitken</span>
           <span>Chief Technology Officer</span>
         </div>
         <div
           style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
           <div style="height:100px;width:100px;background-color:#AAAAAA" />
-          <span style="font-size:20px;font-weight:600">
-            Matias Martinez
-          </span>
+          <span style="font-size:20px;font-weight:600">Matias Martinez</span>
           <span>Director of Marketing & Sales</span>
         </div>
         <div
