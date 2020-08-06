@@ -23,13 +23,21 @@
     currency: "USD"
   });
 
+  var displayedPositions = [];
+  var positions = loadAPI("https://api.guardianbrothers.com/positions");
+  positions.then(innerPositions => {
+    positions = innerPositions;
+    displayedPositions = positions.positions.slice(0, 10);
+  });
+
   async function exportCsv() {
     let array = stats.map((obj, index) => [
       obj.id.substring(0, 10),
-      '$'+(obj.value/obj.shares).toFixed(2),
-      '$'+((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(2),
+      "$" + (obj.value / obj.shares).toFixed(2),
+      "$" +
+        ((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(2),
       obj.shares,
-      '$'+obj.value
+      "$" + obj.value
     ]);
     array.unshift([
       "Date",
@@ -56,7 +64,7 @@
       function drawChart() {
         let array = stats.map((obj, index) => [
           new Date(obj.id),
-          +((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(2)
+          +(parseFloat(obj.value) / parseFloat(obj.shares)).toFixed(2)
           //parseFloat(obj.value)
         ]);
         //console.log(array);
@@ -201,34 +209,78 @@
         market. Creates a solid portfolio for all our investors
       </p>
     </div>
-    <h1 id="sectionPerformance" style="display:flex;align-items:flex-end;justify-content:space-between">Performance    <a
-    style="float:right;font-size:14px;"
-          href="javascript:void(0)"
-          on:click={() => {
-            exportCsv();
-          }}>
-          Download CSV
-        </a></h1>        
+    <h1
+      id="sectionPerformance"
+      style="display:flex;align-items:flex-end;justify-content:space-between">
+      Performance
+      <a
+        style="float:right;font-size:14px;"
+        href="javascript:void(0)"
+        on:click={() => {
+          exportCsv();
+        }}>
+        Download CSV
+      </a>
+    </h1>
 
     <div class="textBlock">
-      <p style="display:flex;flex-direction:row;justify-content:flex-end;">
-
-      </p>
+      <p style="display:flex;flex-direction:row;justify-content:flex-end;" />
       <div id="performanceChart" style="width: 100%; height: 500px" in:fade />
-
-      <p>
-        This chart illustrates the performance of a hypothetical $10,000
-        investment in the Fund since its inception on 04/15/2020. Assumes
-        investment of dividends and capital gains, but does not reflect the
-        effect of any applicable sales charges or redemption fees. This chart
-        does not imply any future performance.
-      </p>
     </div>
     <h1 id="sectionTopHoldings">Top Holdings</h1>
     <div class="textBlock">
-      <p>Work in progress.</p>
+      {#await positions}
+        <div />
+      {:then positions}
+        <table style="width:100%;line-height:35px;">
+          <thead>
+            <tr style="text-align: left;">
+              <th>Ticker</th>
+              <th># of Shares</th>
+              <th>Market Value</th>
+              <th>Weight</th>
+              <th>Total Gain</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each displayedPositions as item}
+              <tr>
+                <td>{item.instrument.symbol}</td>
+                <td>{item.longQuantity}</td>
+                <td>{formatter.format(item.marketValue)}</td>
+                <td>
+                  {((item.marketValue / positions.liquidationValue) * 100).toFixed(2)}%
+                </td>
+                <td>
+                  {(((item.marketValue / item.longQuantity - item.averagePrice) / item.averagePrice) * 100).toFixed(2)}%
+                </td>
+              </tr>
+            {/each}
+            <tr />
+            {#if displayedPositions.length !== 10}
+              <tr style="height:60px;">
+                <td>Cash</td>
+                <td>{formatter.format(positions.cashBalance)}</td>
+              </tr>
+            {/if}
+          </tbody>
+        </table>
+        <div style="display:flex;width:100%;justify-content:center;">
+          <a
+            href="javascript:void(0)"
+            on:click={() => {
+              if (displayedPositions.length === 10) {
+                displayedPositions = positions.positions;
+              } else {
+                displayedPositions = positions.positions.slice(0, 10);
+              }
+            }}>
+            {displayedPositions.length === 10 ? 'Expand' : 'Collapse'}
+          </a>
+        </div>
+      {/await}
     </div>
-    <h1 id="sectionDiversifcation">Diversifcation</h1>
+    <h1 id="sectionDiversifcation">Diversification</h1>
     <div class="textBlock">
       <p>Work in progress.</p>
     </div>

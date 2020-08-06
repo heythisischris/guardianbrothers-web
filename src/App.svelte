@@ -41,7 +41,7 @@
                 alt=""
                 src="/images/logo.svg" />
               <div
-                style="display:flex;flex-direction:column;justify-content:center;">
+                style="display:flex;flex-direction:column;justify-content:center;color:#000000;">
                 <div id="title">Guardian Brothers Holdings</div>
                 <div id="subtitle">Invest in your future</div>
               </div>
