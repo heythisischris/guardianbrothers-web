@@ -1,6 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  var isMobile = window.matchMedia("only screen and (max-width: 760px)")
+    .matches;
+
   function goToSection(section) {
     document.getElementById(section).scrollIntoView({
       behavior: "smooth",
@@ -62,24 +65,116 @@
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-        let array = stats.map((obj, index) => [
+        let performanceArray = stats.map((obj, index) => [
           new Date(obj.id),
           +(parseFloat(obj.value) / parseFloat(obj.shares)).toFixed(2)
           //parseFloat(obj.value)
         ]);
         //console.log(array);
-        var chart = new window.google.visualization.LineChart(
+        var performanceChart = new window.google.visualization.LineChart(
           document.getElementById("performanceChart")
         );
-        let data = new google.visualization.DataTable();
-        data.addColumn("date", "Month");
-        data.addColumn("number", "Price");
-        //data.addColumn("number", "NAV");
-        data.addRows(array);
-        chart.draw(data, {
+        let performanceData = new google.visualization.DataTable();
+        performanceData.addColumn("date", "Month");
+        performanceData.addColumn("number", "Price");
+        performanceData.addRows(performanceArray);
+        performanceChart.draw(performanceData, {
           legend: { position: "none" },
           backgroundColor: { fill: "transparent" },
-          chartArea: { left: 100, top: 20, width: "90%", height: "90%" },
+          chartArea: { left: 50, top: 10, width: "100%", height: "90%" },
+          vAxis: { format: "currency" },
+          hAxis: {
+            gridlines: {
+              units: {
+                months: { format: ["MMM YYYY"] }
+              }
+            },
+            minorGridlines: {
+              units: {
+                days: { format: [] }
+              }
+            }
+          }
+        });
+
+        let diversificationArray = [];
+        for (let obj of positions.positions) {
+          let findIndex = diversificationArray.findIndex(
+            innerObj => innerObj[0] === obj.sector
+          );
+          if (findIndex === -1) {
+            diversificationArray.push([obj.sector, obj.marketValue]);
+          } else {
+            diversificationArray[findIndex][1] += obj.marketValue;
+          }
+        }
+
+        var diversificationChart = new window.google.visualization.PieChart(
+          document.getElementById("diversificationChart")
+        );
+        let diversificationData = new google.visualization.DataTable();
+        diversificationData.addColumn("string", "sector");
+        diversificationData.addColumn("number", "marketValue");
+        diversificationData.addRows(diversificationArray);
+
+        diversificationChart.draw(diversificationData, {
+          legend: { position: isMobile ? "none" : "" },
+          colors: ["#2a314a", "#415777", "#617da1", "#8aaacd", "#b5d8f5"],
+          backgroundColor: { fill: "transparent" },
+          chartArea: { left: 0, top: 0, width: "100%", height: "100%" },
+          vAxis: { format: "currency" },
+          hAxis: {
+            gridlines: {
+              units: {
+                months: { format: ["MMM YYYY"] }
+              }
+            },
+            minorGridlines: {
+              units: {
+                days: { format: [] }
+              }
+            }
+          }
+        });
+
+        let marketCapArray = [
+          ["Micro", 0],
+          ["Small", 0],
+          ["Mid", 0],
+          ["Large", 0],
+          ["Mega", 0]
+        ];
+        for (let obj of positions.positions) {
+          if (obj.marketCap >= 0 && obj.marketCap < 300000000) {
+            marketCapArray[0][1] += obj.marketValue;
+          }
+          if (obj.marketCap >= 300000000 && obj.marketCap < 2000000000) {
+            marketCapArray[1][1] += obj.marketValue;
+          }
+          if (obj.marketCap >= 2000000000 && obj.marketCap < 10000000000) {
+            marketCapArray[2][1] += obj.marketValue;
+          }
+          if (obj.marketCap >= 10000000000 && obj.marketCap < 200000000000) {
+            marketCapArray[3][1] += obj.marketValue;
+          }
+          if (obj.marketCap >= 200000000000) {
+            marketCapArray[4][1] += obj.marketValue;
+          }
+        }
+
+        var marketCapChart = new window.google.visualization.PieChart(
+          document.getElementById("marketCapChart")
+        );
+        let marketCapData = new google.visualization.DataTable();
+        marketCapData.addColumn("string", "sector");
+        marketCapData.addColumn("number", "marketValue");
+        marketCapData.addRows(marketCapArray);
+
+        marketCapChart.draw(marketCapData, {
+          legend: { position: isMobile ? "none" : "" },
+          colors: ["#8aaacd", "#b5d8f5", "#2a314a", "#415777", "#617da1"],
+          backgroundColor: { fill: "transparent" },
+          chartArea: { left: 0, top: 0, width: "100%", height: "100%" },
           vAxis: { format: "currency" },
           hAxis: {
             gridlines: {
@@ -131,6 +226,14 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="investDiv">
+        <a
+          class="investButton"
+          target="_blank"
+          href="https://calendly.com/guardianbrothers/15min">
+          Invest now
+        </a>
       </div>
     {/await}
   </div>
@@ -190,9 +293,9 @@
       </p>
       <h2>Fund Strategy</h2>
       <p>
-        • Fund Title Invest is mid-large cap U.S companies with long-term
-        competitive advantages and relevancy, quality management teams and
-        positive performance on fund’s criteria.
+        • Guardian Brothers invests in mid-large cap U.S companies with
+        long-term competitive advantages and relevancy, quality management teams
+        and positive performance on fund’s criteria.
         <br />
         • Our team focus in value investing. We only invest in companies that
         have being rigorously monitored and have passed all our filters.
@@ -204,10 +307,36 @@
     </div>
     <h1 id="sectionHowItWorks">How it works</h1>
     <div class="textBlock">
-      <p>
-        We Buy: Guardian Brothers Holdings find opportunities in the stock
-        market. Creates a solid portfolio for all our investors
-      </p>
+      <div class="howItWorksBlocks">
+        <div>
+          <p class="howItWorksBlocksTitle">We buy</p>
+          <p>
+            Guardian Brothers Holdings find opportunities in the stock market.
+            Creates a solid portfolio for all of our investors
+          </p>
+        </div>
+        <div>
+          <p class="howItWorksBlocksTitle">You Invest</p>
+          <p>
+            You become a partner and receive benefits of the returns generated
+            by Guardian Brothers Fund
+          </p>
+        </div>
+        <div>
+          <p class="howItWorksBlocksTitle">Capital Appreciation</p>
+          <p>
+            Our portfolio appreciates and receives dividends. You get the
+            benefit of compounded interest and capital appreciation
+          </p>
+        </div>
+        <div>
+          <p class="howItWorksBlocksTitle">You get paid</p>
+          <p>
+            Your investment appreciates in value and we help capture your
+            profits. No limits on withdrawals, no hidden fees. Easy access.
+          </p>
+        </div>
+      </div>
     </div>
     <h1
       id="sectionPerformance"
@@ -225,7 +354,10 @@
 
     <div class="textBlock">
       <p style="display:flex;flex-direction:row;justify-content:flex-end;" />
-      <div id="performanceChart" style="width: 100%; height: 500px" in:fade />
+      <div
+        id="performanceChart"
+        style="width: 100%; height: {isMobile ? '300px' : '500px'}"
+        in:fade />
     </div>
     <h1 id="sectionTopHoldings">Top Holdings</h1>
     <div class="textBlock">
@@ -234,8 +366,9 @@
       {:then positions}
         <table style="width:100%;line-height:35px;">
           <thead>
-            <tr style="text-align: left;">
-              <th>Ticker</th>
+            <tr
+              style="text-align: {isMobile ? 'center' : 'left'};line-height:1.2">
+              <th>{isMobile ? 'Ticker' : 'Name'}</th>
               <th># of Shares</th>
               <th>Market Value</th>
               <th>Weight</th>
@@ -245,7 +378,7 @@
           <tbody>
             {#each displayedPositions as item}
               <tr>
-                <td>{item.instrument.symbol}</td>
+                <td>{isMobile ? item.instrument.symbol : item.name}</td>
                 <td>{item.longQuantity}</td>
                 <td>{formatter.format(item.marketValue)}</td>
                 <td>
@@ -280,43 +413,107 @@
         </div>
       {/await}
     </div>
-    <h1 id="sectionDiversifcation">Diversification</h1>
-    <div class="textBlock">
-      <p>Work in progress.</p>
+    <h1 id="sectionDiversification">Diversification</h1>
+    <div class="textBlock diversificationCharts">
+      <div
+        id="diversificationChart"
+        style="width: 50%; height: 350px;"
+        in:fade />
+      <div id="marketCapChart" style="width: 50%; height: 350px;" in:fade />
     </div>
     <h1 id="sectionFundFacts">Fund Facts</h1>
     <div class="textBlock">
-      <p>
-        • Fund Objective – Capital Appreciation and income
-        <br />
-        • Fund Strategy – U.S Mid-Large Cap Long/Short Equity Fund
-        <br />
-        • Ticker – FMB
-        <br />
-        • Fund Asset – total fund’s assets
-        <br />
-        • CUSIP – Not yet
-        <br />
-        • Distribution Frequency – Quarterly
-        <br />
-        • Minimum Initial Investment - $500
-        <br />
-        • Minimum Subsequent Investment - $50
-        <br />
-        • Gross Expense Ratio – 0.50%
-        <br />
-        • NAV – of the current date
-        <br />
-        • NAV Change from prior day -
-        <br />
-      </p>
+      {#await stats}
+        <div />
+      {:then stats}
+        <div class="fundFactsBlocks">
+          <table style="width:100%;line-height:35px;">
+            <thead>
+              <tr>
+                <th style="width:30%;" />
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fund Objective</td>
+                <td>Capital Appreciation and income</td>
+              </tr>
+              <tr>
+                <td>Fund Strategy</td>
+                <td>U.S Mid-Large Cap Long/Short Equity Fund</td>
+              </tr>
+              <tr>
+                <td>Fund Asset</td>
+                <td>{formatter.format(stats[0].value)}</td>
+              </tr>
+              <tr>
+                <td>NAV</td>
+                <td>{formatter.format(stats[0].value / stats[0].shares)}</td>
+              </tr>
+              <tr>
+                <td>Ticker</td>
+                <td>GBH</td>
+              </tr>
+              <tr>
+                <td>Number of Holdings</td>
+                <td>Total Stocks</td>
+              </tr>
+              <tr>
+                <td style="line-height:1.7;">Distribution Frequency</td>
+                <td>Quarterly</td>
+              </tr>
+              <tr>
+                <td>Gross Expense Ratio</td>
+                <td>0.50%</td>
+              </tr>
+              <tr>
+                <td>Fund Inception</td>
+                <td>02/13/2020</td>
+              </tr>
+            </tbody>
+          </table>
+          <table style="width:100%;line-height:35px;">
+            <thead>
+              <tr>
+                <th style="width:35%;" />
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Primary Benchmark</td>
+                <td>S&P500</td>
+              </tr>
+              <tr>
+                <td>Minimum Investment</td>
+                <td>$500</td>
+              </tr>
+              <tr>
+                <td style="line-height:1.7;">Minimum Subsequent Investment</td>
+                <td>$50</td>
+              </tr>
+              <tr>
+                <td>Management Fees</td>
+                <td>1.5%</td>
+              </tr>
+              <tr>
+                <td>Transaction Fees</td>
+                <td>2%</td>
+              </tr>
+              <tr>
+                <td>Performance Fees</td>
+                <td>10%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      {/await}
     </div>
     <h1 id="sectionTeam">Team</h1>
     <div class="textBlock">
-      <div
-        style="display:flex;flex-direction:row;justify-content:space-around;align-items:flex-start;margin-bottom:50px;margin-top:50px;">
-        <div
-          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+      <div class="teamBlocks">
+        <div class="teamBlocksInner">
           <div style="height:100px;width:100px;background-color:#AAAAAA" />
           <span style="font-size:20px;font-weight:600">
             Fernando Guardia Virreira
@@ -324,20 +521,17 @@
           <span>Chief Executive Officer</span>
           <span>Portfolio Manager</span>
         </div>
-        <div
-          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+        <div class="teamBlocksInner">
           <div style="height:100px;width:100px;background-color:#AAAAAA" />
           <span style="font-size:20px;font-weight:600">Chris Aitken</span>
           <span>Chief Technology Officer</span>
         </div>
-        <div
-          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+        <div class="teamBlocksInner">
           <div style="height:100px;width:100px;background-color:#AAAAAA" />
           <span style="font-size:20px;font-weight:600">Matias Martinez</span>
           <span>Director of Marketing & Sales</span>
         </div>
-        <div
-          style="display:flex;flex-direction:column;justify-content:space-around;align-items:center">
+        <div class="teamBlocksInner">
           <div style="height:100px;width:100px;background-color:#AAAAAA" />
           <span style="font-size:20px;font-weight:600">
             Juan Carlos Paniagua

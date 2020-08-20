@@ -150,6 +150,7 @@ a:hover {
   padding: 10px 10px;
   width: 1140px;
   min-height: 200px;
+  max-width: 90vw;
 }
 
 h1 {
@@ -210,8 +211,89 @@ a {
   justify-content: space-around;
 }
 
-tbody tr:nth-child(odd){
+tbody tr:nth-child(odd) {
   background-color: #d3d3d3;
+}
+
+.diversificationCharts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.teamBlocks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.teamBlocksInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.investDiv {
+  margin-top: 80px;
+  margin-left: 32px;
+}
+
+.investButton {
+  background-color: #B4AC89;
+  color: #000000;
+  text-decoration: none;
+  padding: 5px 20px;
+  border-radius: 5px;
+  font-size: 30px;
+  transition: background-color .2s;
+}
+
+.investButton:hover {
+  text-decoration: none;
+  background-color: #232f5a;
+  color: #ffffff;
+}
+
+.fundFactsBlocks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.fundFactsBlocks table {
+  margin: 20px;
+}
+
+.fundFactsBlocks tr {
+  line-height: unset;
+}
+
+.howItWorksBlocks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.howItWorksBlocks div {
+  width: 20%;
+  background-color: #4A5877;
+  height: 200px;
+  color: #ffffff;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 40px;
+}
+
+.howItWorksBlocksTitle {
+  font-weight: 600;
+  font-size: 20px;
 }
 
 @media only screen and (max-width: 850px) {
@@ -295,5 +377,49 @@ tbody tr:nth-child(odd){
   }
   h2 {
     font-size: 18px;
+  }
+  .diversificationCharts {
+    flex-direction: column;
+  }
+  .diversificationCharts div {
+    width: 100% !important;
+  }
+  .teamBlocks {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+  .teamBlocksInner {
+    margin-bottom: 25px;
+  }
+  .investDiv {
+    margin: 0px;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .fundFactsBlocks {
+    flex-direction: column;
+  }
+  .fundFactsBlocks table {
+    margin: 0px;
+    margin-bottom: 30px;
+  }
+  .fundFactsBlocks tr {
+    line-height: 1.5;
+  }
+  .howItWorksBlocks {
+    flex-direction: column;
+  }
+  .howItWorksBlocks div {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 20px;
+  }
+  .howItWorksBlocks p {
+    margin: 30px;
   }
 }

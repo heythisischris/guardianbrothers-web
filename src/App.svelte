@@ -89,6 +89,6 @@
     <Route path="insights" component={Insights} />
     <Route path="strategies" component={Strategies} />
     <Route path="contact" component={Contact} />
-    <div class="footer">Copyright © 2020 Guardian Brothers Holdings Inc.</div>
+    <div class="footer">Copyright © 2020 Guardian Brothers Holdings LLC</div>
   </div>
 </Router>
