@@ -52,6 +52,22 @@
             <div class="navSocial">
               <a
                 target="_blank"
+                href="https://www.facebook.com/guardianbrothers/">
+                <img
+                  class="socialIcon"
+                  alt="facebook"
+                  src="images/facebook.svg" />
+              </a>
+              <a
+                target="_blank"
+                href="https://www.instagram.com/guardianbrothersofficial/">
+                <img
+                  class="socialIcon"
+                  alt="instagram"
+                  src="images/instagram.svg" />
+              </a>
+              <a
+                target="_blank"
                 href="https://www.linkedin.com/guardianbrothers/">
                 <img
                   class="socialIcon"
@@ -65,14 +81,6 @@
                   class="socialIcon"
                   alt="twitter"
                   src="images/twitter.svg" />
-              </a>
-              <a
-                target="_blank"
-                href="https://www.facebook.com/guardianbrothers/">
-                <img
-                  class="socialIcon"
-                  alt="bandcamp"
-                  src="images/facebook.svg" />
               </a>
             </div>
             <div class="navLinks">

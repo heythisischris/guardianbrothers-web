@@ -127,7 +127,15 @@ a:hover {
 
 .pageContainerMiddle a {
   text-decoration: none;
-  color: #000000;
+  color: #ffffff;
+  font-size: 17px;
+  transition: .2s;
+}
+
+.pageContainerMiddle a:hover {
+  background-color: #0000004f;
+  padding: 10px;
+  margin: -10px;
 }
 
 .infoBorder {
@@ -238,25 +246,37 @@ tbody tr:nth-child(odd) {
   align-items: center;
 }
 
+.teamBlocksInner img {
+  height: 100px;
+  width: 100px;
+  background-color: #AAAAAA;
+  margin-bottom: 10px;
+}
+
+.teamBlocksInner h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0px;
+}
+
 .investDiv {
   margin-top: 80px;
   margin-left: 32px;
 }
 
 .investButton {
-  background-color: #B4AC89;
-  color: #000000;
+  background-color: rgb(16, 46, 80);
+  color: #ffffff;
   text-decoration: none;
-  padding: 5px 20px;
-  border-radius: 5px;
-  font-size: 30px;
-  transition: background-color .2s;
+  padding: 12px 35px;
+  font-size: 17px;
+  transition: .2s;
+  font-weight: 600
 }
 
 .investButton:hover {
   text-decoration: none;
-  background-color: #232f5a;
-  color: #ffffff;
+  background-color: rgb(37, 65, 95);
 }
 
 .fundFactsBlocks {
@@ -294,6 +314,11 @@ tbody tr:nth-child(odd) {
 .howItWorksBlocksTitle {
   font-weight: 600;
   font-size: 20px;
+}
+
+table td {
+  padding: 5px 10px;
+  line-height: 1.25;
 }
 
 @media only screen and (max-width: 850px) {
@@ -388,6 +413,8 @@ tbody tr:nth-child(odd) {
     flex-direction: column;
     width: 100%;
     align-items: center;
+    margin-bottom: 0;
+    margin-top: 25px;
   }
   .teamBlocksInner {
     margin-bottom: 25px;

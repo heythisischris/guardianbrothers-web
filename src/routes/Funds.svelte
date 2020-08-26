@@ -37,15 +37,12 @@
     let array = stats.map((obj, index) => [
       obj.id.substring(0, 10),
       "$" + (obj.value / obj.shares).toFixed(2),
-      "$" +
-        ((parseFloat(obj.value) / parseFloat(obj.shares)) * 1000).toFixed(2),
       obj.shares,
       "$" + obj.value
     ]);
     array.unshift([
       "Date",
       "NAV",
-      "10k Investment",
       "Shares Outstanding",
       "Net Liquidated Value & Trades"
     ]);
@@ -71,7 +68,7 @@
           //parseFloat(obj.value)
         ]);
         //console.log(array);
-        var performanceChart = new window.google.visualization.LineChart(
+        var performanceChart = new window.google.visualization.AreaChart(
           document.getElementById("performanceChart")
         );
         let performanceData = new google.visualization.DataTable();
@@ -81,19 +78,16 @@
         performanceChart.draw(performanceData, {
           legend: { position: "none" },
           backgroundColor: { fill: "transparent" },
-          chartArea: { left: 50, top: 10, width: "100%", height: "90%" },
+          chartArea: {
+            left: isMobile ? 50 : 75,
+            top: 5,
+            width: "100%",
+            height: "90%"
+          },
           vAxis: { format: "currency" },
           hAxis: {
-            gridlines: {
-              units: {
-                months: { format: ["MMM YYYY"] }
-              }
-            },
-            minorGridlines: {
-              units: {
-                days: { format: [] }
-              }
-            }
+            gridlines: { units: { months: { format: ["MMM YYYY"] } } },
+            minorGridlines: { units: { days: { format: [] } } }
           }
         });
 
@@ -190,7 +184,7 @@
           }
         });
       }
-    }, 1000); //find way to detect google charts loaded instead of timeout
+    }, 1500); //find way to detect google charts loaded instead of timeout
   });
 </script>
 
@@ -231,8 +225,9 @@
         <a
           class="investButton"
           target="_blank"
-          href="https://calendly.com/guardianbrothers/15min">
-          Invest now
+          href="https://calendly.com/guardianbrothers/15min"
+          in:fade={{ delay: 250 }}>
+          INVEST NOW
         </a>
       </div>
     {/await}
@@ -246,35 +241,35 @@
       <a
         href="javascript:void(0)"
         on:click={() => goToSection('sectionOverview')}>
-        Overview
+        OVERVIEW
       </a>
       <a
         href="javascript:void(0)"
         on:click={() => goToSection('sectionHowItWorks')}>
-        How it works
+        HOW IT WORKS
       </a>
       <a
         href="javascript:void(0)"
         on:click={() => goToSection('sectionPerformance')}>
-        Performance
+        PERFORMANCE
       </a>
       <a
         href="javascript:void(0)"
         on:click={() => goToSection('sectionFundFacts')}>
-        Fund Facts
+        FUND FACTS
       </a>
       <a
         href="javascript:void(0)"
         on:click={() => goToSection('sectionTopHoldings')}>
-        Holdings
+        HOLDINGS
       </a>
       <a
         href="javascript:void(0)"
         on:click={() => goToSection('sectionDiversification')}>
-        Diversification
+        DIVERSIFICATION
       </a>
       <a href="javascript:void(0)" on:click={() => goToSection('sectionTeam')}>
-        Team
+        TEAM
       </a>
     </div>
   </div>
@@ -308,31 +303,31 @@
     <h1 id="sectionHowItWorks">How it works</h1>
     <div class="textBlock">
       <div class="howItWorksBlocks">
-        <div>
+        <div in:fade="{{delay: 500, duration: 500}}">
           <p class="howItWorksBlocksTitle">We buy</p>
           <p>
             Guardian Brothers Holdings find opportunities in the stock market.
             Creates a solid portfolio for all of our investors
           </p>
         </div>
-        <div>
+        <div in:fade="{{delay: 1000, duration: 500}}">
           <p class="howItWorksBlocksTitle">You Invest</p>
           <p>
             You become a partner and receive benefits of the returns generated
             by Guardian Brothers Fund
           </p>
         </div>
-        <div>
+        <div in:fade="{{delay: 1500, duration: 500}}">
           <p class="howItWorksBlocksTitle">Capital Appreciation</p>
           <p>
             Our portfolio appreciates and receives dividends. You get the
             benefit of compounded interest and capital appreciation
           </p>
         </div>
-        <div>
+        <div in:fade="{{delay: 2000, duration: 500}}">
           <p class="howItWorksBlocksTitle">You get paid</p>
           <p>
-            Your investment appreciates in value and we help capture your
+            Your investment appreciates and we help capture your
             profits. No limits on withdrawals, no hidden fees. Easy access.
           </p>
         </div>
@@ -357,17 +352,16 @@
       <div
         id="performanceChart"
         style="width: 100%; height: {isMobile ? '300px' : '500px'}"
-        in:fade />
+        in:fade={{ delay: 2000 }} />
     </div>
     <h1 id="sectionTopHoldings">Top Holdings</h1>
     <div class="textBlock">
       {#await positions}
         <div />
       {:then positions}
-        <table style="width:100%;line-height:35px;">
+        <table style="width:100%;" in:fade>
           <thead>
-            <tr
-              style="text-align: {isMobile ? 'center' : 'left'};line-height:1.2">
+            <tr style="text-align: {isMobile ? 'center' : 'left'};">
               <th>{isMobile ? 'Ticker' : 'Name'}</th>
               <th># of Shares</th>
               <th>Market Value</th>
@@ -394,6 +388,9 @@
               <tr style="height:60px;">
                 <td>Cash</td>
                 <td>{formatter.format(positions.cashBalance)}</td>
+                <td>
+                  {((positions.cashBalance / positions.liquidationValue) * 100).toFixed(2) + '%'}
+                </td>
               </tr>
             {/if}
           </tbody>
@@ -418,16 +415,19 @@
       <div
         id="diversificationChart"
         style="width: 50%; height: 350px;"
-        in:fade />
-      <div id="marketCapChart" style="width: 50%; height: 350px;" in:fade />
+        in:fade={{ delay: 2000 }} />
+      <div
+        id="marketCapChart"
+        style="width: 50%; height: 350px;"
+        in:fade={{ delay: 2000 }} />
     </div>
     <h1 id="sectionFundFacts">Fund Facts</h1>
     <div class="textBlock">
       {#await stats}
         <div />
       {:then stats}
-        <div class="fundFactsBlocks">
-          <table style="width:100%;line-height:35px;">
+        <div class="fundFactsBlocks" in:fade>
+          <table style="width:100%;">
             <thead>
               <tr>
                 <th style="width:30%;" />
@@ -457,10 +457,14 @@
               </tr>
               <tr>
                 <td>Number of Holdings</td>
-                <td>Total Stocks</td>
+                {#await positions}
+                  <td />
+                {:then positions}
+                  <td in:fade>{positions.positions.length}</td>
+                {/await}
               </tr>
               <tr>
-                <td style="line-height:1.7;">Distribution Frequency</td>
+                <td>Distribution Frequency</td>
                 <td>Quarterly</td>
               </tr>
               <tr>
@@ -473,7 +477,7 @@
               </tr>
             </tbody>
           </table>
-          <table style="width:100%;line-height:35px;">
+          <table style="width:100%;">
             <thead>
               <tr>
                 <th style="width:35%;" />
@@ -490,7 +494,7 @@
                 <td>$500</td>
               </tr>
               <tr>
-                <td style="line-height:1.7;">Minimum Subsequent Investment</td>
+                <td>Minimum Subsequent Investment</td>
                 <td>$50</td>
               </tr>
               <tr>
@@ -514,28 +518,24 @@
     <div class="textBlock">
       <div class="teamBlocks">
         <div class="teamBlocksInner">
-          <div style="height:100px;width:100px;background-color:#AAAAAA" />
-          <span style="font-size:20px;font-weight:600">
-            Fernando Guardia Virreira
-          </span>
+          <img alt="" src="images/fernando.jpg" />
+          <h2>Fernando Guardia Virreira</h2>
           <span>Chief Executive Officer</span>
           <span>Portfolio Manager</span>
         </div>
         <div class="teamBlocksInner">
-          <div style="height:100px;width:100px;background-color:#AAAAAA" />
-          <span style="font-size:20px;font-weight:600">Chris Aitken</span>
+          <img alt="" src="images/chris.jpg" />
+          <h2>Chris Aitken</h2>
           <span>Chief Technology Officer</span>
         </div>
         <div class="teamBlocksInner">
-          <div style="height:100px;width:100px;background-color:#AAAAAA" />
-          <span style="font-size:20px;font-weight:600">Matias Martinez</span>
+          <img alt="" src="images/matias.jpg" />
+          <h2>Matias Martinez</h2>
           <span>Director of Marketing & Sales</span>
         </div>
         <div class="teamBlocksInner">
-          <div style="height:100px;width:100px;background-color:#AAAAAA" />
-          <span style="font-size:20px;font-weight:600">
-            Juan Carlos Paniagua
-          </span>
+          <img alt="" src="images/juan.jpg" />
+          <h2>Juan Carlos Paniagua</h2>
           <span>Executive Vice President</span>
         </div>
       </div>
