@@ -63,7 +63,7 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         let performanceArray = stats.map((obj, index) => [
-          new Date(obj.id),
+          new Date(new Date(obj.id).getTime() + 3600 * 1000 * 24),
           +(parseFloat(obj.value) / parseFloat(obj.shares)).toFixed(2)
           //parseFloat(obj.value)
         ]);
@@ -103,6 +103,8 @@
           }
         }
 
+        diversificationArray.push(["Cash", positions.cashBalance]);
+
         var diversificationChart = new window.google.visualization.PieChart(
           document.getElementById("diversificationChart")
         );
@@ -112,31 +114,24 @@
         diversificationData.addRows(diversificationArray);
 
         diversificationChart.draw(diversificationData, {
-          legend: { position: isMobile ? "none" : "" },
+          legend: { position: isMobile ? "bottom" : "right" },
           colors: ["#2a314a", "#415777", "#617da1", "#8aaacd", "#b5d8f5"],
           backgroundColor: { fill: "transparent" },
-          chartArea: { left: 0, top: 0, width: "100%", height: "100%" },
-          vAxis: { format: "currency" },
-          hAxis: {
-            gridlines: {
-              units: {
-                months: { format: ["MMM YYYY"] }
-              }
-            },
-            minorGridlines: {
-              units: {
-                days: { format: [] }
-              }
-            }
-          }
+          chartArea: {
+            top: 10,
+            width: "100%",
+            height: isMobile ? "80%" : "100%"
+          },
+          forceIFrame: true,
+          pieHole: isMobile ? 0.4 : 0
         });
 
         let marketCapArray = [
-          ["Micro", 0],
-          ["Small", 0],
-          ["Mid", 0],
-          ["Large", 0],
-          ["Mega", 0]
+          ["Micro Cap", 0],
+          ["Small Cap", 0],
+          ["Mid Cap", 0],
+          ["Large Cap", 0],
+          ["Mega Cap", 0]
         ];
         for (let obj of positions.positions) {
           if (obj.marketCap >= 0 && obj.marketCap < 300000000) {
@@ -165,23 +160,16 @@
         marketCapData.addRows(marketCapArray);
 
         marketCapChart.draw(marketCapData, {
-          legend: { position: isMobile ? "none" : "" },
+          legend: { position: isMobile ? "bottom" : "right" },
           colors: ["#8aaacd", "#b5d8f5", "#2a314a", "#415777", "#617da1"],
           backgroundColor: { fill: "transparent" },
-          chartArea: { left: 0, top: 0, width: "100%", height: "100%" },
-          vAxis: { format: "currency" },
-          hAxis: {
-            gridlines: {
-              units: {
-                months: { format: ["MMM YYYY"] }
-              }
-            },
-            minorGridlines: {
-              units: {
-                days: { format: [] }
-              }
-            }
-          }
+          chartArea: {
+            top: 10,
+            width: "100%",
+            height: isMobile ? "80%" : "100%"
+          },
+          forceIFrame: true,
+          pieHole: isMobile ? 0.4 : 0
         });
       }
     }, 1500); //find way to detect google charts loaded instead of timeout
@@ -303,32 +291,32 @@
     <h1 id="sectionHowItWorks">How it works</h1>
     <div class="textBlock">
       <div class="howItWorksBlocks">
-        <div in:fade="{{delay: 500, duration: 500}}">
+        <div in:fade={{ delay: 500, duration: 500 }}>
           <p class="howItWorksBlocksTitle">We buy</p>
           <p>
             Guardian Brothers Holdings find opportunities in the stock market.
             Creates a solid portfolio for all of our investors
           </p>
         </div>
-        <div in:fade="{{delay: 1000, duration: 500}}">
+        <div in:fade={{ delay: 1000, duration: 500 }}>
           <p class="howItWorksBlocksTitle">You Invest</p>
           <p>
             You become a partner and receive benefits of the returns generated
             by Guardian Brothers Fund
           </p>
         </div>
-        <div in:fade="{{delay: 1500, duration: 500}}">
+        <div in:fade={{ delay: 1500, duration: 500 }}>
           <p class="howItWorksBlocksTitle">Capital Appreciation</p>
           <p>
             Our portfolio appreciates and receives dividends. You get the
             benefit of compounded interest and capital appreciation
           </p>
         </div>
-        <div in:fade="{{delay: 2000, duration: 500}}">
+        <div in:fade={{ delay: 2000, duration: 500 }}>
           <p class="howItWorksBlocksTitle">You get paid</p>
           <p>
-            Your investment appreciates and we help capture your
-            profits. No limits on withdrawals, no hidden fees. Easy access.
+            Your investment appreciates and we help capture your profits. No
+            limits on withdrawals, no hidden fees. Easy access.
           </p>
         </div>
       </div>
@@ -427,7 +415,7 @@
         <div />
       {:then stats}
         <div class="fundFactsBlocks" in:fade>
-          <table style="width:100%;">
+          <table style="width:48%;">
             <thead>
               <tr>
                 <th style="width:30%;" />
@@ -477,7 +465,7 @@
               </tr>
             </tbody>
           </table>
-          <table style="width:100%;">
+          <table style="width:48%;">
             <thead>
               <tr>
                 <th style="width:35%;" />

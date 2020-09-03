@@ -433,6 +433,7 @@ table td {
   .fundFactsBlocks table {
     margin: 0px;
     margin-bottom: 30px;
+    width: 100% !important;
   }
   .fundFactsBlocks tr {
     line-height: 1.5;
