@@ -33,26 +33,64 @@
     displayedPositions = positions.positions.slice(0, 10);
   });
 
-  async function exportCsv() {
-    let array = stats.map((obj, index) => [
-      obj.id.substring(0, 10),
-      "$" + (obj.value / obj.shares).toFixed(2),
-      obj.shares,
-      "$" + obj.value
-    ]);
-    array.unshift([
-      "Date",
-      "NAV",
-      "Shares Outstanding",
-      "Net Liquidated Value & Trades"
-    ]);
+  async function exportCsv(csvType) {
+    let array = [];
+    if (csvType === "performance") {
+      array = stats.map((obj, index) => [
+        obj.id.substring(0, 10),
+        "$" + (obj.value / obj.shares).toFixed(2),
+        obj.shares,
+        "$" + obj.value
+      ]);
+      array.unshift([
+        "Date",
+        "NAV",
+        "Shares Outstanding",
+        "Net Liquidated Value & Trades"
+      ]);
+    } else if (csvType === "positions") {
+      array = positions.positions.map((obj, index) => [
+        obj.instrument.symbol,
+        obj.name,
+        obj.longQuantity,
+        obj.marketValue,
+        `${((obj.marketValue / positions.liquidationValue) * 100).toFixed(2)}%`,
+        `${(
+          ((obj.marketValue / obj.longQuantity - obj.averagePrice) /
+            obj.averagePrice) *
+          100
+        ).toFixed(2)}%`,
+        obj.sector,
+        obj.industry,
+        obj.marketCap,
+        obj.peRatio,
+        obj.dividendYield,
+        obj.priceBookRatio,
+        obj.beta
+      ]);
+      array.unshift([
+        "Ticker",
+        "Name",
+        "Number of Shares",
+        "Market Value",
+        "Weight",
+        "Total Gain",
+        "Sector",
+        "Industry",
+        "Market Cap",
+        "P/E Ratio",
+        "Dividend Yield",
+        "Price/Book Ratio",
+        "Beta"
+      ]);
+    }
 
     let csvContent =
       "data:text/csv;charset=utf-8," + array.map(e => e.join(",")).join("\n");
     let encodedUri = encodeURI(csvContent);
     let link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "guardian_brothers_fund_export.csv");
+    link.setAttribute("download", `guardian_brothers_${csvType}_export.csv`);
     document.body.appendChild(link);
     link.click();
   }
@@ -286,12 +324,15 @@
         • The fund seeks to be independent of the market’s conditions generating
         income in any circumstances. Our main goal is to always be on top of the
         markets.
+        <br />
+        <br />
       </p>
     </div>
     <h1 id="sectionHowItWorks">How it works</h1>
     <div class="textBlock">
       <div class="howItWorksBlocks">
         <div in:fade={{ delay: 500, duration: 500 }}>
+          <p class="howItWorksBlocksNumber">1</p>
           <p class="howItWorksBlocksTitle">We buy</p>
           <p>
             Guardian Brothers Holdings find opportunities in the stock market.
@@ -299,6 +340,7 @@
           </p>
         </div>
         <div in:fade={{ delay: 1000, duration: 500 }}>
+          <p class="howItWorksBlocksNumber">2</p>
           <p class="howItWorksBlocksTitle">You Invest</p>
           <p>
             You become a partner and receive benefits of the returns generated
@@ -306,6 +348,7 @@
           </p>
         </div>
         <div in:fade={{ delay: 1500, duration: 500 }}>
+          <p class="howItWorksBlocksNumber">3</p>
           <p class="howItWorksBlocksTitle">Capital Appreciation</p>
           <p>
             Our portfolio appreciates and receives dividends. You get the
@@ -313,6 +356,7 @@
           </p>
         </div>
         <div in:fade={{ delay: 2000, duration: 500 }}>
+          <p class="howItWorksBlocksNumber">4</p>
           <p class="howItWorksBlocksTitle">You get paid</p>
           <p>
             Your investment appreciates and we help capture your profits. No
@@ -329,7 +373,7 @@
         style="float:right;font-size:14px;"
         href="javascript:void(0)"
         on:click={() => {
-          exportCsv();
+          exportCsv('performance');
         }}>
         Download CSV
       </a>
@@ -342,7 +386,20 @@
         style="width: 100%; height: {isMobile ? '300px' : '500px'}"
         in:fade={{ delay: 2000 }} />
     </div>
-    <h1 id="sectionTopHoldings">Top Holdings</h1>
+
+    <h1
+      id="sectionTopHoldings"
+      style="display:flex;align-items:flex-end;justify-content:space-between">
+      Top Holdings
+      <a
+        style="float:right;font-size:14px;"
+        href="javascript:void(0)"
+        on:click={() => {
+          exportCsv('positions');
+        }}>
+        Download CSV
+      </a>
+    </h1>
     <div class="textBlock">
       {#await positions}
         <div />
