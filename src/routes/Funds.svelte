@@ -8,7 +8,7 @@
     document.getElementById(section).scrollIntoView({
       behavior: "smooth",
       block: "start",
-      inline: "nearest"
+      inline: "nearest",
     });
   }
   async function loadAPI(url) {
@@ -17,18 +17,18 @@
     return response;
   }
   var stats = loadAPI("https://api.guardianbrothers.com/stats");
-  stats.then(innerStats => {
+  stats.then((innerStats) => {
     stats = innerStats;
   });
 
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD"
+    currency: "USD",
   });
 
   var displayedPositions = [];
   var positions = loadAPI("https://api.guardianbrothers.com/positions");
-  positions.then(innerPositions => {
+  positions.then((innerPositions) => {
     positions = innerPositions;
     displayedPositions = positions.positions.slice(0, 10);
   });
@@ -40,13 +40,17 @@
         obj.id.substring(0, 10),
         "$" + (obj.value / obj.shares).toFixed(2),
         obj.shares,
-        "$" + obj.value
+        "$" + obj.value,
+        index < stats.length-1
+          ? `${(((obj.value/obj.shares) /(stats[index + 1].value / stats[index + 1].shares) - 1) * 100).toFixed(2)}%`
+          : "0.00%",
       ]);
       array.unshift([
         "Date",
         "NAV",
         "Shares Outstanding",
-        "Net Liquidated Value & Trades"
+        "Fund Assets",
+        "Daily % Return",
       ]);
     } else if (csvType === "positions") {
       array = positions.positions.map((obj, index) => [
@@ -66,7 +70,7 @@
         obj.peRatio,
         obj.dividendYield,
         obj.priceBookRatio,
-        obj.beta
+        obj.beta,
       ]);
       array.unshift([
         "Ticker",
@@ -81,12 +85,12 @@
         "P/E Ratio",
         "Dividend Yield",
         "Price/Book Ratio",
-        "Beta"
+        "Beta",
       ]);
     }
 
     let csvContent =
-      "data:text/csv;charset=utf-8," + array.map(e => e.join(",")).join("\n");
+      "data:text/csv;charset=utf-8," + array.map((e) => e.join(",")).join("\n");
     let encodedUri = encodeURI(csvContent);
     let link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -94,15 +98,16 @@
     document.body.appendChild(link);
     link.click();
   }
-
+  let asOfDate = "";
   onMount(() => {
     setTimeout(() => {
+      asOfDate = `as of ${new Date(stats[0].id).toLocaleDateString()}`;
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         let performanceArray = stats.map((obj, index) => [
           new Date(new Date(obj.id).getTime() + 3600 * 1000 * 24),
-          +(parseFloat(obj.value) / parseFloat(obj.shares)).toFixed(2)
+          +(parseFloat(obj.value) / parseFloat(obj.shares)).toFixed(2),
           //parseFloat(obj.value)
         ]);
         //console.log(array);
@@ -120,19 +125,25 @@
             left: isMobile ? 50 : 75,
             top: 5,
             width: "100%",
-            height: "90%"
+            height: "90%",
           },
-          vAxis: { format: "currency" },
+          vAxis: {
+            format: "currency",
+            viewWindow: {
+              min: 4,
+              max: 14,
+            },
+          },
           hAxis: {
             gridlines: { units: { months: { format: ["MMM YYYY"] } } },
-            minorGridlines: { units: { days: { format: [] } } }
-          }
+            minorGridlines: { units: { days: { format: [] } } },
+          },
         });
 
         let diversificationArray = [];
         for (let obj of positions.positions) {
           let findIndex = diversificationArray.findIndex(
-            innerObj => innerObj[0] === obj.sector
+            (innerObj) => innerObj[0] === obj.sector
           );
           if (findIndex === -1) {
             diversificationArray.push([obj.sector, obj.marketValue]);
@@ -158,10 +169,10 @@
           chartArea: {
             top: 10,
             width: "100%",
-            height: isMobile ? "80%" : "100%"
+            height: isMobile ? "80%" : "100%",
           },
           forceIFrame: true,
-          pieHole: isMobile ? 0.4 : 0
+          pieHole: isMobile ? 0.4 : 0,
         });
 
         let marketCapArray = [
@@ -169,7 +180,7 @@
           ["Small Cap", 0],
           ["Mid Cap", 0],
           ["Large Cap", 0],
-          ["Mega Cap", 0]
+          ["Mega Cap", 0],
         ];
         for (let obj of positions.positions) {
           if (obj.marketCap >= 0 && obj.marketCap < 300000000) {
@@ -202,12 +213,11 @@
           colors: ["#8aaacd", "#b5d8f5", "#2a314a", "#415777", "#617da1"],
           backgroundColor: { fill: "transparent" },
           chartArea: {
-            top: 10,
             width: "100%",
-            height: isMobile ? "80%" : "100%"
+            height: "100%",
           },
           forceIFrame: true,
-          pieHole: isMobile ? 0.4 : 0
+          pieHole: isMobile ? 0.4 : 0,
         });
       }
     }, 1500); //find way to detect google charts loaded instead of timeout
@@ -217,7 +227,8 @@
 <div class="pageContainerTop">
   <div
     class="pageContainerInner"
-    style="color:#ffffff;font-size:22px;height:400px;">
+    style="color:#ffffff;font-size:22px;height:400px;"
+  >
     {#await stats}
       <div />
     {:then stats}
@@ -241,8 +252,16 @@
           <div class="infoBorder">
             <div>NAV Change</div>
             <div>
-              {formatter.format(stats[0].value / stats[0].shares - stats[1].value / stats[1].shares)}
-              ({(((stats[0].value / stats[0].shares - stats[1].value / stats[1].shares) / (stats[1].value / stats[1].shares)) * 100).toFixed(2) + '%'})
+              {formatter.format(
+                stats[0].value / stats[0].shares -
+                  stats[1].value / stats[1].shares
+              )}
+              ({(
+                ((stats[0].value / stats[0].shares -
+                  stats[1].value / stats[1].shares) /
+                  (stats[1].value / stats[1].shares)) *
+                100
+              ).toFixed(2) + "%"})
             </div>
           </div>
         </div>
@@ -252,7 +271,8 @@
           class="investButton"
           target="_blank"
           href="https://calendly.com/guardianbrothers/15min"
-          in:fade={{ delay: 250 }}>
+          in:fade={{ delay: 250 }}
+        >
           INVEST NOW
         </a>
       </div>
@@ -262,39 +282,46 @@
 <div class="pageContainerMiddle">
   <div
     class="pageContainerInner"
-    style="color:#000000;font-size:22px;min-height:auto;">
+    style="color:#000000;font-size:22px;min-height:auto;"
+  >
     <div style="display:flex;flex-direction:row;justify-content:space-between;">
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionOverview')}>
+        on:click={() => goToSection("sectionOverview")}
+      >
         OVERVIEW
       </a>
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionHowItWorks')}>
+        on:click={() => goToSection("sectionHowItWorks")}
+      >
         HOW IT WORKS
       </a>
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionPerformance')}>
+        on:click={() => goToSection("sectionPerformance")}
+      >
         PERFORMANCE
       </a>
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionFundFacts')}>
+        on:click={() => goToSection("sectionFundFacts")}
+      >
         FUND FACTS
       </a>
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionTopHoldings')}>
+        on:click={() => goToSection("sectionTopHoldings")}
+      >
         HOLDINGS
       </a>
       <a
         href="javascript:void(0)"
-        on:click={() => goToSection('sectionDiversification')}>
+        on:click={() => goToSection("sectionDiversification")}
+      >
         DIVERSIFICATION
       </a>
-      <a href="javascript:void(0)" on:click={() => goToSection('sectionTeam')}>
+      <a href="javascript:void(0)" on:click={() => goToSection("sectionTeam")}>
         TEAM
       </a>
     </div>
@@ -318,8 +345,8 @@
         long-term competitive advantages and relevancy, quality management teams
         and positive performance on fund’s criteria.
         <br />
-        • Our team focus in value investing. We only invest in companies that
-        have being rigorously monitored and have passed all our filters.
+        • Our team focus in value investing. We only invest in companies that have
+        being rigorously monitored and have passed all our filters.
         <br />
         • The fund seeks to be independent of the market’s conditions generating
         income in any circumstances. Our main goal is to always be on top of the
@@ -367,14 +394,16 @@
     </div>
     <h1
       id="sectionPerformance"
-      style="display:flex;align-items:flex-end;justify-content:space-between">
-      Performance
+      style="display:flex;align-items:flex-end;justify-content:space-between"
+    >
+      <div>Performance <span class="asOfDate">{asOfDate}</span></div>
       <a
         style="float:right;font-size:14px;"
         href="javascript:void(0)"
         on:click={() => {
-          exportCsv('performance');
-        }}>
+          exportCsv("performance");
+        }}
+      >
         Download CSV
       </a>
     </h1>
@@ -384,19 +413,22 @@
       <div
         id="performanceChart"
         style="width: 100%; height: {isMobile ? '300px' : '500px'}"
-        in:fade={{ delay: 2000 }} />
+        in:fade={{ delay: 2000 }}
+      />
     </div>
 
     <h1
       id="sectionTopHoldings"
-      style="display:flex;align-items:flex-end;justify-content:space-between">
-      Top Holdings
+      style="display:flex;align-items:flex-end;justify-content:space-between"
+    >
+      <div>Top Holdings <span class="asOfDate">{asOfDate}</span></div>
       <a
         style="float:right;font-size:14px;"
         href="javascript:void(0)"
         on:click={() => {
-          exportCsv('positions');
-        }}>
+          exportCsv("positions");
+        }}
+      >
         Download CSV
       </a>
     </h1>
@@ -407,7 +439,8 @@
         <table style="width:100%;" in:fade>
           <thead>
             <tr style="text-align: {isMobile ? 'center' : 'left'};">
-              <th>{isMobile ? 'Ticker' : 'Name'}</th>
+              <th>Ticker</th>
+              <th style="display: {isMobile ? 'none' : 'unset'}">Name</th>
               <th># of Shares</th>
               <th>Market Value</th>
               <th>Weight</th>
@@ -417,14 +450,25 @@
           <tbody>
             {#each displayedPositions as item}
               <tr>
-                <td>{isMobile ? item.instrument.symbol : item.name}</td>
+                <td>{item.instrument.symbol}</td>
+                <td style="display: {isMobile ? 'none' : 'unset'}"
+                  >{item.name}</td
+                >
                 <td>{item.longQuantity}</td>
                 <td>{formatter.format(item.marketValue)}</td>
                 <td>
-                  {((item.marketValue / positions.liquidationValue) * 100).toFixed(2)}%
+                  {(
+                    (item.marketValue / positions.liquidationValue) *
+                    100
+                  ).toFixed(2)}%
                 </td>
                 <td>
-                  {(((item.marketValue / item.longQuantity - item.averagePrice) / item.averagePrice) * 100).toFixed(2)}%
+                  {(
+                    ((item.marketValue / item.longQuantity -
+                      item.averagePrice) /
+                      item.averagePrice) *
+                    100
+                  ).toFixed(2)}%
                 </td>
               </tr>
             {/each}
@@ -434,7 +478,10 @@
                 <td>Cash</td>
                 <td>{formatter.format(positions.cashBalance)}</td>
                 <td>
-                  {((positions.cashBalance / positions.liquidationValue) * 100).toFixed(2) + '%'}
+                  {(
+                    (positions.cashBalance / positions.liquidationValue) *
+                    100
+                  ).toFixed(2) + "%"}
                 </td>
               </tr>
             {/if}
@@ -449,22 +496,33 @@
               } else {
                 displayedPositions = positions.positions.slice(0, 10);
               }
-            }}>
-            {displayedPositions.length === 10 ? 'Expand' : 'Collapse'}
+            }}
+          >
+            {displayedPositions.length === 10 ? "Expand" : "Collapse"}
           </a>
         </div>
       {/await}
     </div>
-    <h1 id="sectionDiversification">Diversification</h1>
+    <h1 id="sectionDiversification">
+      <div>Diversification <span class="asOfDate">{asOfDate}</span></div>
+    </h1>
     <div class="textBlock diversificationCharts">
-      <div
-        id="diversificationChart"
-        style="width: 50%; height: 350px;"
-        in:fade={{ delay: 2000 }} />
-      <div
-        id="marketCapChart"
-        style="width: 50%; height: 350px;"
-        in:fade={{ delay: 2000 }} />
+      <div style="width: 50%; height: 350px;">
+        <h2>Sectors</h2>
+        <div
+          id="diversificationChart"
+          style="height:300px"
+          in:fade={{ delay: 2000 }}
+        />
+      </div>
+      <div style="width: 50%; height: 350px;">
+        <h2>Market Cap</h2>
+        <div
+          id="marketCapChart"
+          style="height:300px"
+          in:fade={{ delay: 2000 }}
+        />
+      </div>
     </div>
     <h1 id="sectionFundFacts">Fund Facts</h1>
     <div class="textBlock">
@@ -536,11 +594,11 @@
               </tr>
               <tr>
                 <td>Minimum Investment</td>
-                <td>$500</td>
+                <td>$1000</td>
               </tr>
               <tr>
                 <td>Minimum Subsequent Investment</td>
-                <td>$50</td>
+                <td>$100</td>
               </tr>
               <tr>
                 <td>Management Fees</td>
@@ -566,7 +624,7 @@
           <img alt="" src="images/fernando.jpg" />
           <h2>Fernando Guardia Virreira</h2>
           <span>Chief Executive Officer</span>
-          <span>Portfolio Manager</span>
+          <span>Chief Investment Officer</span>
         </div>
         <div class="teamBlocksInner">
           <img alt="" src="images/chris.jpg" />

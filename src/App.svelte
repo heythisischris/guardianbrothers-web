@@ -14,11 +14,11 @@
   //background scroll
 
   onMount(() => {
-    (function() {
+    (function () {
       var parallax = window.document.querySelectorAll("body"),
         speed = 0.5;
-      window.onscroll = function() {
-        [].slice.call(parallax).forEach(function(el, i) {
+      window.onscroll = function () {
+        [].slice.call(parallax).forEach(function (el, i) {
           var windowYOffset = window.pageYOffset,
             elBackgrounPos = "50% " + windowYOffset * speed + "px";
           el.style.backgroundPosition = elBackgrounPos;
@@ -39,48 +39,56 @@
                 style="margin-right:10px;"
                 class="logo"
                 alt=""
-                src="/images/logo.svg" />
+                src="/images/logo.svg"
+              />
               <div
-                style="display:flex;flex-direction:column;justify-content:center;color:#000000;">
+                style="display:flex;flex-direction:column;justify-content:center;color:#000000;"
+              >
                 <div id="title">Guardian Brothers Holdings</div>
                 <div id="subtitle">Invest in your future</div>
               </div>
             </NavLink>
           </div>
           <div
-            style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;">
+            style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;"
+          >
             <div class="navSocial">
               <a
                 target="_blank"
-                href="https://www.facebook.com/guardianbrothers/">
+                href="https://www.facebook.com/guardianbrothers/"
+              >
                 <img
                   class="socialIcon"
                   alt="facebook"
-                  src="images/facebook.svg" />
+                  src="images/facebook.svg"
+                />
               </a>
               <a
                 target="_blank"
-                href="https://www.instagram.com/guardianbrothersofficial/">
+                href="https://www.instagram.com/guardianbrothersofficial/"
+              >
                 <img
                   class="socialIcon"
                   alt="instagram"
-                  src="images/instagram.svg" />
+                  src="images/instagram.svg"
+                />
               </a>
               <a
                 target="_blank"
-                href="https://www.linkedin.com/guardianbrothers/">
+                href="https://www.linkedin.com/company/guardianbrothers/"
+              >
                 <img
                   class="socialIcon"
                   alt="linkedin"
-                  src="images/linkedin.svg" />
+                  src="images/linkedin.svg"
+                />
               </a>
-              <a
-                target="_blank"
-                href="https://www.twitter.com/guardianbrothers/">
+              <a target="_blank" href="https://twitter.com/GBH_Fund">
                 <img
                   class="socialIcon"
                   alt="twitter"
-                  src="images/twitter.svg" />
+                  src="images/twitter.svg"
+                />
               </a>
             </div>
             <div class="navLinks">
@@ -97,6 +105,11 @@
     <Route path="insights" component={Insights} />
     <Route path="strategies" component={Strategies} />
     <Route path="contact" component={Contact} />
-    <div class="footer">Copyright © 2020 Guardian Brothers Holdings LLC</div>
+    <div class="footer">
+      <p style="max-width: 800px;margin-left:auto;margin-right:auto;padding:10px;padding-top:0px;">
+        {`*Investing involves risk, including loss of principal. Past performance does not guarantee or indicate future results. Any historical returns expected returns or probability projections may not reflect actual future performance. While the data we use from third parties is believed to be reliable, we cannot ensure the accuracy or completeness of data provided by investors or other third parties. NeitherGuardian Brothers Holdings nor any of its affiliates provide tax advice and do not represent in any manner that the outcomes described herein will result in any particular tax consequence. Offers to sell, or solicitations of offers to buy, any security can only be made through official offering documents that contain important information about investment objectives, risks, fees, and expenses. Prospective investors should consult with a tax or legal adviser before making any investment decision.`}
+      </p>
+      Copyright © {new Date().getFullYear()} Guardian Brothers Holdings LLC
+    </div>
   </div>
 </Router>
