@@ -111,7 +111,7 @@
           //parseFloat(obj.value)
         ]);
         //console.log(array);
-        var performanceChart = new window.google.visualization.AreaChart(
+        var performanceChart = new google.visualization.AreaChart(
           document.getElementById("performanceChart")
         );
         let performanceData = new google.visualization.DataTable();
@@ -154,7 +154,7 @@
 
         diversificationArray.push(["Cash", positions.cashBalance]);
 
-        var diversificationChart = new window.google.visualization.PieChart(
+        var diversificationChart = new google.visualization.PieChart(
           document.getElementById("diversificationChart")
         );
         let diversificationData = new google.visualization.DataTable();
@@ -171,7 +171,7 @@
             width: "100%",
             height: isMobile ? "80%" : "100%",
           },
-          forceIFrame: true,
+          forceIFrame: false,
           pieHole: isMobile ? 0.4 : 0,
         });
 
@@ -216,7 +216,7 @@
             width: "100%",
             height: "100%",
           },
-          forceIFrame: true,
+          forceIFrame: false,
           pieHole: isMobile ? 0.4 : 0,
         });
       }
