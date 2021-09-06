@@ -209,7 +209,7 @@
         marketCapData.addRows(marketCapArray);
 
         marketCapChart.draw(marketCapData, {
-          legend: { position: isMobile ? "bottom" : "right" },
+          legend: { position: "right", textStyle: { fontSize: 14 } },
           colors: ["#8aaacd", "#b5d8f5", "#2a314a", "#415777", "#617da1"],
           backgroundColor: { fill: "transparent" },
           chartArea: {
@@ -217,7 +217,7 @@
             height: "100%",
           },
           forceIFrame: false,
-          pieHole: isMobile ? 0.4 : 0,
+          pieHole: isMobile ? 0.4 : 0
         });
       }
     }, 1500); //find way to detect google charts loaded instead of timeout
@@ -572,7 +572,7 @@
               </tr>
               <tr>
                 <td>Gross Expense Ratio</td>
-                <td>0.50%</td>
+                <td>1%</td>
               </tr>
               <tr>
                 <td>Fund Inception</td>
@@ -594,7 +594,7 @@
               </tr>
               <tr>
                 <td>Minimum Investment</td>
-                <td>$1000</td>
+                <td>$1,000</td>
               </tr>
               <tr>
                 <td>Minimum Subsequent Investment</td>
@@ -602,15 +602,15 @@
               </tr>
               <tr>
                 <td>Management Fees</td>
-                <td>1.5%</td>
-              </tr>
-              <tr>
-                <td>Transaction Fees</td>
                 <td>2%</td>
               </tr>
               <tr>
+                <td>Transaction Fees</td>
+                <td>3%</td>
+              </tr>
+              <tr>
                 <td>Performance Fees</td>
-                <td>10%</td>
+                <td>15%</td>
               </tr>
             </tbody>
           </table>
