@@ -367,6 +367,7 @@ table td {
   }
   #title {
     font-size: 19px;
+    text-align: left;
   }
   #subtitle {
     font-size: 14px;

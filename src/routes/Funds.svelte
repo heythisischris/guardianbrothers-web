@@ -1,8 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  var isMobile = window.matchMedia("only screen and (max-width: 760px)")
-    .matches;
+  var isMobile = window.matchMedia(
+    "only screen and (max-width: 760px)"
+  ).matches;
 
   function goToSection(section) {
     document.getElementById(section).scrollIntoView({
@@ -26,11 +27,19 @@
     currency: "USD",
   });
 
+  let positionsSelected = true;
   var displayedPositions = [];
   var positions = loadAPI("https://api.guardianbrothers.com/positions");
   positions.then((innerPositions) => {
     positions = innerPositions;
     displayedPositions = positions.positions.slice(0, 10);
+  });
+
+  var displayedTrades = [];
+  var trades = loadAPI("https://api.guardianbrothers.com/trades");
+  trades.then((innerTrades) => {
+    trades = innerTrades;
+    displayedTrades = trades.slice(0, 10);
   });
 
   async function exportCsv(csvType) {
@@ -41,8 +50,14 @@
         "$" + (obj.value / obj.shares).toFixed(2),
         obj.shares,
         "$" + obj.value,
-        index < stats.length-1
-          ? `${(((obj.value/obj.shares) /(stats[index + 1].value / stats[index + 1].shares) - 1) * 100).toFixed(2)}%`
+        index < stats.length - 1
+          ? `${(
+              (obj.value /
+                obj.shares /
+                (stats[index + 1].value / stats[index + 1].shares) -
+                1) *
+              100
+            ).toFixed(2)}%`
           : "0.00%",
       ]);
       array.unshift([
@@ -87,6 +102,15 @@
         "Price/Book Ratio",
         "Beta",
       ]);
+    } else if (csvType === "trades") {
+      array = trades.map((obj, index) => [
+        obj.ticker,
+        obj.company,
+        obj.date,
+        obj.order,
+        obj.shares,
+      ]);
+      array.unshift(["Ticker", "Company", "Date", "Order", "Shares"]);
     }
 
     let csvContent =
@@ -157,13 +181,20 @@
         var diversificationChart = new google.visualization.PieChart(
           document.getElementById("diversificationChart")
         );
+        google.visualization.events.addListener(
+          diversificationChart,
+          "ready",
+          function () {
+            document.getElementById("diversificationChart").style.display =
+              null;
+          }
+        );
         let diversificationData = new google.visualization.DataTable();
         diversificationData.addColumn("string", "sector");
         diversificationData.addColumn("number", "marketValue");
         diversificationData.addRows(diversificationArray);
-
         diversificationChart.draw(diversificationData, {
-          legend: { position: isMobile ? "bottom" : "right" },
+          legend: { position: "right" },
           colors: ["#2a314a", "#415777", "#617da1", "#8aaacd", "#b5d8f5"],
           backgroundColor: { fill: "transparent" },
           chartArea: {
@@ -171,7 +202,8 @@
             width: "100%",
             height: isMobile ? "80%" : "100%",
           },
-          forceIFrame: false,
+          // chartArea: {left: '10%', width: '100%', height: '65%'},
+          forceIFrame: true,
           pieHole: isMobile ? 0.4 : 0,
         });
 
@@ -216,8 +248,8 @@
             width: "100%",
             height: "100%",
           },
-          forceIFrame: false,
-          pieHole: isMobile ? 0.4 : 0
+          forceIFrame: true,
+          pieHole: isMobile ? 0.4 : 0,
         });
       }
     }, 1500); //find way to detect google charts loaded instead of timeout
@@ -355,7 +387,7 @@
         <br />
       </p>
     </div>
-    <h1 id="sectionHowItWorks">How it works</h1>
+    <h1 id="sectionHowItWorks" style="{isMobile ? 'margin-bottom:30px;' : ''}">How it works</h1>
     <div class="textBlock">
       <div class="howItWorksBlocks">
         <div in:fade={{ delay: 500, duration: 500 }}>
@@ -421,87 +453,154 @@
       id="sectionTopHoldings"
       style="display:flex;align-items:flex-end;justify-content:space-between"
     >
-      <div>Top Holdings <span class="asOfDate">{asOfDate}</span></div>
+      <div style="display:flex;">
+        <div
+          on:click={() => {
+            positionsSelected = true;
+          }}
+          style="cursor:pointer;background-color:{positionsSelected
+            ? '#aaaaaa'
+            : '#00000011'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
+        >
+          {isMobile ? "" : "Top "}Holdings
+        </div>
+        <div
+          on:click={() => {
+            positionsSelected = false;
+          }}
+          style="cursor:pointer;background-color:{positionsSelected
+            ? '#00000011'
+            : '#aaaaaa'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
+        >
+          Trades
+        </div>
+        <span
+          style="display:{isMobile ? 'none' : 'relative'};align-self:flex-end"
+          class="asOfDate">{asOfDate}</span
+        >
+      </div>
       <a
         style="float:right;font-size:14px;"
         href="javascript:void(0)"
         on:click={() => {
-          exportCsv("positions");
+          exportCsv(positionsSelected ? "positions" : "trades");
         }}
       >
         Download CSV
       </a>
     </h1>
     <div class="textBlock">
-      {#await positions}
-        <div />
-      {:then positions}
+      {#if positionsSelected}
+        {#await positions}
+          <div />
+        {:then positions}
+          <table style="width:100%;{isMobile ? 'font-size:11px;' : ''}" in:fade>
+            <thead>
+              <tr style="text-align: {isMobile ? 'center' : 'left'};">
+                <th>Ticker</th>
+                <th style="display: {isMobile ? 'none' : 'unset'}">Name</th>
+                <th># of Shares</th>
+                <th>Market Value</th>
+                <th>Weight</th>
+                <th>Total Gain</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each displayedPositions as item}
+                <tr>
+                  <td>{item.instrument.symbol}</td>
+                  <td style="display: {isMobile ? 'none' : 'unset'}"
+                    >{item.name}</td
+                  >
+                  <td>{item.longQuantity}</td>
+                  <td>{formatter.format(item.marketValue)}</td>
+                  <td>
+                    {(
+                      (item.marketValue / positions.liquidationValue) *
+                      100
+                    ).toFixed(2)}%
+                  </td>
+                  <td>
+                    {(
+                      ((item.marketValue / item.longQuantity -
+                        item.averagePrice) /
+                        item.averagePrice) *
+                      100
+                    ).toFixed(2)}%
+                  </td>
+                </tr>
+              {/each}
+              <tr />
+              {#if displayedPositions.length !== 10}
+                <tr style="height:60px;">
+                  <td>Cash</td>
+                  <td>{formatter.format(positions.cashBalance)}</td>
+                  <td>
+                    {(
+                      (positions.cashBalance / positions.liquidationValue) *
+                      100
+                    ).toFixed(2) + "%"}
+                  </td>
+                </tr>
+              {/if}
+            </tbody>
+          </table>
+          <div style="display:flex;width:100%;justify-content:center;">
+            <a
+              href="javascript:void(0)"
+              on:click={() => {
+                if (displayedPositions.length === 10) {
+                  displayedPositions = positions.positions;
+                } else {
+                  displayedPositions = positions.positions.slice(0, 10);
+                }
+              }}
+            >
+              {displayedPositions.length === 10 ? "Expand" : "Collapse"}
+            </a>
+          </div>
+        {/await}
+      {:else}
         <table style="width:100%;" in:fade>
           <thead>
             <tr style="text-align: {isMobile ? 'center' : 'left'};">
               <th>Ticker</th>
-              <th style="display: {isMobile ? 'none' : 'unset'}">Name</th>
-              <th># of Shares</th>
-              <th>Market Value</th>
-              <th>Weight</th>
-              <th>Total Gain</th>
+              <th style="display: {isMobile ? 'none' : 'unset'}">Company</th>
+              <th>Date</th>
+              <th>Order</th>
+              <th>Shares</th>
             </tr>
           </thead>
           <tbody>
-            {#each displayedPositions as item}
+            {#each displayedTrades as item}
               <tr>
-                <td>{item.instrument.symbol}</td>
+                <td>{item.ticker}</td>
                 <td style="display: {isMobile ? 'none' : 'unset'}"
-                  >{item.name}</td
+                  >{item.company}</td
                 >
-                <td>{item.longQuantity}</td>
-                <td>{formatter.format(item.marketValue)}</td>
-                <td>
-                  {(
-                    (item.marketValue / positions.liquidationValue) *
-                    100
-                  ).toFixed(2)}%
-                </td>
-                <td>
-                  {(
-                    ((item.marketValue / item.longQuantity -
-                      item.averagePrice) /
-                      item.averagePrice) *
-                    100
-                  ).toFixed(2)}%
-                </td>
+                <td>{new Date(item.date).toLocaleDateString()}</td>
+                <td>{item.order}</td>
+                <td>{item.shares}</td>
               </tr>
             {/each}
             <tr />
-            {#if displayedPositions.length !== 10}
-              <tr style="height:60px;">
-                <td>Cash</td>
-                <td>{formatter.format(positions.cashBalance)}</td>
-                <td>
-                  {(
-                    (positions.cashBalance / positions.liquidationValue) *
-                    100
-                  ).toFixed(2) + "%"}
-                </td>
-              </tr>
-            {/if}
           </tbody>
         </table>
         <div style="display:flex;width:100%;justify-content:center;">
           <a
             href="javascript:void(0)"
             on:click={() => {
-              if (displayedPositions.length === 10) {
-                displayedPositions = positions.positions;
+              if (displayedTrades.length === 10) {
+                displayedTrades = trades;
               } else {
-                displayedPositions = positions.positions.slice(0, 10);
+                displayedTrades = trades.slice(0, 10);
               }
             }}
           >
-            {displayedPositions.length === 10 ? "Expand" : "Collapse"}
+            {displayedTrades.length === 10 ? "Expand" : "Collapse"}
           </a>
         </div>
-      {/await}
+      {/if}
     </div>
     <h1 id="sectionDiversification">
       <div>Diversification <span class="asOfDate">{asOfDate}</span></div>
@@ -509,19 +608,11 @@
     <div class="textBlock diversificationCharts">
       <div style="width: 50%; height: 350px;">
         <h2>Sectors</h2>
-        <div
-          id="diversificationChart"
-          style="height:300px"
-          in:fade={{ delay: 2000 }}
-        />
+        <div id="diversificationChart" style="height:300px" />
       </div>
       <div style="width: 50%; height: 350px;">
         <h2>Market Cap</h2>
-        <div
-          id="marketCapChart"
-          style="height:300px"
-          in:fade={{ delay: 2000 }}
-        />
+        <div id="marketCapChart" style="height:300px" />
       </div>
     </div>
     <h1 id="sectionFundFacts">Fund Facts</h1>
