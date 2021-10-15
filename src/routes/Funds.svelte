@@ -42,6 +42,8 @@
     displayedTrades = trades.slice(0, 10);
   });
 
+  let teamIndex = 0;
+
   async function exportCsv(csvType) {
     let array = [];
     if (csvType === "performance") {
@@ -387,7 +389,9 @@
         <br />
       </p>
     </div>
-    <h1 id="sectionHowItWorks" style="{isMobile ? 'margin-bottom:30px;' : ''}">How it works</h1>
+    <h1 id="sectionHowItWorks" style={isMobile ? "margin-bottom:30px;" : ""}>
+      How it works
+    </h1>
     <div class="textBlock">
       <div class="howItWorksBlocks">
         <div in:fade={{ delay: 500, duration: 500 }}>
@@ -708,31 +712,105 @@
         </div>
       {/await}
     </div>
-    <h1 id="sectionTeam">Team</h1>
-    <div class="textBlock">
-      <div class="teamBlocks">
-        <div class="teamBlocksInner">
-          <img alt="" src="images/fernando.jpg" />
-          <h2>Fernando Guardia Virreira</h2>
-          <span>Chief Executive Officer</span>
-          <span>Chief Investment Officer</span>
+    <h1 id="sectionTeam">
+      <div style="display:flex;margin-bottom:-1px;">
+        <div
+          on:click={() => {
+            teamIndex = 0;
+          }}
+          style="cursor:pointer;background-color:{teamIndex === 0
+            ? '#aaaaaa'
+            : '#00000011'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
+        >
+          Team
         </div>
-        <div class="teamBlocksInner">
-          <img alt="" src="images/chris.jpg" />
-          <h2>Chris Aitken</h2>
-          <span>Chief Technology Officer</span>
+        <div
+          on:click={() => {
+            teamIndex = 1;
+          }}
+          style="cursor:pointer;background-color:{teamIndex !== 1
+            ? '#00000011'
+            : '#aaaaaa'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
+        >
+          {isMobile ? "" : "Board of "}Directors
         </div>
-        <div class="teamBlocksInner">
-          <img alt="" src="images/matias.jpg" />
-          <h2>Matias Martinez</h2>
-          <span>Director of Marketing & Sales</span>
-        </div>
-        <div class="teamBlocksInner">
-          <img alt="" src="images/juan.jpg" />
-          <h2>Juan Carlos Paniagua</h2>
-          <span>Executive Vice President</span>
+        <div
+          on:click={() => {
+            teamIndex = 2;
+          }}
+          style="cursor:pointer;background-color:{teamIndex !== 2
+            ? '#00000011'
+            : '#aaaaaa'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
+        >
+          Partners
         </div>
       </div>
+    </h1>
+    <div class="textBlock">
+      {#if teamIndex === 0}
+        <div class="teamBlocks" in:fade>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/fernando.jpg" />
+            <h2>Fernando Guardia</h2>
+            <span>Founder & Chief Executive Officer</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/sebastian.jpg" />
+            <h2>Sebastian Ewel</h2>
+            <span>Chairman & Chief Financial Office</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/chris.jpg" />
+            <h2>Chris Aitken</h2>
+            <span>Chief Technology Officer</span>
+          </div>
+        </div>
+      {/if}
+
+      {#if teamIndex === 1}
+        <div class="teamBlocks" in:fade>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/prodisma.jpg" />
+            <h2>Luis Fernando Guardia</h2>
+            <span>President & CEO of Prodimsa S.A</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/prodisma.jpg" />
+            <h2>Monica Virreira</h2>
+            <span>Chairman & CLO of Prodimsa S.A</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/matias.jpg" />
+            <h2>Matias Martinez</h2>
+            <span>Founder & CEO of TocToc S.R.L</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/juan.jpg" />
+            <h2>Juan Carlos Paniagua</h2>
+            <span>Board member</span>
+          </div>
+        </div>
+      {/if}
+
+      {#if teamIndex === 2}
+        <div class="teamBlocks" in:fade>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/tdameritrade.jpg" />
+            <h2>TD Ameritrade</h2>
+            <span>&nbsp;</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/interactivebrokers.jpg" />
+            <h2>Interactive Brokers LLC</h2>
+            <span>&nbsp;</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/prodisma.jpg" />
+            <h2>Prodimsa S.A</h2>
+            <span>&nbsp;</span>
+          </div>
+        </div>
+      {/if}
     </div>
   </div>
 </div>
