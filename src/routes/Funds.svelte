@@ -770,12 +770,12 @@
       {#if teamIndex === 1}
         <div class="teamBlocks" in:fade>
           <div class="teamBlocksInner">
-            <img alt="" src="images/prodisma.jpg" />
+            <img alt="" src="images/luis.jpg" />
             <h2>Luis Fernando Guardia</h2>
             <span>President & CEO of Prodimsa S.A</span>
           </div>
           <div class="teamBlocksInner">
-            <img alt="" src="images/prodisma.jpg" />
+            <img alt="" src="images/monica.jpg" />
             <h2>Monica Virreira</h2>
             <span>Chairman & CLO of Prodimsa S.A</span>
           </div>
@@ -807,6 +807,11 @@
           <div class="teamBlocksInner">
             <img alt="" src="images/prodisma.jpg" />
             <h2>Prodimsa S.A</h2>
+            <span>&nbsp;</span>
+          </div>
+          <div class="teamBlocksInner">
+            <img alt="" src="images/investmentlawgroup.jpg" />
+            <h2>Investment Law Group</h2>
             <span>&nbsp;</span>
           </div>
         </div>
