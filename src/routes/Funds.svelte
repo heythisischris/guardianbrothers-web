@@ -126,6 +126,8 @@
   }
   let asOfDate = "";
   onMount(() => {
+    document.querySelectorAll("#body")[0].style.backgroundImage =
+      "url('images/background_funds.jpg')";
     setTimeout(() => {
       asOfDate = `as of ${new Date(stats[0].id).toLocaleDateString()}`;
       google.charts.load("current", { packages: ["corechart"] });
@@ -261,7 +263,7 @@
 <div class="pageContainerTop">
   <div
     class="pageContainerInner"
-    style="color:#ffffff;font-size:22px;height:400px;"
+    style="color:#ffffff;font-size:22px;height:284px;"
   >
     {#await stats}
       <div />
@@ -819,3 +821,6 @@
     </div>
   </div>
 </div>
+
+<style>
+</style>

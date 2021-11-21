@@ -3,7 +3,7 @@
   import { fade } from "svelte/transition";
   onMount(() => {
     document.querySelectorAll("#body")[0].style.backgroundImage =
-      "url('images/background_about.jpg')";
+      "url('images/background_contactus.jpg')";
   });
 </script>
 
