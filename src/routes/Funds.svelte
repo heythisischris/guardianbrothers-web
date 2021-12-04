@@ -760,6 +760,11 @@
             <span>Chairman & Chief Financial Office</span>
           </div>
           <div class="teamBlocksInner">
+            <img alt="" src="images/manuel.jpg" />
+            <h2>Manuel Sauma</h2>
+            <span>Chief Marketing Officer</span>
+          </div>
+          <div class="teamBlocksInner">
             <img alt="" src="images/chris.jpg" />
             <h2>Chris Aitken</h2>
             <span>Chief Technology Officer</span>

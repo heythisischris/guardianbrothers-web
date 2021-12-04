@@ -246,6 +246,7 @@ tbody tr:nth-child(odd) {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  width: 25%;
 }
 
 .teamBlocksInner img {
@@ -435,6 +436,7 @@ table td {
   }
   .teamBlocksInner {
     margin-bottom: 25px;
+    width: unset;
   }
   .investDiv {
     margin: 0px;
