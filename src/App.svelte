@@ -11,14 +11,11 @@
 
   // Used for SSR. A falsy value is ignored by the Router.
   export let url = "";
-
-  var isMobile = window.matchMedia(
-    "only screen and (max-width: 760px)"
-  ).matches;
-
+  var isMobile = false;
   //background scroll
   onMount(() => {
     (function () {
+      isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
       var parallax = window.document.querySelectorAll("body"),
         speed = 0.4;
       window.onscroll = function () {
@@ -48,7 +45,7 @@
           style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;color:#ffffff;text-decoration-line:none;"
         >
           <img class="socialIcon" alt="location" src="images/location.svg" />
-          601 Brickell Key Drive, Miami, FL
+          {!isMobile ? `601 Brickell Key Drive, Miami, FL` : `Miami, FL`}
         </a>
         <div class="navSocial">
           <a target="_blank" href="https://www.facebook.com/guardianbrothers/">
@@ -184,7 +181,7 @@
             <div class="contactContainer">
               <img alt="location" src="images/footer_location.svg" />
               <a target="_blank" href="https://goo.gl/maps/wq7EaAxM3nkQ9EC1A"
-                >601 Brickell Key Drive, Miami, FL 33131</a
+                >601 Brickell Key Drive, Miami, FL{isMobile ? `` : `33131`}</a
               >
             </div>
           </div>
@@ -193,7 +190,7 @@
     </div>
     <div
       class="navContainer"
-      style="height:60px;background-color:#A09162;padding:0px;margin:0px;color:#ffffff;display:flex;flex-direction:column;justify-content:center;align-items:center;"
+      style="height:60px;background-color:#A09162;padding:0px;margin:0px;color:#ffffff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;"
     >
       Copyright © {new Date().getFullYear()} Guardian Brothers Holdings LLC
     </div>

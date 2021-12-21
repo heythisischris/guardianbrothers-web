@@ -88,7 +88,9 @@
         </p>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;">
+    <div
+      style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;"
+    >
       <div class="header">
         <div class="headerText">What We're Offering</div>
         <div class="headerLine" />
@@ -110,28 +112,6 @@
     max-width: 800px;
   }
 
-  .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .headerText {
-    font-size: 20px;
-  }
-  .headerLine {
-    width: 50px;
-    height: 3px;
-    background-color: #a09162;
-    margin-bottom: -5px;
-    margin-left: 25px;
-  }
-  .subHeaderText {
-    font-size: 28px;
-    font-weight: 700;
-    margin-top: 10px;
-    margin-bottom: 50px;
-  }
   .blocks {
     display: flex;
     flex-direction: row;
@@ -191,6 +171,9 @@
     }
     .awardTextContainer {
       max-width: 150px;
+    }
+    .blocksTitle {
+      font-size: 20px;
     }
   }
 </style>

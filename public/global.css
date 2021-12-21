@@ -85,7 +85,7 @@ nav {
 
 .navLinks {
   height: 30px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .navLinks a {
@@ -249,17 +249,31 @@ tbody tr:nth-child(odd) {
 }
 
 .teamBlocksInner img {
-  height: 150px;
-  width: 150px;
+  height: 250px;
+  width: 250px;
   background-color: #AAAAAA;
   margin-bottom: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.teamBlocksInnerText {
+  margin-top:-80px;
+  background-color: #F2EFE5;
+  text-align: center;
+  padding: 5px;
+  width: 80%;
+}
+
 .teamBlocksInner h2 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0px;
+}
+.teamBlocksInner span {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0px;
+  color: #888888;
 }
 
 .investDiv {
@@ -368,6 +382,7 @@ table td {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
 .awardTextContainer {
   display: flex;
   flex-direction: column;
@@ -375,13 +390,16 @@ table td {
   align-items: flex-start;
   max-width: 300px;
 }
+
 .awardTitle {
   font-size: 22px;
   font-weight: 700;
 }
+
 .awardSubtitle {
   font-size: 20px;
 }
+
 .awardIcon {
   width: 100px;
   height: 100px;
@@ -392,6 +410,33 @@ table td {
   justify-content: center;
   align-items: center;
   margin-right: 40px;
+}
+
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.headerText {
+  font-size: 20px;
+}
+
+.headerLine {
+  width: 50px;
+  height: 3px;
+  background-color: #a09162;
+  margin-bottom: -5px;
+  margin-left: 25px;
+}
+
+.subHeaderText {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 50px;
 }
 
 @media only screen and (max-width: 850px) {
@@ -525,7 +570,7 @@ table td {
   }
 
   .teamBlocksInner {
-    margin-bottom: 25px;
+    margin-bottom: 50px;
   }
 
   .investDiv {
@@ -576,6 +621,6 @@ table td {
   }
 
   .investDiv {
-    margin-top:30px;
+    margin-top: 30px;
   }
 }
