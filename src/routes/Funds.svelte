@@ -17,7 +17,7 @@
     let response = await data.json();
     return response;
   }
-  var stats = loadAPI("https://api.guardianbrothers.com/stats");
+  var stats = loadAPI("https://lambda.guardianbrothers.com/stats");
   stats.then((innerStats) => {
     stats = innerStats;
   });
@@ -29,14 +29,14 @@
 
   let positionsSelected = true;
   var displayedPositions = [];
-  var positions = loadAPI("https://api.guardianbrothers.com/positions");
+  var positions = loadAPI("https://lambda.guardianbrothers.com/positions");
   positions.then((innerPositions) => {
     positions = innerPositions;
     displayedPositions = positions.positions.slice(0, 10);
   });
 
   var displayedTrades = [];
-  var trades = loadAPI("https://api.guardianbrothers.com/trades");
+  var trades = loadAPI("https://lambda.guardianbrothers.com/trades");
   trades.then((innerTrades) => {
     trades = innerTrades;
     displayedTrades = trades.slice(0, 10);
