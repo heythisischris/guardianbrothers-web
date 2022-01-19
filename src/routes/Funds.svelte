@@ -322,42 +322,42 @@
   >
     <div style="display:flex;flex-direction:row;justify-content:space-between;">
       <a
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => goToSection("sectionOverview")}
       >
         OVERVIEW
       </a>
       <a
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => goToSection("sectionHowItWorks")}
       >
         HOW IT WORKS
       </a>
       <a
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => goToSection("sectionPerformance")}
       >
         PERFORMANCE
       </a>
       <a
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => goToSection("sectionFundFacts")}
       >
         FUND FACTS
       </a>
       <a
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => goToSection("sectionTopHoldings")}
       >
         HOLDINGS
       </a>
       <a
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => goToSection("sectionDiversification")}
       >
         DIVERSIFICATION
       </a>
-      <a href="javascript:void(0)" on:click={() => goToSection("sectionTeam")}>
+      <a href={'#'} on:click={() => goToSection("sectionTeam")}>
         TEAM
       </a>
     </div>
@@ -437,7 +437,7 @@
       <div>Performance <span class="asOfDate">{asOfDate}</span></div>
       <a
         style="float:right;font-size:14px;"
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => {
           exportCsv("performance");
         }}
@@ -487,7 +487,7 @@
       </div>
       <a
         style="float:right;font-size:14px;"
-        href="javascript:void(0)"
+        href={'#'}
         on:click={() => {
           exportCsv(positionsSelected ? "positions" : "trades");
         }}
@@ -553,7 +553,7 @@
           </table>
           <div style="display:flex;width:100%;justify-content:center;">
             <a
-              href="javascript:void(0)"
+              href={'#'}
               on:click={() => {
                 if (displayedPositions.length === 10) {
                   displayedPositions = positions.positions;
@@ -594,7 +594,7 @@
         </table>
         <div style="display:flex;width:100%;justify-content:center;">
           <a
-            href="javascript:void(0)"
+            href={'#'}
             on:click={() => {
               if (displayedTrades.length === 10) {
                 displayedTrades = trades;

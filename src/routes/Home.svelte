@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { _ } from "svelte-i18n";
   onMount(() => {
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_home.jpg')";
@@ -13,7 +14,7 @@
     style="color:#ffffff;font-size:22px;height:600px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
     <div class="mainTitle" in:fade={{ delay: 250, duration: 500 }}>
-      Take the first step to make your capital work for you.
+      {$_("title")}
     </div>
     <div class="mainSubtitle" in:fade={{ delay: 1500, duration: 500 }}>
       At Guardian Brothers, we ensure that your investment is secure and tied to

@@ -8,6 +8,13 @@
   import ContactUs from "./routes/ContactUs.svelte";
   import Funds from "./routes/Funds.svelte";
   import Team from "./routes/Team.svelte";
+  import { addMessages, getLocaleFromNavigator, init } from "svelte-i18n";
+  import es from "./es.json";
+  addMessages("es", es);
+  init({
+    fallbackLocale: "es",
+    initialLocale: getLocaleFromNavigator(),
+  });
 
   // Used for SSR. A falsy value is ignored by the Router.
   export let url = "";
@@ -15,7 +22,9 @@
   //background scroll
   onMount(() => {
     (function () {
-      isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+      isMobile = window.matchMedia(
+        "only screen and (max-width: 760px)"
+      ).matches;
       var parallax = window.document.querySelectorAll("body"),
         speed = 0.4;
       window.onscroll = function () {
