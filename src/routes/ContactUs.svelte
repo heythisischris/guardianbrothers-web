@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { _ } from "svelte-i18n";
   onMount(() => {
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_contactus.jpg')";
@@ -17,11 +18,10 @@
       style="margin-top:60px;"
       in:fade={{ delay: 0, duration: 500 }}
     >
-      Contact us
+      {$_("contact.main.title")}
     </div>
     <div class="mainSubtitle" in:fade={{ delay: 0, duration: 500 }}>
-      Nihil odio reprehenderit. Voluptatum animi nulla doloremque aut odio sed
-      veniam sit. Veritatis doloribus ad perspiciatis.
+      {$_("contact.main.subtitle")}
     </div>
   </div>
 </div>
@@ -155,9 +155,9 @@
     all: unset;
     background-color: #6f8db1;
     color: #ffffff;
-    padding:10px 20px;
-    min-width:150px;
-    text-align:center;
+    padding: 10px 20px;
+    min-width: 150px;
+    text-align: center;
   }
   @media only screen and (max-width: 850px) {
     .row {

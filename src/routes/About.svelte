@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { _ } from "svelte-i18n";
   onMount(() => {
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_about.jpg')";
@@ -17,10 +18,10 @@
       style="margin-top:60px;"
       in:fade={{ delay: 0, duration: 500 }}
     >
-      About us
+      {$_("about.main.title")}
     </div>
     <div class="mainSubtitle" in:fade={{ delay: 0, duration: 500 }}>
-      We're an investment firm dedicated to your financial growth.
+      {$_("about.main.subtitle")}
     </div>
   </div>
 </div>
@@ -103,7 +104,7 @@
   </div>
   <img alt="" class="rowItem desktop" src="images/about1.jpg" />
 </div>
-<div class="pageContainer"  style="min-height:650px;">
+<div class="pageContainer" style="min-height:650px;">
   <div class="pageContainerInner">
     <div>
       <div class="header" style="margin-top:50px;">

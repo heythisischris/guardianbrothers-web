@@ -1,3 +1,64 @@
 {
-  "title": "test"
+  "home": {
+    "main": {
+      "title": "Da tus primeros pasos y deja que tu capital trabaje para ti",
+      "subtitle": "En Guardian Brothers Holdings, estamos comprometidos a alcanzar tu bienestar financiero"
+    },
+    "section1": {
+      "title": "Acerca de Nosotros",
+      "subtitle": "Quienes Somos",
+      "paragraph1": "Somos una empresa gestora de inversiones alternativas centrada en ofrecer un rendimiento superior adjustado al riesgo y soluciones de carteras personalizdas, que implementa la última tecnología y capital humano en todo nuestro negocio para ayudar a manternos al tope de la evolucion technologica, social, y economimca.",
+      "paragraph2": "Nuestra prioridad numero uno, la rentabilidad de nuestros inversores, buscando un crecimiento sostenible al largo plazo mientras construimos relaciones significativas con nuestros inversionistas.",
+      "badge1": {
+        "title": "Nuestra Mision",
+        "description": "Ser los líderes en gestión de activos globales en nuestra comunidad que surge a través de un trabajo significativo y relaciones significativas entre nuestros inversionistas y asociados"
+      },
+      "badge2": {
+        "title": "Nuestra Vision",
+        "description": "Democratizar los mercados de inversiones alternativas para latinoamérica. Brindando toda la transparencia, y accesibilidad con el objetivo de exceder las expectativas de todos nuestros inversionistas"
+      }
+    },
+    "section2": {
+      "title": "Que Ofrecemos",
+      "subtitle": "Nuestros Servicios",
+      "box1": {
+        "title":"Fondos De Inversion",
+        "description": "Fondos de renta variable a mediano-largo plazo.",
+        "button": "MAS"
+      },
+      "box2": {
+        "title":"Asesoria De Inversion",
+        "description": "Carteras personalizadas de acorde al perfil de inversionista",
+        "button": "MAS"
+      },
+      "box3": {
+        "title":"Educacion Financiera",
+        "description": "Material educativo y webinars para estar al tanto de las tendencias macroeconomicas",
+        "button": "MAS"
+      }
+    }
+  },
+  "about": {
+    "main": {
+      "title": "Quienes Somos",
+      "subtitle": "Somos una firma de inversión dedicada a su crecimiento financiero."
+    }
+  },
+  "contact": {
+    "main": {
+      "title": "Contactanos",
+      "subtitle": "Nihil odio reprehenderit. Voluptatum animi nulla doloremque aut odio sed veniam sit. Veritatis doloribus ad perspiciatis."
+    }
+  },
+  "funds": {
+    "main": {
+      "title": "Guardian Brother Holdings - Investors Shares"
+    }
+  },
+  "team": {
+    "main": {
+      "title": "Team",
+      "subtitle": "Consequuntur saepe reprehenderit provident esse ut itaque aut. Sapiente reiciendis tenetur atque perferendis ut quis in. Illum animi sed. Et libero aliquam ullam illum beatae facilis."
+    }
+  }
 }

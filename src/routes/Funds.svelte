@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { _ } from "svelte-i18n";
   var isMobile = window.matchMedia(
     "only screen and (max-width: 760px)"
   ).matches;
@@ -268,7 +269,7 @@
     {#await stats}
       <div />
     {:then stats}
-      <div id="statsTitle">Guardian Brother Holdings - Investors Shares</div>
+      <div id="statsTitle">{$_("funds.main.title")}</div>
       <div id="stats" in:fade>
         <div class="statsContainer">
           <div class="infoBorder">
@@ -321,45 +322,25 @@
     style="color:#000000;font-size:22px;min-height:auto;"
   >
     <div style="display:flex;flex-direction:row;justify-content:space-between;">
-      <a
-        href={'#'}
-        on:click={() => goToSection("sectionOverview")}
-      >
+      <a href={"#"} on:click={() => goToSection("sectionOverview")}>
         OVERVIEW
       </a>
-      <a
-        href={'#'}
-        on:click={() => goToSection("sectionHowItWorks")}
-      >
+      <a href={"#"} on:click={() => goToSection("sectionHowItWorks")}>
         HOW IT WORKS
       </a>
-      <a
-        href={'#'}
-        on:click={() => goToSection("sectionPerformance")}
-      >
+      <a href={"#"} on:click={() => goToSection("sectionPerformance")}>
         PERFORMANCE
       </a>
-      <a
-        href={'#'}
-        on:click={() => goToSection("sectionFundFacts")}
-      >
+      <a href={"#"} on:click={() => goToSection("sectionFundFacts")}>
         FUND FACTS
       </a>
-      <a
-        href={'#'}
-        on:click={() => goToSection("sectionTopHoldings")}
-      >
+      <a href={"#"} on:click={() => goToSection("sectionTopHoldings")}>
         HOLDINGS
       </a>
-      <a
-        href={'#'}
-        on:click={() => goToSection("sectionDiversification")}
-      >
+      <a href={"#"} on:click={() => goToSection("sectionDiversification")}>
         DIVERSIFICATION
       </a>
-      <a href={'#'} on:click={() => goToSection("sectionTeam")}>
-        TEAM
-      </a>
+      <a href={"#"} on:click={() => goToSection("sectionTeam")}> TEAM </a>
     </div>
   </div>
 </div>
@@ -437,7 +418,7 @@
       <div>Performance <span class="asOfDate">{asOfDate}</span></div>
       <a
         style="float:right;font-size:14px;"
-        href={'#'}
+        href={"#"}
         on:click={() => {
           exportCsv("performance");
         }}
@@ -487,7 +468,7 @@
       </div>
       <a
         style="float:right;font-size:14px;"
-        href={'#'}
+        href={"#"}
         on:click={() => {
           exportCsv(positionsSelected ? "positions" : "trades");
         }}
@@ -553,7 +534,7 @@
           </table>
           <div style="display:flex;width:100%;justify-content:center;">
             <a
-              href={'#'}
+              href={"#"}
               on:click={() => {
                 if (displayedPositions.length === 10) {
                   displayedPositions = positions.positions;
@@ -594,7 +575,7 @@
         </table>
         <div style="display:flex;width:100%;justify-content:center;">
           <a
-            href={'#'}
+            href={"#"}
             on:click={() => {
               if (displayedTrades.length === 10) {
                 displayedTrades = trades;

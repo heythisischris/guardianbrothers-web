@@ -14,35 +14,20 @@
     style="color:#ffffff;font-size:22px;height:600px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
     <div class="mainTitle" in:fade={{ delay: 250, duration: 500 }}>
-      {$_("title")}
+      {$_("home.main.title")}
     </div>
     <div class="mainSubtitle" in:fade={{ delay: 1500, duration: 500 }}>
-      At Guardian Brothers, we ensure that your investment is secure and tied to
-      the highest growth possible.
+      {$_("home.main.subtitle")}
     </div>
   </div>
 </div>
 <div class="pageContainer">
   <div class="pageContainerInner">
-    <div class="blocks" style="margin-top:-150px;margin-bottom:50px;">
-      <div in:fade={{ delay: 2000, duration: 500 }}>
-        <p class="blocksNumber">1</p>
-        <p class="blocksTitle">WE BUY</p>
-      </div>
-      <div in:fade={{ delay: 2125, duration: 500 }}>
-        <p class="blocksNumber">2</p>
-        <p class="blocksTitle">YOU INVEST</p>
-      </div>
-      <div in:fade={{ delay: 2250, duration: 500 }}>
-        <p class="blocksNumber">3</p>
-        <p class="blocksTitle">CAPITAL APPRECIATION</p>
-      </div>
-    </div>
     <div class="header">
-      <div class="headerText">Company Introductions</div>
+      <div class="headerText">{$_("home.section1.title")}</div>
       <div class="headerLine" />
     </div>
-    <div class="subHeaderText">Guardian Brothers works for you</div>
+    <div class="subHeaderText">{$_("home.section1.subtitle")}</div>
     <div class="containerOne">
       <div>
         <div class="award">
@@ -50,9 +35,9 @@
             <img alt="medal" src="images/medal.svg" />
           </div>
           <div class="awardTextContainer">
-            <div class="awardTitle">Award Winning</div>
+            <div class="awardTitle">{$_("home.section1.badge1.title")}</div>
             <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
+              {$_("home.section1.badge1.description")}
             </div>
           </div>
         </div>
@@ -61,31 +46,19 @@
             <img alt="certificate" src="images/certificate.svg" />
           </div>
           <div class="awardTextContainer">
-            <div class="awardTitle">Certified Company</div>
+            <div class="awardTitle">{$_("home.section1.badge2.title")}</div>
             <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
+              {$_("home.section1.badge2.description")}
             </div>
           </div>
         </div>
       </div>
       <div class="containerOneText">
         <p>
-          Quia enim et et dolor dolorem ut vero ullam. Rerum vel dolores. Harum
-          autem architecto voluptas rerum pariatur sapiente aut. Hic recusandae
-          sit. Veritatis neque nihil.
+          {$_("home.section1.paragraph1")}
         </p>
         <p>
-          Sit atque ullam aut explicabo. Assumenda unde provident quam incidunt
-          in omnis itaque et distinctio. Officiis facilis ad laborum eum sequi
-          ut vel. Fugit labore a qui sed voluptates earum in. Cum maxime cumque
-          et at odio.
-        </p>
-        <p>
-          Natus officiis dolore hic nesciunt. Ut et explicabo maiores tenetur
-          accusamus nam id assumenda. Consequatur quo fuga ducimus voluptas quia
-          placeat nesciunt molestias. Quo qui laboriosam et sed itaque.
-          Doloremque provident dolorem ipsum repudiandae eos consequatur sunt
-          dignissimos. Suscipit et esse et est.
+          {$_("home.section1.paragraph2")}
         </p>
       </div>
     </div>
@@ -93,10 +66,10 @@
       style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;"
     >
       <div class="header">
-        <div class="headerText">What We're Offering</div>
+        <div class="headerText">{$_("home.section2.title")}</div>
         <div class="headerLine" />
       </div>
-      <div class="subHeaderText">All Services</div>
+      <div class="subHeaderText">{$_("home.section2.subtitle")}</div>
     </div>
   </div>
 </div>

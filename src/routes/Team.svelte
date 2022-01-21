@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { _ } from "svelte-i18n";
   onMount(() => {
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_team.jpg')";
@@ -17,12 +18,10 @@
       style="margin-top:60px;"
       in:fade={{ delay: 0, duration: 500 }}
     >
-      Team
+      {$_("team.main.title")}
     </div>
     <div class="mainSubtitle" in:fade={{ delay: 0, duration: 500 }}>
-      Consequuntur saepe reprehenderit provident esse ut itaque aut. Sapiente
-      reiciendis tenetur atque perferendis ut quis in. Illum animi sed. Et
-      libero aliquam ullam illum beatae facilis.
+      {$_("team.main.subtitle")}
     </div>
   </div>
 </div>
