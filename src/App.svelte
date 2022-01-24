@@ -133,8 +133,12 @@
             <div
               style="display:flex;flex-direction:column;justify-content:center;color:#000000;"
             >
-              <div style="font-size:18px;">Guardian Brothers Holdings</div>
-              <div style="font-size:12px;font-family:arial;text-align:right;">ASSET MANAGEMENT</div>
+              <div style="font-size:18px;">
+                Guardian Brothers{isMobile ? "" : " Holdings"}
+              </div>
+              <div style="font-size:12px;font-family:arial;text-align:right;">
+                ASSET MANAGEMENT
+              </div>
             </div>
           </a>
           <p style="margin-bottom:20px;font-size:12px;">

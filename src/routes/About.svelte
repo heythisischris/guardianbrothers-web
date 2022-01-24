@@ -3,6 +3,7 @@
   import { fade } from "svelte/transition";
   import { _ } from "svelte-i18n";
   onMount(() => {
+    window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_about.jpg')";
   });

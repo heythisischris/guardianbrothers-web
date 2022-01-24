@@ -127,6 +127,7 @@
   }
   let asOfDate = "";
   onMount(() => {
+    window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_funds.jpg')";
     setTimeout(() => {

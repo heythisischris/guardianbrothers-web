@@ -3,6 +3,7 @@
   import { fade } from "svelte/transition";
   import { _ } from "svelte-i18n";
   onMount(() => {
+    window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_team.jpg')";
   });
@@ -142,5 +143,8 @@
     align-items: center;
     margin-top: 50px;
     margin-bottom: -50px;
+  }
+  .mainTitle {
+    margin-top: 15px !important;
   }
 </style>

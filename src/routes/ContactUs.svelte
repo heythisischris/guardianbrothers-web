@@ -3,9 +3,38 @@
   import { fade } from "svelte/transition";
   import { _ } from "svelte-i18n";
   onMount(() => {
+    window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_contactus.jpg')";
   });
+  let firstName = "";
+  let lastName = "";
+  let email = "";
+  let mailingListEmail = "";
+  let message = "";
+  let messageSent = false;
+  let addedToMailingList = false;
+  async function sendMessage() {
+    await fetch(`https://lambda.guardianbrothers.com/contact`, {
+      method: "post",
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        message: message,
+      }),
+    });
+    messageSent = true;
+  }
+  async function addToMailingList() {
+    await fetch(`https://lambda.guardianbrothers.com/mailinglist`, {
+      method: "post",
+      body: JSON.stringify({
+        email: mailingListEmail,
+      }),
+    });
+    addedToMailingList = true;
+  }
 </script>
 
 <div class="pageContainerTop">
@@ -76,17 +105,40 @@
       <div class="headerLine" />
     </div>
     <div class="subHeaderText">Get in touch</div>
-    <div class="row">
-      <input class="rowItem" placeholder="First Name" />
-      <input class="rowItem" placeholder="Last Name" />
-    </div>
-    <div class="row">
-      <input placeholder="Email" />
-    </div>
-    <div class="row">
-      <textarea style="min-height:200px" placeholder="Message" />
-    </div>
-    <button style="float:right;">SUBMIT</button>
+    {#if messageSent}
+      <p>Message sent! We will get back to you as soon as possible.</p>
+    {:else}
+      <div>
+        <div class="row">
+          <input
+            bind:value={firstName}
+            class="rowItem"
+            placeholder="First Name"
+          />
+          <input
+            bind:value={lastName}
+            class="rowItem"
+            placeholder="Last Name"
+          />
+        </div>
+        <div class="row">
+          <input bind:value={email} placeholder="Email" />
+        </div>
+        <div class="row">
+          <textarea
+            bind:value={message}
+            style="min-height:200px"
+            placeholder="Message"
+          />
+        </div>
+        <button
+          on:click={() => {
+            sendMessage();
+          }}
+          style="float:right;">SUBMIT</button
+        >
+      </div>
+    {/if}
   </div>
 </div>
 <iframe
@@ -113,10 +165,23 @@
           </div>
         </div>
 
-        <div class="row" style="align-items:center;margin-top:40px;">
-          <input placeholder="Enter your Email" />
-          <button>SUBSCRIBE</button>
-        </div>
+        {#if addedToMailingList}
+          <p style="margin:40px;">
+            You're now subscribed! Check your inbox for new updates.
+          </p>
+        {:else}
+          <div class="row" style="align-items:center;margin-top:40px;">
+            <input
+              bind:value={mailingListEmail}
+              placeholder="Enter your Email"
+            />
+            <button
+              on:click={() => {
+                addToMailingList();
+              }}>SUBSCRIBE</button
+            >
+          </div>
+        {/if}
       </div>
       <img
         alt=""
@@ -158,6 +223,11 @@
     padding: 10px 20px;
     min-width: 150px;
     text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  button:hover {
+    background-color: #9bc8ff;
   }
   @media only screen and (max-width: 850px) {
     .row {
@@ -176,6 +246,9 @@
     }
     .expandContact {
       margin-bottom: 650px;
+    }
+    .awardTextContainer {
+      max-width: 150px;
     }
   }
 </style>
