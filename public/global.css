@@ -104,9 +104,9 @@ a:hover {
 }
 
 .logo {
-  height: 90px;
+  height: 60px;
   float: left;
-  margin-top: -12px;
+  margin-top: 0px;
 }
 
 .pageContainerTop {
@@ -355,11 +355,15 @@ table td {
 #title {
   font-size: 30px;
   text-align: left;
+  color: #C49C4B;
 }
 
 #subtitle {
-  font-size: 18px;
-  text-align: left;
+  font-size: 14px;
+  text-align: right;
+  color: #335a7e;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
 }
 
 .mainTitle {
@@ -397,7 +401,7 @@ table td {
 }
 
 .awardSubtitle {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .awardIcon {
@@ -482,8 +486,8 @@ table td {
   }
 
   .logo {
-    height: 35px;
-    margin-top: 4px;
+    height: 30px;
+    margin-top: 5px;
   }
 
   #title {
@@ -492,8 +496,7 @@ table td {
   }
 
   #subtitle {
-    font-size: 14px;
-    text-align: left;
+    font-size: 12px;
   }
 
   .pageContainerMiddle {

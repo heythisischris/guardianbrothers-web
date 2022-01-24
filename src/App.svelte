@@ -97,7 +97,7 @@
                 style="display:flex;flex-direction:column;justify-content:center;color:#000000;"
               >
                 <div id="title">Guardian Brothers Holdings</div>
-                <div id="subtitle">Invest in your future</div>
+                <div id="subtitle">ASSET MANAGEMENT</div>
               </div>
             </NavLink>
           </div>
@@ -125,7 +125,7 @@
         <div class="blocksInner">
           <a href="/" style="font-family: 'alegreya-regular';">
             <img
-              style="margin-right:10px;height:70px;"
+              style="margin-right:10px;height:40px;"
               class="logo"
               alt=""
               src="/images/logo.svg"
@@ -133,8 +133,8 @@
             <div
               style="display:flex;flex-direction:column;justify-content:center;color:#000000;"
             >
-              <div style="font-size:20px;">Guardian Brothers Holdings</div>
-              <div style="font-size:14px;">Invest in your future</div>
+              <div style="font-size:18px;">Guardian Brothers Holdings</div>
+              <div style="font-size:12px;font-family:arial;text-align:right;">ASSET MANAGEMENT</div>
             </div>
           </a>
           <p style="margin-bottom:20px;font-size:12px;">

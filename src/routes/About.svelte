@@ -31,25 +31,27 @@
       <img alt="" class="rowItem" src="images/fernando_cover.jpg" />
       <div class="rowItem">
         <div class="header" style="margin-top:100px;">
-          <div class="headerText">About the Company</div>
+          <div class="headerText">{$_("about.section1.title")}</div>
           <div class="headerLine" />
         </div>
-        <div class="subHeaderText">Why choose us</div>
+        <div class="subHeaderText">{$_("about.section1.subtitle")}</div>
         <div class="containerOne">
           <div class="containerOneText">
-            Excepturi ipsam quibusdam accusamus. Vel omnis consequatur ea et
-            quia maxime nemo voluptatem accusamus. Et sapiente quod rerum
-            ratione ea assumenda quod quo ex. Nam aut deserunt veniam eaque sit
-            non cum consequatur earum. Qui laborum ea id deserunt.
-            <p />
-            Provident et ea rerum rerum nemo nihil repellat. Laborum a sequi tenetur.
-            Ex nam nihil fuga architecto perspiciatis est eos aut incidunt. Nemo
-            labore sequi sit est blanditiis.
-            <p />
-            Eum incidunt sit velit nemo. Consectetur veritatis et nemo. Ut sed voluptate
-            consectetur nam ea. Ab facilis aliquam quo consequatur ipsum dicta. Molestiae
-            sequi ipsa dolorem fugiat qui vel nihil iusto eos. Ducimus delectus molestiae
-            nobis iure quaerat pariatur similique rem temporibus.
+            <p>
+              {$_("about.section1.paragraph1")}
+            </p>
+            <p>
+              {$_("about.section1.paragraph2")}
+            </p>
+            <p>
+              {$_("about.section1.paragraph3")}
+            </p>
+            <p>
+              {$_("about.section1.paragraph4")}
+            </p>
+            <p>
+              {$_("about.section1.quote")}
+            </p>
           </div>
         </div>
       </div>
@@ -61,18 +63,18 @@
     <div class="row">
       <div class="rowItem">
         <div class="header" style="margin-top:50px;">
-          <div class="headerText">Learn more</div>
+          <div class="headerText">{$_("about.section2.title")}</div>
           <div class="headerLine" />
         </div>
-        <div class="subHeaderText">Our Advantages</div>
+        <div class="subHeaderText">{$_("about.section2.subtitle")}</div>
         <div class="award">
           <div class="awardIcon" style="background-color:#A09162;">
             <img alt="medal" src="images/medal.svg" />
           </div>
           <div class="awardTextContainer">
-            <div class="awardTitle">Confidentiality</div>
+            <div class="awardTitle">{$_("about.section2.badge1.title")}</div>
             <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
+              {$_("about.section2.badge1.description")}
             </div>
           </div>
         </div>
@@ -81,9 +83,11 @@
             <img alt="certificate" src="images/certificate.svg" />
           </div>
           <div class="awardTextContainer">
-            <div class="awardTitle">Comprehensive support</div>
+            <div class="awardTitle">
+              {$_("about.section2.badge2.title")}
+            </div>
             <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
+              {$_("about.section2.badge2.description")}
             </div>
           </div>
         </div>
@@ -92,9 +96,11 @@
             <img alt="certificate" src="images/certificate.svg" />
           </div>
           <div class="awardTextContainer">
-            <div class="awardTitle">Quality</div>
+            <div class="awardTitle">
+              {$_("about.section2.badge3.title")}
+            </div>
             <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
+              {$_("about.section2.badge3.description")}
             </div>
           </div>
         </div>
@@ -108,54 +114,47 @@
   <div class="pageContainerInner">
     <div>
       <div class="header" style="margin-top:50px;">
-        <div class="headerText">Our story</div>
+        <div class="headerText">
+          {$_("about.section3.title")}
+        </div>
         <div class="headerLine" />
       </div>
-      <div class="subHeaderText">Who we are</div>
+      <div class="subHeaderText">{$_("about.section3.subtitle")}</div>
       <div class="containerOneText">
-        Excepturi ipsam quibusdam accusamus. Vel omnis consequatur ea et quia
-        maxime nemo voluptatem accusamus. Et sapiente quod rerum ratione ea
-        assumenda quod quo ex. Nam aut deserunt veniam eaque sit non cum
-        consequatur earum. Qui laborum ea id deserunt.
-        <p />
-        Provident et ea rerum rerum nemo nihil repellat. Laborum a sequi tenetur.
-        Ex nam nihil fuga architecto perspiciatis est eos aut incidunt. Nemo labore
-        sequi sit est blanditiis.
-        <p />
-        Eum incidunt sit velit nemo. Consectetur veritatis et nemo. Ut sed voluptate
-        consectetur nam ea. Ab facilis aliquam quo consequatur ipsum dicta. Molestiae
-        sequi ipsa dolorem fugiat qui vel nihil iusto eos. Ducimus delectus molestiae
-        nobis iure quaerat pariatur similique rem temporibus.
+        <p>
+          {$_("about.section3.paragraph1")}
+        </p>
+        <p>
+          {$_("about.section3.paragraph2")}
+        </p>
+        <p>
+          {$_("about.section3.paragraph3")}
+        </p>
+        <p>
+          {$_("about.section3.paragraph4")}
+        </p>
       </div>
     </div>
   </div>
 </div>
 <div class="blueContainer">
-  <div class="subHeaderText">Aut sit itaque vitae ipsam fugit quos ipsa.</div>
+  <div class="subHeaderText">{$_("about.section4.title")}</div>
   <div class="row">
     <ul class="rowItem">
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
+      <li>{$_("about.section4.bullet1")}</li>
+      <li>{$_("about.section4.bullet2")}</li>
+      <li>{$_("about.section4.bullet3")}</li>
+      <li>{$_("about.section4.bullet4")}</li>
+      <li>{$_("about.section4.bullet5")}</li>
+      <li>{$_("about.section4.bullet6")}</li>
     </ul>
     <ul class="rowItem">
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-    </ul>
-    <ul class="rowItem">
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
-      <li>Beatae aperiam aperiam</li>
+      <li>{$_("about.section4.bullet7")}</li>
+      <li>{$_("about.section4.bullet8")}</li>
+      <li>{$_("about.section4.bullet9")}</li>
+      <li>{$_("about.section4.bullet10")}</li>
+      <li>{$_("about.section4.bullet11")}</li>
+      <li>{$_("about.section4.bullet12")}</li>
     </ul>
   </div>
 </div>
@@ -167,16 +166,24 @@
       style="display:flex;flex-direction:column;justify-content:center;align-items:center;"
     >
       <div class="header" style="margin-top:50px;">
-        <div class="headerText">Those who connect us</div>
+        <div class="headerText">{$_("about.section5.title")}</div>
         <div class="headerLine" />
       </div>
-      <div class="subHeaderText">Our partners</div>
+      <div class="subHeaderText">{$_("about.section5.subtitle")}</div>
     </div>
-    <div class="row" style="text-align: center;">
-      <div class="rowItem">Logo</div>
-      <div class="rowItem">Logo</div>
-      <div class="rowItem">Logo</div>
-      <div class="rowItem">Logo</div>
+    <div class="teamBlocks" in:fade>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/tdameritrade.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/interactivebrokers.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/prodisma.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/investmentlawgroup.jpg" />
+      </div>
     </div>
   </div>
 </div>

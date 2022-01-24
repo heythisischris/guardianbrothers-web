@@ -60,6 +60,9 @@
         <p>
           {$_("home.section1.paragraph2")}
         </p>
+        <p>
+          {$_("home.section1.paragraph3")}
+        </p>
       </div>
     </div>
     <div
@@ -71,8 +74,133 @@
       </div>
       <div class="subHeaderText">{$_("home.section2.subtitle")}</div>
     </div>
+    <div class="blocks" style="margin-bottom:50px;">
+      <div>
+        <img class="blocksImage" alt="blocks" src="images/blocks.jpg" />
+        <p class="blocksTitle">{$_("home.section2.box1.title")}</p>
+        <p class="blocksDescription">{$_("home.section2.box1.description")}</p>
+        <p class="blocksButton">{$_("home.section2.box1.button")}</p>
+      </div>
+      <div>
+        <img class="blocksImage" alt="blocks" src="images/blocks.jpg" />
+        <p class="blocksTitle">{$_("home.section2.box2.title")}</p>
+        <p class="blocksDescription">{$_("home.section2.box2.description")}</p>
+        <p class="blocksButton">{$_("home.section2.box2.button")}</p>
+      </div>
+      <div>
+        <img class="blocksImage" alt="blocks" src="images/blocks.jpg" />
+        <p class="blocksTitle">{$_("home.section2.box3.title")}</p>
+        <p class="blocksDescription">{$_("home.section2.box3.description")}</p>
+        <p class="blocksButton">{$_("home.section2.box3.button")}</p>
+      </div>
+    </div>
+    <div class="pageContainerInner">
+      <div class="row">
+        <div class="rowItem">
+          <div class="header" style="margin-top:50px;">
+            <div class="headerText">{$_("home.section3.title")}</div>
+            <div class="headerLine" />
+          </div>
+          <div class="subHeaderText">{$_("home.section3.subtitle")}</div>
+          <div class="row">
+            <div class="award">
+              <div class="awardIcon" style="background-color:#A09162;">
+                <img alt="medal" src="images/group.svg" />
+              </div>
+              <div class="awardTextContainer">
+                <div class="awardTitle">
+                  {$_("home.section3.badge1.title")}
+                </div>
+                <div class="awardSubtitle">
+                  {$_("home.section3.badge1.description")}
+                </div>
+              </div>
+            </div>
+            <div class="award">
+              <div class="awardIcon" style="background-color:#A09162;">
+                <img alt="certificate" src="images/like.svg" />
+              </div>
+              <div class="awardTextContainer">
+                <div class="awardTitle">
+                  {$_("home.section3.badge2.title")}
+                </div>
+                <div class="awardSubtitle">
+                  {$_("home.section3.badge2.description")}
+                </div>
+              </div>
+            </div>
+            <div class="award">
+              <div class="awardIcon" style="background-color:#A09162;">
+                <img alt="certificate" src="images/chart.svg" />
+              </div>
+              <div class="awardTextContainer">
+                <div class="awardTitle">
+                  {$_("home.section3.badge3.title")}
+                </div>
+                <div class="awardSubtitle">
+                  {$_("home.section3.badge3.description")}
+                </div>
+              </div>
+            </div>
+            <div class="award">
+              <div class="awardIcon" style="background-color:#A09162;">
+                <img alt="medal" src="images/geography.svg" />
+              </div>
+              <div class="awardTextContainer">
+                <div class="awardTitle">
+                  {$_("home.section3.badge4.title")}
+                </div>
+                <div class="awardSubtitle">
+                  {$_("home.section3.badge4.description")}
+                </div>
+              </div>
+            </div>
+            <div class="award">
+              <div class="awardIcon" style="background-color:#A09162;">
+                <img alt="certificate" src="images/collaboration.svg" />
+              </div>
+              <div class="awardTextContainer">
+                <div class="awardTitle">
+                  {$_("home.section3.badge5.title")}
+                </div>
+                <div class="awardSubtitle">
+                  {$_("home.section3.badge5.description")}
+                </div>
+              </div>
+            </div>
+            <div class="award">
+              <div class="awardIcon" style="background-color:#A09162;">
+                <img alt="certificate" src="images/business.svg" />
+              </div>
+              <div class="awardTextContainer">
+                <div class="awardTitle">
+                  {$_("home.section3.badge6.title")}
+                </div>
+                <div class="awardSubtitle">
+                  {$_("home.section3.badge6.description")}
+                </div>
+              </div>
+            </div>
+            <div class="award">
+              <div class="awardIcon" style="background-color:#A09162;">
+                <img alt="certificate" src="images/medal.svg" />
+              </div>
+              <div class="awardTextContainer">
+                <div class="awardTitle">
+                  {$_("home.section3.badge7.title")}
+                </div>
+                <div class="awardSubtitle">
+                  {$_("home.section3.badge7.description")}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<img alt="" style="width:100%;" src="images/gbfund1.jpg" />
 
 <style>
   .containerOne {
@@ -84,6 +212,7 @@
   }
   .containerOneText {
     max-width: 800px;
+    font-size: 20px;
   }
 
   .blocks {
@@ -92,36 +221,42 @@
     justify-content: space-between;
     align-items: center;
   }
-  .blocksNumber {
-    font-size: 125px;
-    font-weight: 800;
-    color: #bbb18f;
+  .blocksImage {
+    width: 100%;
+    height: 100%;
+  }
+  .blocksTitle {
+    font-weight: 700;
+    font-size: 24px;
+    padding: 20px;
+  }
+  .blocksDescription {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 20px;
+  }
+  .blocksButton {
+    font-weight: 600;
+    font-size: 18px;
   }
 
   .blocks div {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     width: 30%;
-    background-color: #a09162;
-    height: 200px;
+    background-color: #021c32;
+    height: 600px;
     color: #ffffff;
     margin: 10px;
-    padding: 20px;
     border-radius: 0px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: 0.2s;
   }
 
   .blocks div:hover {
-    background-color: #f2efe5;
-    color: #141414;
-  }
-
-  .blocksTitle {
-    font-weight: 600;
-    font-size: 30px;
+    background-color: #6f8db1;
   }
 
   @media only screen and (max-width: 850px) {
@@ -136,7 +271,7 @@
       margin-bottom: 20px;
     }
 
-    .blocksNumber {
+    .blocksTitle {
       margin-top: -30px !important;
       margin-bottom: -30px !important;
     }
@@ -146,7 +281,7 @@
     .awardTextContainer {
       max-width: 150px;
     }
-    .blocksTitle {
+    .blocksDescription {
       font-size: 20px;
     }
   }

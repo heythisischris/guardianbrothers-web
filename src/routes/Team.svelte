@@ -50,6 +50,13 @@
         </div>
       </div>
       <div class="teamBlocksInner">
+        <img alt="" src="images/manuel.jpg" />
+        <div class="teamBlocksInnerText">
+          <h2>Manuel Sauma</h2>
+          <span>Chief Marketing Officer</span>
+        </div>
+      </div>
+      <div class="teamBlocksInner">
         <img alt="" src="images/chris.jpg" />
         <div class="teamBlocksInnerText">
           <h2>Chris Aitken</h2>
