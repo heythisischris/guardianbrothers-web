@@ -48,9 +48,6 @@
               {$_("about.section1.paragraph3")}
             </p>
             <p>
-              {$_("about.section1.paragraph4")}
-            </p>
-            <p>
               {$_("about.section1.quote")}
             </p>
           </div>

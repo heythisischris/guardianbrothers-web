@@ -59,18 +59,29 @@
     <div class="row">
       <div class="rowItem">
         <div class="header" style="margin-top:50px;">
-          <div class="headerText">Learn more</div>
+          <div class="headerText">{$_("contact.section1.title")}</div>
           <div class="headerLine" />
         </div>
-        <div class="subHeaderText">Our Advantages</div>
+        <div class="subHeaderText">{$_("contact.section1.subtitle")}</div>
         <div class="award">
           <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="medal" src="images/medal.svg" />
+            <img alt="marker" src="images/marker.svg" />
           </div>
           <div class="awardTextContainer">
-            <div class="awardTitle">Confidentiality</div>
+            <div class="awardTitle">{$_("contact.section1.badge1.title")}</div>
             <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
+              {$_("contact.section1.badge1.description")}
+            </div>
+          </div>
+        </div>
+        <div class="award">
+          <div class="awardIcon" style="background-color:#A09162;">
+            <img alt="call" src="images/call.svg" />
+          </div>
+          <div class="awardTextContainer">
+            <div class="awardTitle">{$_("contact.section1.badge2.title")}</div>
+            <div class="awardSubtitle">
+              {$_("contact.section1.badge2.description")}
             </div>
           </div>
         </div>
@@ -79,20 +90,9 @@
             <img alt="certificate" src="images/certificate.svg" />
           </div>
           <div class="awardTextContainer">
-            <div class="awardTitle">Comprehensive support</div>
+            <div class="awardTitle">{$_("contact.section1.badge3.title")}</div>
             <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
-            </div>
-          </div>
-        </div>
-        <div class="award">
-          <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="certificate" src="images/certificate.svg" />
-          </div>
-          <div class="awardTextContainer">
-            <div class="awardTitle">Quality</div>
-            <div class="awardSubtitle">
-              Qui asperiores et pariatur rerum incidunt.
+              {$_("contact.section1.badge3.description")}
             </div>
           </div>
         </div>
@@ -101,41 +101,44 @@
   </div>
   <div class="contactContainer">
     <div class="header" style="margin-top:50px;">
-      <div class="headerText">Voluptas non aut voluptatibus</div>
+      <div class="headerText">{$_("contact.section2.title")}</div>
       <div class="headerLine" />
     </div>
-    <div class="subHeaderText">Get in touch</div>
+    <div class="subHeaderText">{$_("contact.section2.subtitle")}</div>
     {#if messageSent}
-      <p>Message sent! We will get back to you as soon as possible.</p>
+      <p>{$_("contact.section2.form.success")}</p>
     {:else}
       <div>
         <div class="row">
           <input
             bind:value={firstName}
             class="rowItem"
-            placeholder="First Name"
+            placeholder={$_("contact.section2.form.firstName")}
           />
           <input
             bind:value={lastName}
             class="rowItem"
-            placeholder="Last Name"
+            placeholder={$_("contact.section2.form.lastName")}
           />
         </div>
         <div class="row">
-          <input bind:value={email} placeholder="Email" />
+          <input
+            bind:value={email}
+            placeholder={$_("contact.section2.form.email")}
+          />
         </div>
         <div class="row">
           <textarea
             bind:value={message}
             style="min-height:200px"
-            placeholder="Message"
+            placeholder={$_("contact.section2.form.message")}
           />
         </div>
         <button
           on:click={() => {
             sendMessage();
           }}
-          style="float:right;">SUBMIT</button
+          style="float:right;">{$_("contact.section2.form.submit")}</button
         >
       </div>
     {/if}
@@ -153,32 +156,30 @@
     <div class="row">
       <div class="rowItem">
         <div class="header" style="margin-top:100px;">
-          <div class="headerText">est quia autem iste qui ut</div>
+          <div class="headerText">{$_("contact.section3.title")}</div>
           <div class="headerLine" />
         </div>
-        <div class="subHeaderText">Subscribe to our newsletter</div>
+        <div class="subHeaderText">{$_("contact.section3.subtitle")}</div>
         <div class="containerOne">
           <div class="containerOneText">
-            Ut deserunt laborum. Ut rerum repellendus voluptates voluptatem iste
-            eum et nihil non. Ad repellendus voluptatem molestias rem non omnis
-            et.
+            {$_("contact.section3.description")}
           </div>
         </div>
 
         {#if addedToMailingList}
           <p style="margin:40px;">
-            You're now subscribed! Check your inbox for new updates.
+            {$_("contact.section3.form.success")}
           </p>
         {:else}
           <div class="row" style="align-items:center;margin-top:40px;">
             <input
               bind:value={mailingListEmail}
-              placeholder="Enter your Email"
+              placeholder="{$_("contact.section3.form.email")}"
             />
             <button
               on:click={() => {
                 addToMailingList();
-              }}>SUBSCRIBE</button
+              }}>{$_("contact.section3.form.submit")}</button
             >
           </div>
         {/if}

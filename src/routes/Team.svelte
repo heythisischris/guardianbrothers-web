@@ -30,10 +30,10 @@
   <div class="pageContainerInner">
     <div class="teamContainer">
       <div class="header">
-        <div class="headerText">Our members</div>
+        <div class="headerText">{$_("team.section1.title")}</div>
         <div class="headerLine" />
       </div>
-      <div class="subHeaderText">Get Consultancy From Our Expert Agents</div>
+      <div class="subHeaderText">{$_("team.section1.subtitle")}</div>
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
@@ -71,7 +71,7 @@
   <div class="pageContainerInner">
     <div class="teamContainer">
       <div class="header">
-        <div class="headerText">Board of Directors</div>
+        <div class="headerText">{$_("team.section2.title")}</div>
         <div class="headerLine" />
       </div>
       <div class="subHeaderText" />
@@ -113,10 +113,10 @@
   <div class="pageContainerInner">
     <div class="teamContainer">
       <div class="header">
-        <div class="headerText">Sint illo esse et enim est</div>
+        <div class="headerText">{$_("team.section3.title")}</div>
         <div class="headerLine" />
       </div>
-      <div class="subHeaderText">Our partners</div>
+      <div class="subHeaderText" />
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">

@@ -18,8 +18,11 @@
     <div class="mainTitle" in:fade={{ delay: 250, duration: 500 }}>
       {$_("home.main.title")}
     </div>
-    <div class="mainSubtitle" in:fade={{ delay: 1500, duration: 500 }}>
-      {$_("home.main.subtitle")}
+    <div class="mainSubtitle">
+      <div class="subtitle1">{$_("home.main.subtitle1")}</div>
+      <div class="subtitle2">{$_("home.main.subtitle2")}</div>
+      <div class="subtitle3">{$_("home.main.subtitle3")}</div>
+      <div class="subtitle4">{$_("home.main.subtitle4")}</div>
     </div>
   </div>
 </div>
@@ -64,6 +67,9 @@
         </p>
         <p>
           {$_("home.section1.paragraph3")}
+        </p>
+        <p>
+          {$_("home.section1.paragraph4")}
         </p>
       </div>
     </div>
@@ -117,152 +123,155 @@
         </div>
       </div>
     </div>
-    <div class="pageContainerInner">
-      <div class="row">
-        <div class="rowItem">
-          <div class="header" style="margin-top:50px;">
-            <div class="headerText">{$_("home.section3.title")}</div>
-            <div class="headerLine" />
-          </div>
-          <div class="subHeaderText">{$_("home.section3.subtitle")}</div>
-          <div class="row" style="text-align:center;">
-            <div class="award awardModify">
-              <div
-                class="awardIcon awardIconModify"
-                style="background-color:#A09162;"
-              >
-                <img alt="medal" src="images/group.svg" />
-              </div>
-              <div class="awardTextContainer awardTextContainerModify">
-                <div class="awardTitle">
-                  {$_("home.section3.badge1.title")}
-                </div>
-                <div class="awardSubtitle">
-                  {$_("home.section3.badge1.description")}
-                </div>
-              </div>
-            </div>
-            <div class="award awardModify">
-              <div
-                class="awardIcon awardIconModify"
-                style="background-color:#A09162;"
-              >
-                <img alt="certificate" src="images/like.svg" />
-              </div>
-              <div class="awardTextContainer awardTextContainerModify">
-                <div class="awardTitle">
-                  {$_("home.section3.badge2.title")}
-                </div>
-                <div class="awardSubtitle">
-                  {$_("home.section3.badge2.description")}
-                </div>
-              </div>
-            </div>
-            <div class="award awardModify">
-              <div
-                class="awardIcon awardIconModify"
-                style="background-color:#A09162;"
-              >
-                <img alt="certificate" src="images/chart.svg" />
-              </div>
-              <div class="awardTextContainer awardTextContainerModify">
-                <div class="awardTitle">
-                  {$_("home.section3.badge3.title")}
-                </div>
-                <div class="awardSubtitle">
-                  {$_("home.section3.badge3.description")}
-                </div>
-              </div>
-            </div>
-            <div class="award awardModify">
-              <div
-                class="awardIcon awardIconModify"
-                style="background-color:#A09162;"
-              >
-                <img alt="medal" src="images/geography.svg" />
-              </div>
-              <div class="awardTextContainer awardTextContainerModify">
-                <div class="awardTitle">
-                  {$_("home.section3.badge4.title")}
-                </div>
-                <div class="awardSubtitle">
-                  {$_("home.section3.badge4.description")}
-                </div>
-              </div>
-            </div>
-            <div class="award awardModify">
-              <div
-                class="awardIcon awardIconModify"
-                style="background-color:#A09162;"
-              >
-                <img alt="certificate" src="images/collaboration.svg" />
-              </div>
-              <div class="awardTextContainer awardTextContainerModify">
-                <div class="awardTitle">
-                  {$_("home.section3.badge5.title")}
-                </div>
-                <div class="awardSubtitle">
-                  {$_("home.section3.badge5.description")}
-                </div>
-              </div>
-            </div>
-            <div class="award awardModify">
-              <div
-                class="awardIcon awardIconModify"
-                style="background-color:#A09162;"
-              >
-                <img alt="certificate" src="images/business.svg" />
-              </div>
-              <div class="awardTextContainer awardTextContainerModify">
-                <div class="awardTitle">
-                  {$_("home.section3.badge6.title")}
-                </div>
-                <div class="awardSubtitle">
-                  {$_("home.section3.badge6.description")}
-                </div>
-              </div>
-            </div>
-            <div class="award awardModify">
-              <div
-                class="awardIcon awardIconModify"
-                style="background-color:#A09162;"
-              >
-                <img alt="certificate" src="images/medal.svg" />
-              </div>
-              <div class="awardTextContainer awardTextContainerModify">
-                <div class="awardTitle">
-                  {$_("home.section3.badge7.title")}
-                </div>
-                <div class="awardSubtitle">
-                  {$_("home.section3.badge7.description")}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-<div class="pageContainer section4">
+<div class="pageContainer section3">
   <div
     class="pageContainerInner"
     style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
-    <div class="section4Title">
-      {$_("home.section4.title")}
+    <div class="section3Title">
+      {$_("home.section3.title")}
     </div>
-    <div class="section4Description">
-      {$_("home.section4.description")}
+    <div class="section3Description">
+      {$_("home.section3.description")}
     </div>
     <div
       on:click={() => {
         navigate("/funds");
       }}
-      class="section4Button"
+      class="section3Button"
     >
-      {$_("home.section4.button")}
+      {$_("home.section3.button")}
+    </div>
+  </div>
+</div>
+
+<div class="pageContainer">
+  <div class="pageContainerInner">
+    <div class="row">
+      <div class="rowItem">
+        <div class="header" style="margin-top:50px;">
+          <div class="headerText">{$_("home.section4.title")}</div>
+          <div class="headerLine" />
+        </div>
+        <div class="subHeaderText">{$_("home.section4.subtitle")}</div>
+        <div class="row" style="text-align:center;">
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#A09162;"
+            >
+              <img alt="medal" src="images/group.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("home.section4.badge1.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("home.section4.badge1.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#A09162;"
+            >
+              <img alt="certificate" src="images/like.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("home.section4.badge2.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("home.section4.badge2.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#A09162;"
+            >
+              <img alt="certificate" src="images/chart.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("home.section4.badge3.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("home.section4.badge3.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#A09162;"
+            >
+              <img alt="medal" src="images/geography.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("home.section4.badge4.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("home.section4.badge4.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#A09162;"
+            >
+              <img alt="certificate" src="images/collaboration.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("home.section4.badge5.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("home.section4.badge5.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#A09162;"
+            >
+              <img alt="certificate" src="images/business.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("home.section4.badge6.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("home.section4.badge6.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#A09162;"
+            >
+              <img alt="certificate" src="images/medal.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("home.section4.badge7.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("home.section4.badge7.description")}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -280,17 +289,17 @@
     font-size: 20px;
   }
 
-  .section4Title {
+  .section3Title {
     font-size: 50px;
     font-weight: 600;
   }
-  .section4Description {
+  .section3Description {
     margin-top: 40px;
     font-size: 26px;
     font-weight: 600;
     max-width: 50%;
   }
-  .section4Button {
+  .section3Button {
     margin-top: 60px;
     cursor: pointer;
     background-color: #ffffff;
@@ -303,7 +312,7 @@
     justify-content: center;
   }
 
-  .section4 {
+  .section3 {
     min-height: 600px;
     background: linear-gradient(#354558aa, #354558aa), url("images/gbfund1.jpg");
     color: #ffffff;
@@ -377,6 +386,64 @@
     text-align: center;
   }
 
+  @keyframes subtitleAnimation {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    20% {
+      opacity: 1;
+    }
+    30% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    60% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 0;
+    }
+    80% {
+      opacity: 0;
+    }
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .subtitle1,
+  .subtitle2,
+  .subtitle3,
+  .subtitle4 {
+    opacity: 0;
+    animation: subtitleAnimation 20s infinite;
+    transition: all;
+    position: absolute;
+  }
+  .subtitle1 {
+    animation-delay: 0s;
+  }
+  .subtitle2 {
+    animation-delay: 5s;
+  }
+  .subtitle3 {
+    animation-delay: 10s;
+  }
+  .subtitle4 {
+    animation-delay: 15s;
+  }
+
   @media only screen and (max-width: 850px) {
     .blocks {
       flex-direction: column;
@@ -403,15 +470,15 @@
       font-size: 20px;
     }
 
-    .section4 {
+    .section3 {
       background-size: 250%;
       background-position: -250px 0px;
       min-height: 300px;
     }
-    .section4Title {
+    .section3Title {
       font-size: 30px;
     }
-    .section4Description {
+    .section3Description {
       margin-top: 20px;
       font-size: 22px;
       max-width: 100%;

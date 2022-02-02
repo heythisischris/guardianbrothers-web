@@ -142,18 +142,9 @@
             </div>
           </a>
           <p style="margin-bottom:20px;font-size:12px;">
-            {`Investing involves risk, including loss of principal. Past performance does not guarantee or indicate future results. Any historical returns expected returns or probability projections may not reflect actual future performance. While the data we use from third parties is believed to be reliable, we cannot ensure the accuracy or completeness of data provided by investors or other third parties. Neither Guardian Brothers Holdings nor any of its affiliates provide tax advice and do not represent in any manner that the outcomes described herein will result in any particular tax consequence. Offers to sell, or solicitations of offers to buy, any security can only be made through official offering documents that contain important information about investment objectives, risks, fees, and expenses. Prospective investors should consult with a tax or legal adviser before making any investment decision.`}
+            {`No hay garantías de que los Fondos cumplirán sus objetivos de inversión o que sus estrategias GBH serán exitosas.
+              Los datos de rendimiento indicados representan el rendimiento pasado y no son garantía de rendimientos futuros. El rendimiento actual puede ser inferior o superior a los datos de rendimiento citados.`}
           </p>
-          <div class="yellowLine" />
-          <a href="tel:4788414516" class="award">
-            <div class="awardIcon" style="background-color:#A09162;">
-              <img alt="call" src="images/call.svg" />
-            </div>
-            <div class="awardTextContainer" style="width:200px;">
-              <div class="awardTitle">Call Any Time</div>
-              <div class="awardSubtitle">(478) 841-4516</div>
-            </div>
-          </a>
         </div>
         <div class="blocksInner">
           <div class="footerTitle">Explore</div>
@@ -173,7 +164,6 @@
               <a href="/funds#sectionFundFacts">FUND FACTS</a>
               <a href="/funds#sectionTopHoldings">HOLDINGS</a>
               <a href="/funds#sectionDiversification">DIVERSIFICATION</a>
-              <a href="/funds#sectionTeam">TEAM</a>
             </div>
           </div>
         </div>

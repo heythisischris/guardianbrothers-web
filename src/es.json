@@ -2,21 +2,25 @@
   "home": {
     "main": {
       "title": "Haz que tu dinero trabaje por ti.",
-      "subtitle": "Descubre una forma alternativa de inversión.\nMercados financieros y bursátiles de EE. UU. al alcance de tus posibilidades.\nInvierte de manera segura, simple y accesible para lograr tus propósitos financieros. Haz crecer tu patrimonio hoy, invierte en fondos de inversión alternativos."
+      "subtitle1": "Descubre una forma alternativa de inversión.",
+      "subtitle2": "Mercados financieros y bursátiles de EE. UU. al alcance de tus posibilidades.",
+      "subtitle3": "Invierte de manera segura, simple y accesible para lograr tus propósitos financieros.",
+      "subtitle4": "Haz crecer tu patrimonio hoy, invierte en fondos de inversión alternativos."
     },
     "section1": {
       "title": "Acerca de Nosotros",
       "subtitle": "Quienes Somos",
-      "paragraph1": "Somos tus guardianes, en GBH tú eres el centro de todo lo que hacemos, nos ocupamos de escucharte activamente para conocer y entender tu estilo de vida, tus necesidades y posibilidades de inversión.",
-      "paragraph2": "Con la asesoría de nuestros expertos financieros, el uso de softwares y análisis de datos en tiempo real, creamos portafolios hechos a la medida que ofrecen un rendimiento superior y minimizan el riesgo.",
-      "paragraph3": "Nuestra prioridad número uno, es lograr la rentabilidad de tú inversión con un crecimiento sostenible a largo plazo que te permita alcanzar tus objetivos financieros personales.",
+      "paragraph1": "Guardian Brothers Holdings es una empresa gestora de inversiones alternativas, constituida en Miami, Florida. La firma emplea un enfoque en la preservación y crecimiento sostenible del patrimonio de nuestros inversionistas.",
+      "paragraph2": "La firma combina la experiencia desarrollada a lo largo de su historia en creación de carteras y habilidades de gestión de riesgo para ofrecer atractivos rendimientos ajustados al riesgo de forma sostenible.",
+      "paragraph3": "Un pionero en inversión en LATAM impulsada por eventos macro, estrategias en corto, largo y diversificación de activos globales.",
+      "paragraph4": "Guardian Brothers ha ganado una reputación por su compromiso con la integridad, transparencia y simplicidad con sus inversionistas.",
       "badge1": {
         "title": "Nuestra Mision",
-        "description": "Acompañar a nuestros inversionistas y asociados en la construcción de su bienestar financiero y patrimonio, a través de la gestión experta de inversiones alternativas globales, comprendiendo la singularidad de cada uno de nuestros clientes."
+        "description": "Ser los líderes en gestión de activos globales en nuestra comunidad a través de un trabajo significativo y relaciones cercanas entre nuestros inversionistas y asociados."
       },
       "badge2": {
-        "title": "Nuestra Vision",
-        "description": "Hacemos que invertir sea un proceso simple, interesante, seguro y accesible dentro de tus posibilidades económicas, poniendo a tu alcance atractivos activos financieros de EE. UU.  para sacar el mayor provecho de tu inversión."
+        "title": "Nuestra Visión",
+        "description": "Democratizar los mercados de inversiones alternativas para latinoamérica. Brindando toda la transparencia, y accesibilidad con el objetivo de superar las expectativas de todos nuestros inversionistas"
       }
     },
     "section2": {
@@ -39,42 +43,45 @@
       }
     },
     "section3": {
+      "title": "Guardian Equity Fund I",
+      "description": "Sí, una alternativa de inversión puede ser simple, interesante, divertida y darte dinero.",
+      "button": "LEER MAS"
+    },
+    "section4": {
       "title": "Conocenos Mejor",
       "subtitle": "Nuestros Principios",
       "description": "Somos una empresa impulsada por valores y principios",
       "badge1": {
         "title": "Transparencia",
-        "description": "Comunicación clara y sencilla para que tengas total transparencia del destino de tu dinero."
+        "description": "Comunicación clara y activa con nuestros inversionistas."
       },
       "badge2": {
         "title": "Disciplina",
-        "description": "Promovemos prácticas laborales de orden, constancia y colaboración entre nuestros diferentes equipos para entregarte lo mejor."
+        "description": "Promovemos prácticas laborales de orden, constancia y colaboración entre nuestros diferentes equipos."
       },
       "badge3": {
         "title": "Creatividad",
-        "description": "Generamos nuevas ideas e enfoques que permitan crear productos más interesantes y mejorar nuestros servicios."
+        "description": "Generamos nuevas ideas y enfoques que permitan alcanzar las expectativas de nuestros inversionistas."
       },
       "badge4": {
         "title": "Integridad",
-        "description": "Nuestro mayor tesoro es tu confianza, trabajamos bajo principios de honestidad y lealtad."
+        "description": "Nuestro mayor tesoro es tu confianza, trabajamos bajo principios de honestidad y lealtad en todo momento."
       },
       "badge5": {
         "title": "Excelencia",
-        "description": "Buscamos la mejora constante, no nos basta con que el resultado esté bien, ¡queremos que sea excelente!"
+        "description": "Buscamos la mejora constante, creemos que pensar en grande es lo que nos lleva al éxito."
       },
       "badge6": {
         "title": "Relaciones Significativas",
-        "description": "Nos tomamos el tiempo para conocerte, saber quién eres para diseñar el mejor portafolio para ti."
+        "description": "Nos tomamos el tiempo para conocerte y diseñar el mejor portafolio a tu medida."
       },
       "badge7": {
         "title": "Análisis Y Tecnología",
-        "description": "Investigamos y analizamos información con la ayuda de programas tecnológicos para identificar oportunidades de inversión."
+        "description": "Investigamos y analizamos información con la ayuda de programas tecnológicos y algoritmos para identificar oportunidades de inversión."
       }
     },
-    "section4": {
-      "title": "Guardian Equity Fund I",
-      "description": "Sí, una alternativa de inversión puede ser simple, interesante, divertida y darte dinero.",
-      "button": "LEER MAS"
+    "section5": {
+      "title": "Testimonios de Clientes"
     }
   },
   "about": {
@@ -85,10 +92,9 @@
     "section1": {
       "title": "GUARDIAN BROTHERS HOLDINGS",
       "subtitle": "¿Por qué elegirnos?",
-      "paragraph1": "En GHB creemos que los fondos de inversión no son exclusivos del inversionista sofisticado o con un gran patrimonio, son una herramienta que debe estar al alcance de todos sin importar cuánto dinero tengas.",
+      "paragraph1": "Creemos que los fondos de inversión no son exclusivos del inversionista sofisticado o con un gran patrimonio, son una herramienta que debe estar al alcance de todos sin importar cuánto dinero tengas.",
       "paragraph2": "Creamos portafolios alternativos a la medida con inversiones a partir de $1,000 USD y ponemos a tu alcance mercados financieros y bursátiles de EE. UU., considerando tu estilo de vida, tus necesidades, tus proyectos y objetivos a mediano y largo plazo.",
       "paragraph3": "Nuestro equipo profesional de gestores de carteras se encargan de buscar oportunidades en los mercados, diversificar el portafolio y gestionar el nivel de riesgo para lograr el rendimiento superior de tu inversión.",
-      "paragraph4": "Nuestra prioridad número uno, es lograr la rentabilidad de tu inversión con un crecimiento sostenible a largo plazo que te permita alcanzar tus objetivos financieros personales.",
       "quote": "Invertir debe ser un proceso simple y accesible, una experiencia interesante que te motive e inspire para lograr tus propósitos financieros."
     },
     "section2": {
@@ -96,7 +102,7 @@
       "subtitle": "Nuestras Ventajas",
       "badge1": {
         "title": "Confidencialidad",
-        "description": "Nos comprometemos en salvaguardar la información que nos proporciones."
+        "description": "Nos comprometemos a salvaguardar la información que nos proporciones."
       },
       "badge2": {
         "title": "Soporte Continuo",
@@ -111,20 +117,20 @@
       "title": "Our story",
       "subtitle": "Nuestra Historia",
       "paragraph1": "Guardian Brothers Holdings LLC (GBH) surgió con el objetivo de poner al alcance de inversores en Latinoamérica, mercados bursátiles de EE. UU., de forma segura, simple e interesante.",
-      "paragraph2": "Fernando Guardia, nuestro Director Ejecutivo y Director de Información, empezó su carrera como gestor de inversiones a la temprana edad de 18 años gestionando carteras de alto valor, demostrando que invertir es un ejercicio que puede ser para todos y para todo tipo de bolsillos.",
+      "paragraph2": "Fernando Guardia, nuestro Director Ejecutivo y Director de Información, empezó su carrera como gestor de inversiones a la temprana edad de 18 años gestionando carteras de alto valor, demostrando que invertir es un ejercicio que puede ser para todos y para todo tipo de presupuestos.",
       "paragraph3": "En su trayectoria fue responsable de la construcción de los algoritmos de Alegra, un sistema de gestión de acciones que es utilizado por GBH, pues estamos convencidos de que garantizar la seguridad en cada inversión es el mejor aliado.",
-      "paragraph4": "Sobre estos principios fundamos GBH, una compañía creadora y administradora de fondos de inversión alternativos, constituida en Florida, EE. UU., que actualmente cuenta con clientes en EE. UU., Bolivia y Paraguay, y continúa buscando llegar a más inversionistas en países de Latinoamérica que tengan interés de invertir en mercados internacionales."
+      "paragraph4": "Sobre estos principios fundamos GBH, una compañía creadora y administradora de fondos de inversión alternativos, constituida en Florida, EE. UU., que actualmente cuenta con clientes en EE.UU., Bolivia y Paraguay, y continúa buscando llegar a más inversionistas en países de Latinoamérica que tengan interés de invertir en mercados internacionales."
     },
     "section4": {
       "title": "¿Cuál es el proceso?",
       "bullet1": "Buscamos oportunidades en los mercados de valores de EE. UU.",
       "bullet2": "Diseñamos un portafolio a la medida ",
-      "bullet3": "Acompañamiento continuo de asesores expertos ",
+      "bullet3": "Acompañamiento continuo de asesores expertos",
       "bullet4": "Inviertes con base en tus posibilidades financieras",
       "bullet5": "Te conviertes dueño de tu portafolio ",
       "bullet6": "Asesoría de Guardian Brothers Fund",
       "bullet7": "Recibes los beneficios de los rendimientos ",
-      "bullet8": "Crecemos el valor de tu inversión  ",
+      "bullet8": "Crecemos el valor de tu inversión",
       "bullet9": "Tu cartera recibe dividendos",
       "bullet10": "Revalorización del capital invertido",
       "bullet11": "Servicio personalizado ",
@@ -139,6 +145,44 @@
     "main": {
       "title": "Contactanos",
       "subtitle": "Queremos conocerte y ayudarte a lograr tus propósitos. Envía tus datos para que un asesor experto se ponga en contacto contigo."
+    },
+    "section1": {
+      "title": "Como encontrarnos",
+      "subtitle": " ",
+      "badge1": {
+        "title": "Sede",
+        "description": "601 brickell key drive, Miami, Florida"
+      },
+      "badge2": {
+        "title": "Telefono",
+        "description": "+1 (478) 841-4516"
+      },
+      "badge3": {
+        "title": "Email",
+        "description": "invest@guardianbrothers.com"
+      }
+    },
+    "section2": {
+      "title": "Si tienes alguna pregunta, simplemente complete el formulario de contacto, y le responderemos a la brevedad posible, si vive cerca, venga a visitarnos.",
+      "subtitle": " ",
+      "form": {
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Email",
+        "message": "Mensaje",
+        "submit": "Enviar",
+        "success": "¡Mensaje enviado! Nos pondremos en contacto con usted lo antes posible."
+      }
+    },
+    "section3": {
+      "title": "Recibe las últimas noticias",
+      "subtitle": "Suscríbete a nuestro boletín",
+      "description": " ",
+      "form": {
+        "email": "Introduce tu Email",
+        "submit": "SUSCRIBIR",
+        "success": "¡Ya estás suscrito! Revisa tu bandeja de entrada para nuevas actualizaciones."
+      }
     }
   },
   "funds": {
@@ -150,6 +194,16 @@
     "main": {
       "title": "Nuestro equipo",
       "subtitle": "Conoce nuestro equipo de especialistas en el sector de inversión y gestión de fondos de inversión con experiencia en mercados internacionales, que te proporcionarán el asesoramiento y evaluación de oportunidades para que inviertas con confianza."
+    },
+    "section1": {
+      "title": "Nuestros miembros",
+      "subtitle": "Obtenga asesoramiento de nuestros agentes"
+    },
+    "section2": {
+      "title": "Junta directiva"
+    },
+    "section3": {
+      "title": "Nuestros socios"
     }
   }
 }
