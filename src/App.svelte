@@ -97,7 +97,7 @@
                 style="display:flex;flex-direction:column;justify-content:center;color:#000000;"
               >
                 <div id="title">Guardian Brothers Holdings</div>
-                <div id="subtitle">ASSET MANAGEMENT</div>
+                <div id="subtitle">GESTIÓN FINANCIERA</div>
               </div>
             </NavLink>
           </div>
@@ -137,7 +137,7 @@
                 Guardian Brothers{isMobile ? "" : " Holdings"}
               </div>
               <div style="font-size:12px;font-family:arial;text-align:right;">
-                ASSET MANAGEMENT
+                GESTIÓN FINANCIERA
               </div>
             </div>
           </a>
