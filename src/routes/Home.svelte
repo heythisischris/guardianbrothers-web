@@ -29,7 +29,11 @@
     class="pageContainerInner"
     style="color:#ffffff;font-size:22px;height:600px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
-    <div class="mainTitle" style="margin-top:-20px;" in:fade={{ delay: 250, duration: 500 }}>
+    <div
+      class="mainTitle"
+      style="margin-top:-20px;"
+      in:fade={{ delay: 250, duration: 500 }}
+    >
       {$_("home.main.title")}
     </div>
     <div class="mainSubtitle">
@@ -349,6 +353,47 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="rowItem section5">
+        <div class="header" style="margin-top:50px;">
+          <div class="headerText">{$_("home.section5.title")}</div>
+          <div class="headerLine" />
+        </div>
+        <div class="subHeaderText">{$_("home.section5.subtitle")}</div>
+        <div class="row">
+          <div class="testimonialBlocks">
+            {#each [0, 1, 2] as item}
+              <div class="testimonialBlock {item == 2 ? 'selected' : ''}">
+                <div class="testimonialDescription">
+                  Praesentium cumque doloribus explicabo dicta suscipit et
+                  maiores. Vel qui ea velit tenetur fugiat. Dignissimos culpa
+                  facilis maiores voluptatum autem sint recusandae et aut.
+                  Expedita id natus vel blanditiis omnis ad ad. Quidem cumque
+                  molestiae consequatur.
+                </div>
+                <div class="testimonialAuthor">
+                  <div class="testimonialImage" />
+                  <div>
+                    <div class="testimonialName">Annabell Brown</div>
+                    <div class="testimonialLocation">
+                      Kessler, Hauck And Gusikowski
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {/each}
+          </div>
+
+          <div class="testimonialBackgroundBlock">
+            <div class="testimonialArrows">
+              <div class="testimonialArrow">{`>`}</div>
+              <div class="testimonialArrow">{`<`}</div>
+            </div>
+            <div class="testimonialButton">LEER MAS</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -558,6 +603,115 @@
     height: 450px;
   }
 
+  .testimonialBlocks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    z-index: 1;
+    position: relative;
+  }
+  .testimonialBlock {
+    width: 320px;
+    height: 320px;
+    padding: 10px;
+    background-color: #f3f3f3;
+    border: 2px solid #a09162;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .testimonialBlock.selected {
+    background-color: #f2efe5;
+  }
+  .testimonialDescription {
+    font-style: italic;
+    line-height: 2;
+    color: #888888;
+  }
+  .testimonialImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    background-color: #cccccc;
+    margin-right:10px;
+  }
+  .testimonialName {
+    font-weight: 600;
+  }
+  .testimonialLocation {
+    color: #888888;
+  }
+  .testimonialAuthor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .testimonialBackgroundBlock {
+    position: absolute;
+    right: 0px;
+    margin-top: -250px;
+    width: 750px;
+    height: 380px;
+    background-color: #a09162;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .testimonialArrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 250px;
+  }
+
+  .testimonialArrow {
+    height: 50px;
+    width: 50px;
+    background-color: #cccccc;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+    font-weight: 100;
+    transition: 0.5s;
+    margin: 10px;
+  }
+  .testimonialArrow:hover {
+    background-color: #ffffff;
+  }
+
+  .testimonialButton {
+    cursor: pointer;
+    background-color: #cccccc;
+    color: #000000;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    transition: 0.5s;
+    margin-left: 50px;
+  }
+  .testimonialButton:hover {
+    background-color: #ffffff;
+  }
+  .section5 {
+    min-height: 582px;
+  }
+
   @media only screen and (max-width: 850px) {
     .blocks {
       flex-direction: column;
@@ -621,7 +775,31 @@
       max-width: 100%;
     }
     .awardSubtitle {
-      font-size:20px;
+      font-size: 20px;
+    }
+    .testimonialBlocks {
+      flex-direction: column;
+      width: 100%;
+    }
+    .testimonialBlock {
+      margin: 10px 0px;
+    }
+    .testimonialBackgroundBlock {
+      position: relative;
+      margin-top: 0px;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      margin-bottom: 50px;
+    }
+    .testimonialArrows {
+      margin-left: 0px;
+      flex-direction: row-reverse;
+    }
+    .testimonialButton {
+      margin: 0px;
     }
   }
 </style>
