@@ -141,6 +141,7 @@
               </div>
             </div>
           </a>
+          <p style="margin-bottom:10px;font-size:12px;width:99%;">© 2010-2022 Guardian Brothers Fund</p>
           <p style="margin-bottom:20px;font-size:12px;">
             {`No hay garantías de que los Fondos cumplirán sus objetivos de inversión o que sus estrategias GBH serán exitosas.
               Los datos de rendimiento indicados representan el rendimiento pasado y no son garantía de rendimientos futuros. El rendimiento actual puede ser inferior o superior a los datos de rendimiento citados.`}
@@ -173,8 +174,8 @@
           <div class="blocksMenu">
             <div class="contactContainer">
               <img alt="email" src="images/footer_email.svg" />
-              <a href="mailto:fernando@guardianbrothers.com"
-                >Fernando@guardianbrothers.com</a
+              <a href="mailto:invest@guardianbrothers.com"
+                >invest@guardianbrothers.com</a
               >
             </div>
             <div class="contactContainer">

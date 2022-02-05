@@ -31,7 +31,7 @@
     <div class="row">
       <img alt="" class="rowItem" src="images/fernando_cover.jpg" />
       <div class="rowItem">
-        <div class="header" style="margin-top:100px;">
+        <div class="header" style="margin-top:50px;">
           <div class="headerText">{$_("about.section1.title")}</div>
           <div class="headerLine" />
         </div>

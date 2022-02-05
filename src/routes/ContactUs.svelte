@@ -151,7 +151,7 @@
   allowfullscreen=""
   loading="lazy"
 />
-<div class="pageContainer" style="min-height:100px;">
+<div class="pageContainer" style="min-height:400px;">
   <div class="pageContainerInner" style="padding-bottom:0px;">
     <div class="row">
       <div class="rowItem">
@@ -184,12 +184,6 @@
           </div>
         {/if}
       </div>
-      <img
-        alt=""
-        style="max-height: 500px;object-fit: contain;"
-        class="rowItem"
-        src="images/about3.jpg"
-      />
     </div>
   </div>
 </div>

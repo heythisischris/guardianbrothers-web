@@ -8,6 +8,20 @@
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_home.jpg')";
   });
+  async function loadAPI(url) {
+    let data = await fetch(url);
+    let response = await data.json();
+    return response;
+  }
+  var stats = loadAPI("https://lambda.guardianbrothers.com/stats");
+  stats.then((innerStats) => {
+    stats = innerStats;
+  });
+
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 </script>
 
 <div class="pageContainerTop">
@@ -15,7 +29,7 @@
     class="pageContainerInner"
     style="color:#ffffff;font-size:22px;height:600px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
-    <div class="mainTitle" in:fade={{ delay: 250, duration: 500 }}>
+    <div class="mainTitle" style="margin-top:-20px;" in:fade={{ delay: 250, duration: 500 }}>
       {$_("home.main.title")}
     </div>
     <div class="mainSubtitle">
@@ -35,23 +49,27 @@
     <div class="subHeaderText">{$_("home.section1.subtitle")}</div>
     <div class="containerOne">
       <div>
-        <div class="award">
-          <div class="awardIcon">
+        <div class="award awardModify2">
+          <div class="awardIcon awardIconModify2">
             <img alt="medal" src="images/medal.svg" />
           </div>
-          <div class="awardTextContainer">
-            <div class="awardTitle">{$_("home.section1.badge1.title")}</div>
+          <div class="awardTextContainer awardTextContainerModify2">
+            <div class="awardTitle">
+              {$_("home.section1.badge1.title")}
+            </div>
             <div class="awardSubtitle">
               {$_("home.section1.badge1.description")}
             </div>
           </div>
         </div>
-        <div class="award">
-          <div class="awardIcon">
+        <div class="award awardModify2">
+          <div class="awardIcon awardIconModify2">
             <img alt="certificate" src="images/certificate.svg" />
           </div>
-          <div class="awardTextContainer">
-            <div class="awardTitle">{$_("home.section1.badge2.title")}</div>
+          <div class="awardTextContainer awardTextContainerModify2">
+            <div class="awardTitle">
+              {$_("home.section1.badge2.title")}
+            </div>
             <div class="awardSubtitle">
               {$_("home.section1.badge2.description")}
             </div>
@@ -84,7 +102,7 @@
     </div>
     <div class="blocks" style="margin-bottom:50px;">
       <div class="blocksDiv">
-        <img class="blocksImage" alt="blocks" src="images/blocks.jpg" />
+        <img class="blocksImage" alt="blocks" src="images/block1.jpg" />
         <p class="blocksTitle">{$_("home.section2.box1.title")}</p>
         <p class="blocksDescription">{$_("home.section2.box1.description")}</p>
         <div
@@ -96,8 +114,9 @@
           {$_("home.section2.box1.button")}
         </div>
       </div>
+
       <div class="blocksDiv">
-        <img class="blocksImage" alt="blocks" src="images/blocks.jpg" />
+        <img class="blocksImage" alt="blocks" src="images/block2.jpg" />
         <p class="blocksTitle">{$_("home.section2.box2.title")}</p>
         <p class="blocksDescription">{$_("home.section2.box2.description")}</p>
         <div
@@ -110,7 +129,7 @@
         </div>
       </div>
       <div class="blocksDiv">
-        <img class="blocksImage" alt="blocks" src="images/blocks.jpg" />
+        <img class="blocksImage" alt="blocks" src="images/block3.jpg" />
         <p class="blocksTitle">{$_("home.section2.box3.title")}</p>
         <p class="blocksDescription">{$_("home.section2.box3.description")}</p>
         <div
@@ -131,19 +150,76 @@
     class="pageContainerInner"
     style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
-    <div class="section3Title">
-      {$_("home.section3.title")}
-    </div>
-    <div class="section3Description">
-      {$_("home.section3.description")}
-    </div>
     <div
-      on:click={() => {
-        navigate("/funds");
-      }}
-      class="section3Button"
+      class="pageContainerInner section3Inner"
+      style="color:#ffffff;font-size:22px;"
     >
-      {$_("home.section3.button")}
+      {#await stats}
+        <div />
+      {:then stats}
+        <div class="section3TopContainer">
+          <div class="section3Title">
+            {$_("home.section3.title")}
+          </div>
+          <div class="section3Description">
+            {$_("home.section3.description")}
+          </div>
+          <div class="section3ButtonContainer">
+            <div
+              on:click={() => {
+                navigate("/funds");
+              }}
+              class="section3Button"
+            >
+              {$_("home.section3.button")}
+            </div>
+
+            <div
+              on:click={() => {
+                window.location = "https://calendly.com/guardianbrothers/15min";
+              }}
+              class="section3InvestButton"
+            >
+              {$_("home.section3.investButton")}
+            </div>
+          </div>
+        </div>
+        <div id="stats" in:fade>
+          <div class="statsContainer">
+            <div class="infoBorder">
+              <div>Fund Assets</div>
+              <div>{formatter.format(stats[0].value)}</div>
+            </div>
+            <div class="infoBorder">
+              <div>Shares Outstanding</div>
+              <div>{formatter.format(stats[0].shares).slice(1)}</div>
+            </div>
+          </div>
+          <div class="statsContainer">
+            <div class="infoBorder">
+              <div>NAV</div>
+              <div>
+                {formatter.format(stats[0].value / stats[0].shares)}
+              </div>
+            </div>
+            <div class="infoBorder">
+              <div>NAV Change</div>
+              <div>
+                {formatter.format(
+                  stats[0].value / stats[0].shares -
+                    stats[1].value / stats[1].shares
+                )}
+                ({(
+                  ((stats[0].value / stats[0].shares -
+                    stats[1].value / stats[1].shares) /
+                    (stats[1].value / stats[1].shares)) *
+                  100
+                ).toFixed(2) + "%"})
+              </div>
+            </div>
+          </div>
+        </div>
+      {/await}
     </div>
   </div>
 </div>
@@ -294,15 +370,13 @@
     font-weight: 600;
   }
   .section3Description {
-    margin-top: 40px;
     font-size: 26px;
     font-weight: 600;
-    max-width: 50%;
+    margin-bottom: 25px;
   }
   .section3Button {
-    margin-top: 60px;
     cursor: pointer;
-    background-color: #ffffff;
+    background-color: #cccccc;
     color: #000000;
     width: 150px;
     height: 40px;
@@ -310,11 +384,32 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
+    transition: 0.5s;
+  }
+  .section3Button:hover {
+    background-color: #ffffff;
+  }
+  .section3InvestButton {
+    cursor: pointer;
+    background-color: #102e50;
+    color: #ffffff;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+  }
+  .section3InvestButton:hover {
+    background-color: #2c6db6;
   }
 
   .section3 {
     min-height: 600px;
-    background: linear-gradient(#354558aa, #354558aa), url("images/gbfund1.jpg");
+    background: linear-gradient(#354558ee, #354558ee), url("images/gbfund1.svg");
+    background-size: cover;
     color: #ffffff;
   }
 
@@ -444,6 +539,25 @@
     animation-delay: 15s;
   }
 
+  .section3TopContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .section3ButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  #stats {
+    margin-top: 100px;
+  }
+  .section3Inner {
+    height: 450px;
+  }
+
   @media only screen and (max-width: 850px) {
     .blocks {
       flex-direction: column;
@@ -480,8 +594,34 @@
     }
     .section3Description {
       margin-top: 20px;
-      font-size: 22px;
+      font-size: 18px;
       max-width: 100%;
+    }
+    .section3TopContainer {
+      flex-direction: column;
+    }
+    #stats {
+      margin-top: 20px;
+    }
+    .section3Inner {
+      height: 100%;
+    }
+
+    .awardModify2 {
+      display: inline-flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+    .awardIconModify2 {
+      margin-right: 0px;
+    }
+    .awardTextContainerModify2 {
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+    }
+    .awardSubtitle {
+      font-size:20px;
     }
   }
 </style>
