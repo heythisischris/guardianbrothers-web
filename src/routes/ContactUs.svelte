@@ -6,6 +6,8 @@
     window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_contactus.jpg')";
+    document.querySelectorAll("#body")[0].style.backgroundPosition =
+      "50% 100px";
   });
   let firstName = "";
   let lastName = "";
@@ -59,13 +61,14 @@
     <div class="row">
       <div class="rowItem">
         <div class="header" style="margin-top:50px;">
+          <div class="headerLine" />
           <div class="headerText">{$_("contact.section1.title")}</div>
           <div class="headerLine" />
         </div>
         <div class="subHeaderText">{$_("contact.section1.subtitle")}</div>
         <div class="award">
-          <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="marker" src="images/marker.svg" />
+          <div class="awardIcon" style="background-color:#d1a765;">
+            <img alt="marker" src="images/pin.svg" />
           </div>
           <div class="awardTextContainer">
             <div class="awardTitle">{$_("contact.section1.badge1.title")}</div>
@@ -75,8 +78,8 @@
           </div>
         </div>
         <div class="award">
-          <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="call" src="images/call.svg" />
+          <div class="awardIcon" style="background-color:#d1a765;">
+            <img alt="call" src="images/phone.svg" />
           </div>
           <div class="awardTextContainer">
             <div class="awardTitle">{$_("contact.section1.badge2.title")}</div>
@@ -86,8 +89,8 @@
           </div>
         </div>
         <div class="award">
-          <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="certificate" src="images/certificate.svg" />
+          <div class="awardIcon" style="background-color:#d1a765;">
+            <img alt="certificate" src="images/email.svg" />
           </div>
           <div class="awardTextContainer">
             <div class="awardTitle">{$_("contact.section1.badge3.title")}</div>
@@ -101,6 +104,7 @@
   </div>
   <div class="contactContainer">
     <div class="header" style="margin-top:50px;">
+      <div class="headerLine" />
       <div class="headerText">{$_("contact.section2.title")}</div>
       <div class="headerLine" />
     </div>
@@ -156,6 +160,7 @@
     <div class="row">
       <div class="rowItem">
         <div class="header" style="margin-top:100px;">
+          <div class="headerLine" />
           <div class="headerText">{$_("contact.section3.title")}</div>
           <div class="headerLine" />
         </div>
@@ -174,7 +179,7 @@
           <div class="row" style="align-items:center;margin-top:40px;">
             <input
               bind:value={mailingListEmail}
-              placeholder="{$_("contact.section3.form.email")}"
+              placeholder={$_("contact.section3.form.email")}
             />
             <button
               on:click={() => {
@@ -244,6 +249,11 @@
     }
     .awardTextContainer {
       max-width: 150px;
+    }
+
+    .awardIcon {
+      margin-right: 20px;
+      margin-left: -10px;
     }
   }
 </style>

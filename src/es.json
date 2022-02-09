@@ -1,4 +1,22 @@
 {
+  "app": {
+    "home": "INICIO",
+    "about": "QUIENES SOMOS",
+    "contact": "CONTÁCTANOS",
+    "funds": "FONDOS",
+    "team": "EQUIPO",
+    "privacy": "POLÍTICA DE PRIVACIDAD",
+    "terms": "TÉRMINOS DE SERVICIO",
+    "overview": "GENERAL",
+    "howItWorks": "CÓMO FUNCIONA",
+    "performance": "RENDIMIENTO",
+    "fundFacts": "TERMINOS",
+    "holdings": "HOLDINGS",
+    "diversification": "DIVERSIFICACIÓN",
+    "copyright": "Derechos de autor",
+    "contactBottom": "Contáctanos",
+    "exploreBottom": "Explorar"
+  },
   "home": {
     "main": {
       "title": "Haz que tu dinero trabaje por ti.",
@@ -27,25 +45,25 @@
       "title": "Que Ofrecemos",
       "subtitle": "Nuestros Servicios",
       "box1": {
-        "title": "Fondos De Inversion",
+        "title": "Fondos de Inversión",
         "description": "Acceso a fondos de inversión de EE. UU. de renta variable a mediano-largo plazo.",
-        "button": "MAS"
+        "button": "MÁS"
       },
       "box2": {
-        "title": "Asesoria De Inversion",
+        "title": "Asesoría de Inversión",
         "description": "Carteras personalizadas de acuerdo con tu estilo de vida.",
-        "button": "MAS"
+        "button": "MÁS"
       },
       "box3": {
-        "title": "Educacion Financiera",
+        "title": "Educación Financiera",
         "description": "Aprende de forma simple sobre finanzas y mantente informado sobre las tendencias macroeconómicas con nuestros webinars y material educativo.",
-        "button": "MAS"
+        "button": "MÁS"
       }
     },
     "section3": {
       "title": "Guardian Equity Fund I",
-      "description": "Sí, una alternativa de inversión puede ser simple, interesante, divertida y darte dinero.",
-      "button": "LEER MAS",
+      "description": "Explora una forma diferente de invertir de acuerdo con tus necesidades",
+      "button": "LEER MÁS",
       "investButton": "INVIERTE AHORA"
     },
     "section4": {
@@ -119,8 +137,8 @@
       "title": "Our story",
       "subtitle": "Nuestra Historia",
       "paragraph1": "Guardian Brothers Holdings LLC (GBH) surgió con el objetivo de poner al alcance de inversores en Latinoamérica, mercados bursátiles de EE. UU., de forma segura, simple e interesante.",
-      "paragraph2": "Fernando Guardia, nuestro Director Ejecutivo y Director de Información, empezó su carrera como gestor de inversiones a la temprana edad de 18 años gestionando carteras de alto valor, demostrando que invertir es un ejercicio que puede ser para todos y para todo tipo de presupuestos.",
-      "paragraph3": "En su trayectoria fue responsable de la construcción de los algoritmos de Alegra, un sistema de gestión de acciones que es utilizado por GBH, pues estamos convencidos de que garantizar la seguridad en cada inversión es el mejor aliado.",
+      "paragraph2": "Fernando Guardia, nuestro Fundador y Director Ejecutivo, empezó su carrera como gestor de inversiones a la temprana edad de 18 años gestionando carteras de por encima $1MM AUM, demostrando que invertir es un ejercicio que puede ser para todos y para todo tipo de presupuestos.",
+      "paragraph3": "En su trayectoria fue responsable de la construcción de los algoritmos de Alegra, y fondos estudiantiles donde destaco por su gestion de riesgo y liderazgo en toma de decisiones en momentos de crisis, pues estamos convencidos de que garantizar la seguridad en cada inversión es el mejor aliado.",
       "paragraph4": "Sobre estos principios fundamos GBH, una compañía creadora y administradora de fondos de inversión alternativos, constituida en Florida, EE. UU., que actualmente cuenta con clientes en EE.UU., Bolivia y Paraguay, y continúa buscando llegar a más inversionistas en países de Latinoamérica que tengan interés de invertir en mercados internacionales."
     },
     "section4": {
@@ -139,8 +157,7 @@
       "bullet12": "Recursos sin límites de retirada"
     },
     "section5": {
-      "title": "Sint illo esse et enim est",
-      "subtitle": "Our partners"
+      "title": "Nuestros socios"
     }
   },
   "contact": {
@@ -189,7 +206,118 @@
   },
   "funds": {
     "main": {
-      "title": "Guardian Brother Holdings - Investors Shares"
+      "title": "Guardian Brother Holdings - Investors Shares",
+      "fundAssets": "Activos del Fondo",
+      "sharesOutstanding": "Acciones en circulación",
+      "nav": "NAV",
+      "navChange": "Cambio de NAV",
+      "investNow": "Cambio de NAV"
+    },
+    "overview": {
+      "title": "General",
+      "section1": {
+        "title": "Como Invertimos",
+        "paragraph1": "Creemos que invertir se trata de transparencia, honestidad y accesibilidad para todos nuestros inversores en cualquier momento.",
+        "paragraph2": "Creamos este fondo con el objetivo de brindar protección contra las caídas del mercado mientras buscamos la apreciacion y flujo de capital al transcurso de estos ciclos."
+      },
+      "section2": {
+        "title": "Estrategia del fondo",
+        "paragraph1": "Gestionamos el fondo de manera activa que incluye una amplia gama de estrategias impulsadas por eventos macro, posiciones corto/largo, apalancamiento, rotación sectorial, gestión de riesgo dinámico de forma que podemos asegurar ganancias y limitar pérdidas.",
+        "paragraph2": "De esa manera lograr un crecimiento a largo plazo y protección del capital, con una baja correlación a lo largo de los ciclos del mercado americano para generar rendimientos superiores ajustados al riesgo."
+      }
+    },
+    "howItWorks": {
+      "title": "Como funciona",
+      "block1": {
+        "title": "Compramos",
+        "description": "Guardian Brothers Holdings encuentra oportunidades en el mercado de valores. Crea una cartera sólida para todos nuestros inversores."
+      },
+      "block2": {
+        "title": "Tu inviertes",
+        "description": "Te conviertes en socio y recibes beneficios de los rendimientos generados por Guardian Brothers Equity Fund I"
+      },
+      "block3": {
+        "title": "Apreciacion del capital",
+        "description": "Nuestra cartera se aprecia y recibe dividendos. Obtiene el beneficio del interés compuesto y la revalorización del capital"
+      },
+      "block4": {
+        "title": "Redistribucion",
+        "description": "Tu inversión se valoriza y te ayudamos a capturar tus ganancias. Sin límites de retiros, sin comisiones ocultas. Fácil acceso."
+      }
+    },
+    "performance": {
+      "title": "Rendimiento"
+    },
+    "fundFacts": {
+      "title": "Terminos",
+      "fundObjective": {
+        "title": "Objetivo del fondo",
+        "description": "Apreciacion de capital"
+      },
+      "fundStrategy": {
+        "title": "Estrategia del fondo",
+        "description": "U.S Mid-Large Cap Long/Short Equity Fund"
+      },
+      "fundAsset": {
+        "title": "Activos del fondo",
+        "description": ""
+      },
+      "nav": {
+        "title": "NAV",
+        "description": ""
+      },
+      "ticker": {
+        "title": "Ticker",
+        "description": "GBH"
+      },
+      "numberOfHoldings": {
+        "title": "Número de activos",
+        "description": ""
+      },
+      "distributionFrequency": {
+        "title": "Frequencia de distribución",
+        "description": "Anual"
+      },
+      "grossExpenseRatio": {
+        "title": "Ratio de gastos bruto",
+        "description": "1%"
+      },
+      "fundInception": {
+        "title": "",
+        "description": ""
+      },
+      "primaryBenchmark": {
+        "title": "Índice de referencia",
+        "description": "S&P500"
+      },
+      "minimumInvestment": {
+        "title": "Inversión mínima",
+        "description": "$1,000"
+      },
+      "minimumSubsequentInvestment": {
+        "title": "Inversión subsiguiente Mínima",
+        "description": "$100"
+      },
+      "managementFees": {
+        "title": "Comisión de gestión",
+        "description": "2%"
+      },
+      "transactionFees": {
+        "title": "Tarifa de transacción",
+        "description": "3%"
+      },
+      "performanceFees": {
+        "title": "Comisión de rendimiento",
+        "description": "20%"
+      }
+    },
+    "holdings": {
+      "title": "Holdings"
+    },
+    "diversification": {
+      "title": "Diversificación",
+      "sectors": "Sectores",
+      "marketCap": "Capitalizacion mercado"
     }
   },
   "team": {

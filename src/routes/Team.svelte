@@ -6,6 +6,8 @@
     window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_team.jpg')";
+    document.querySelectorAll("#body")[0].style.backgroundPosition =
+      "50% 100px";
   });
 </script>
 
@@ -30,6 +32,7 @@
   <div class="pageContainerInner">
     <div class="teamContainer">
       <div class="header">
+        <div class="headerLine" />
         <div class="headerText">{$_("team.section1.title")}</div>
         <div class="headerLine" />
       </div>
@@ -71,6 +74,7 @@
   <div class="pageContainerInner">
     <div class="teamContainer">
       <div class="header">
+        <div class="headerLine" />
         <div class="headerText">{$_("team.section2.title")}</div>
         <div class="headerLine" />
       </div>
@@ -113,6 +117,7 @@
   <div class="pageContainerInner">
     <div class="teamContainer">
       <div class="header">
+        <div class="headerLine" />
         <div class="headerText">{$_("team.section3.title")}</div>
         <div class="headerLine" />
       </div>

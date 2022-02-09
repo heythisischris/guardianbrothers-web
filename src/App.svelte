@@ -1,6 +1,7 @@
 <script>
   import { Router, Route } from "svelte-routing";
-  import { onMount } from "svelte";
+  import { globalHistory } from "svelte-routing/src/history";
+  import { onMount, onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   import NavLink from "./components/NavLink.svelte";
   import Home from "./routes/Home.svelte";
@@ -8,7 +9,7 @@
   import ContactUs from "./routes/ContactUs.svelte";
   import Funds from "./routes/Funds.svelte";
   import Team from "./routes/Team.svelte";
-  import { addMessages, getLocaleFromNavigator, init } from "svelte-i18n";
+  import { _, addMessages, getLocaleFromNavigator, init } from "svelte-i18n";
   import es from "./es.json";
   addMessages("es", es);
   init({
@@ -18,9 +19,15 @@
 
   // Used for SSR. A falsy value is ignored by the Router.
   export let url = "";
+  let pathname = window.location.pathname;
+  let unsub;
   var isMobile = false;
   //background scroll
   onMount(() => {
+    unsub = globalHistory.listen(({ location, action }) => {
+      console.log(location, action);
+      pathname = location.pathname;
+    });
     (function () {
       isMobile = window.matchMedia(
         "only screen and (max-width: 760px)"
@@ -30,74 +37,49 @@
       window.onscroll = function () {
         [].slice.call(parallax).forEach(function (el, i) {
           var windowYOffset = window.pageYOffset,
-            elBackgrounPos = "50% " + (windowYOffset * speed + 100) + "px";
+            elBackgrounPos =
+              "50% " +
+              (windowYOffset * speed + (pathname === "/" ? 0 : 100)) +
+              "px";
           el.style.backgroundPosition = elBackgrounPos;
         });
       };
     })();
   });
+
+  onDestroy(() => {
+    unsub();
+  });
 </script>
 
 <Router {url}>
   <div class="container">
-    <div
-      class="navContainer"
-      style="height:40px;background-color:#A09162;padding:0px;margin:0px;"
-    >
-      <div
-        class="navContainerInner"
-        style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;color:#ffffff;"
-      >
-        <a
-          target="_blank"
-          href="https://goo.gl/maps/wq7EaAxM3nkQ9EC1A"
-          style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;color:#ffffff;text-decoration-line:none;"
-        >
-          <img class="socialIcon" alt="location" src="images/location.svg" />
-          {!isMobile ? `601 Brickell Key Drive, Miami, FL` : `Miami, FL`}
-        </a>
-        <div class="navSocial">
-          <a target="_blank" href="https://www.facebook.com/guardianbrothers/">
-            <img class="socialIcon" alt="facebook" src="images/facebook.svg" />
-          </a>
-          <a
-            target="_blank"
-            href="https://www.instagram.com/guardianbrothersofficial/"
-          >
-            <img
-              class="socialIcon"
-              alt="instagram"
-              src="images/instagram.svg"
-            />
-          </a>
-          <a
-            target="_blank"
-            href="https://www.linkedin.com/company/guardianbrothers/"
-          >
-            <img class="socialIcon" alt="linkedin" src="images/linkedin.svg" />
-          </a>
-          <a target="_blank" href="https://twitter.com/GBH_Fund">
-            <img class="socialIcon" alt="twitter" src="images/twitter.svg" />
-          </a>
-        </div>
-      </div>
-    </div>
     <nav>
-      <div class="navContainer">
+      <div
+        class="navContainer"
+        style={pathname === "/" ? "background-color:transparent" : ""}
+      >
         <div class="navContainerInner">
           <div class="navTitle">
             <NavLink to="/">
               <img
-                style="margin-right:10px;"
+                style="margin-right:10px;{pathname === '/'
+                  ? 'filter: brightness(10)'
+                  : ''}"
                 class="logo"
                 alt=""
                 src="/images/logo.svg"
               />
               <div
-                style="display:flex;flex-direction:column;justify-content:center;color:#000000;"
+                style="display:flex;flex-direction:column;justify-content:center;color:#333333;"
               >
                 <div id="title">Guardian Brothers Holdings</div>
-                <div id="subtitle">GESTIÓN FINANCIERA</div>
+                <div
+                  id="subtitle"
+                  style={pathname === "/" ? "color:#ffffff" : ""}
+                >
+                  GESTIÓN FINANCIERA
+                </div>
               </div>
             </NavLink>
           </div>
@@ -105,11 +87,11 @@
             style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;"
           >
             <div class="navLinks">
-              <NavLink to="/">HOME</NavLink>
-              <NavLink to="/about">ABOUT</NavLink>
-              <NavLink to="/contactus">CONTACT {isMobile ? "" : "US"}</NavLink>
-              <NavLink to="/funds">FUNDS</NavLink>
-              <NavLink to="/team">TEAM</NavLink>
+              <NavLink to="/">{$_("app.home")}</NavLink>
+              <NavLink to="/about">{$_("app.about")}</NavLink>
+              <NavLink to="/contactus">{$_("app.contact")}</NavLink>
+              <NavLink to="/funds">{$_("app.funds")}</NavLink>
+              <NavLink to="/team">{$_("app.team")}</NavLink>
             </div>
           </div>
         </div>
@@ -131,7 +113,7 @@
               src="/images/logo.svg"
             />
             <div
-              style="display:flex;flex-direction:column;justify-content:center;color:#000000;"
+              style="display:flex;flex-direction:column;justify-content:center;color:#333333;"
             >
               <div style="font-size:18px;">
                 Guardian Brothers{isMobile ? "" : " Holdings"}
@@ -141,35 +123,39 @@
               </div>
             </div>
           </a>
-          <p style="margin-bottom:10px;font-size:12px;width:99%;">© 2010-2022 Guardian Brothers Fund</p>
+          <p style="margin-bottom:10px;font-size:12px;width:99%;">
+            © 2010-2022 Guardian Brothers Fund
+          </p>
           <p style="margin-bottom:20px;font-size:12px;">
             {`No hay garantías de que los Fondos cumplirán sus objetivos de inversión o que sus estrategias GBH serán exitosas.
               Los datos de rendimiento indicados representan el rendimiento pasado y no son garantía de rendimientos futuros. El rendimiento actual puede ser inferior o superior a los datos de rendimiento citados.`}
           </p>
         </div>
         <div class="blocksInner">
-          <div class="footerTitle">Explore</div>
+          <div class="footerTitle">{$_("app.exploreBottom")}</div>
           <div class="yellowLine" />
           <div class="blocksMenuContainer">
             <div class="blocksMenu">
-              <a href="/">HOME</a>
-              <a href="/about">ABOUT</a>
-              <a href="/contactus">CONTACT US</a>
-              <a href="/privacypolicy">PRIVACY POLICY</a>
-              <a href="/termsofservice">TERMS OF SERVICE</a>
+              <a href="/">{$_("app.home")}</a>
+              <a href="/about">{$_("app.about")}</a>
+              <a href="/contactus">{$_("app.contact")}</a>
+              <a href="/privacypolicy">{$_("app.privacy")}</a>
+              <a href="/termsofservice">{$_("app.terms")}</a>
             </div>
             <div class="blocksMenu">
-              <a href="/funds#sectionOverview">OVERVIEW</a>
-              <a href="/funds#sectionHowItWorks">HOW IT WORKS</a>
-              <a href="/funds#sectionPerformance">PERFORMANCE</a>
-              <a href="/funds#sectionFundFacts">FUND FACTS</a>
-              <a href="/funds#sectionTopHoldings">HOLDINGS</a>
-              <a href="/funds#sectionDiversification">DIVERSIFICATION</a>
+              <a href="/funds#sectionOverview">{$_("app.overview")}</a>
+              <a href="/funds#sectionHowItWorks">{$_("app.howItWorks")}</a>
+              <a href="/funds#sectionPerformance">{$_("app.performance")}</a>
+              <a href="/funds#sectionFundFacts">{$_("app.fundFacts")}</a>
+              <a href="/funds#sectionTopHoldings">{$_("app.holdings")}</a>
+              <a href="/funds#sectionDiversification"
+                >{$_("app.diversification")}</a
+              >
             </div>
           </div>
         </div>
         <div class="blocksInner">
-          <div class="footerTitle">Contact</div>
+          <div class="footerTitle">{$_("app.contactBottom")}</div>
           <div class="yellowLine" />
           <div class="blocksMenu">
             <div class="contactContainer">
@@ -194,9 +180,10 @@
     </div>
     <div
       class="navContainer"
-      style="height:60px;background-color:#A09162;padding:0px;margin:0px;color:#ffffff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;"
+      style="height:60px;background-color:#d1a765;padding:0px;margin:0px;color:#ffffff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;"
     >
-      Copyright © {new Date().getFullYear()} Guardian Brothers Holdings LLC
+      {$_("app.copyright")} © {new Date().getFullYear()} Guardian Brothers Holdings
+      LLC
     </div>
   </div>
 </Router>
@@ -231,7 +218,7 @@
   .yellowLine {
     width: 100%;
     height: 1px;
-    background-color: #a09162;
+    background-color: #d1a765;
   }
 
   .blocks a {
@@ -240,7 +227,7 @@
     transition: 0.2s;
   }
   .blocks a:hover {
-    color: #000000;
+    color: #333333;
   }
 
   .blocks {

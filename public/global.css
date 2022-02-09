@@ -17,7 +17,7 @@ html {
   margin: 0;
   padding: 0;
   background-color: #201c30;
-  color: #141414;
+  color: #333333;
   display: flex;
   justify-content: center;
   background-image: url('images/background_home.jpg');
@@ -35,6 +35,8 @@ nav {
   width: 100%;
   display: flex;
   align-items: center;
+  z-index: 1;
+  position: relative;
 }
 
 .footer {
@@ -96,7 +98,16 @@ nav {
 }
 
 .navLinks a.active {
-  color: #000000;
+  color: #C49C4B;
+}
+
+
+.navLinks a.homeInactive {
+  color: #ffffff;
+}
+
+.navLinks a.homeActive {
+  color: #C49C4B;
 }
 
 a:hover {
@@ -165,11 +176,15 @@ h1 {
   font-size: 30px;
   padding-bottom: 5px;
   border-bottom: 2px solid #AAAAAA;
+  font-family: 'Merriweather';
+  color: #00355f;
 }
 
 h2 {
   margin-left: 10px;
   font-size: 20px;
+  font-family: 'Merriweather';
+  color: #00355f;
 }
 
 p {
@@ -206,7 +221,7 @@ a {
 }
 
 #statsTitle {
-  margin-top: 10px;
+  margin-top: 65px;
   margin-bottom: 20px;
   margin-left: 42px;
   font-size: 14px;
@@ -257,11 +272,12 @@ tbody tr:nth-child(odd) {
 }
 
 .teamBlocksInnerText {
-  margin-top: -80px;
+  margin-top: -35px;
   background-color: #F2EFE5;
   text-align: center;
   padding: 5px;
   width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .teamBlocksInner h2 {
@@ -399,6 +415,11 @@ table td {
 .awardTitle {
   font-size: 22px;
   font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Merriweather';
+  color: #00355f;
+  font-weight: bold;
 }
 
 .awardSubtitle {
@@ -406,9 +427,10 @@ table td {
 }
 
 .awardIcon {
+  min-width: 100px;
   width: 100px;
   height: 100px;
-  background-color: #6f8db1;
+  background-color: #00355f;
   border-radius: 100px;
   display: flex;
   flex-direction: row;
@@ -422,11 +444,13 @@ table td {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  color: #00355f;
 }
 
 .headerText {
   font-size: 20px;
+  text-align: center;
 }
 
 .headerLine {
@@ -435,6 +459,7 @@ table td {
   background-color: #a09162;
   margin-bottom: -5px;
   margin-left: 25px;
+  margin-right: 25px;
 }
 
 .subHeaderText {
@@ -442,6 +467,8 @@ table td {
   font-weight: 700;
   margin-top: 10px;
   margin-bottom: 50px;
+  color: #00355f;
+  text-align: center;
 }
 
 @media only screen and (max-width: 850px) {
@@ -492,7 +519,7 @@ table td {
   }
 
   #title {
-    font-size: 18px;
+    font-size: 17px;
     text-align: left;
   }
 
@@ -528,11 +555,11 @@ table td {
 
   .navLinks {
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 11px;
   }
 
   .navLinks a {
-    padding: 8px;
+    padding: 4px;
   }
 
   .pageContainer {
@@ -627,4 +654,5 @@ table td {
   .investDiv {
     margin-top: 30px;
   }
+
 }

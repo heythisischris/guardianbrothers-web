@@ -7,6 +7,7 @@
     window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_home.jpg')";
+    document.querySelectorAll("#body")[0].style.backgroundPosition = "50% 0px";
   });
   async function loadAPI(url) {
     let data = await fetch(url);
@@ -24,10 +25,10 @@
   });
 </script>
 
-<div class="pageContainerTop">
+<div class="pageContainerTop" style="margin-top: -110px;">
   <div
     class="pageContainerInner"
-    style="color:#ffffff;font-size:22px;height:600px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
+    style="color:#ffffff;font-size:22px;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
     <div
       class="mainTitle"
@@ -47,6 +48,7 @@
 <div class="pageContainer">
   <div class="pageContainerInner" style="margin-top:60px;">
     <div class="header">
+      <div class="headerLine" />
       <div class="headerText">{$_("home.section1.title")}</div>
       <div class="headerLine" />
     </div>
@@ -99,6 +101,7 @@
       style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;"
     >
       <div class="header">
+        <div class="headerLine" />
         <div class="headerText">{$_("home.section2.title")}</div>
         <div class="headerLine" />
       </div>
@@ -191,23 +194,23 @@
         <div id="stats" in:fade>
           <div class="statsContainer">
             <div class="infoBorder">
-              <div>Fund Assets</div>
+              <div>{$_("funds.main.fundAssets")}</div>
               <div>{formatter.format(stats[0].value)}</div>
             </div>
             <div class="infoBorder">
-              <div>Shares Outstanding</div>
+              <div>{$_("funds.main.sharesOutstanding")}</div>
               <div>{formatter.format(stats[0].shares).slice(1)}</div>
             </div>
           </div>
           <div class="statsContainer">
             <div class="infoBorder">
-              <div>NAV</div>
+              <div>{$_("funds.main.nav")}</div>
               <div>
                 {formatter.format(stats[0].value / stats[0].shares)}
               </div>
             </div>
             <div class="infoBorder">
-              <div>NAV Change</div>
+              <div>{$_("funds.main.navChange")}</div>
               <div>
                 {formatter.format(
                   stats[0].value / stats[0].shares -
@@ -233,6 +236,7 @@
     <div class="row">
       <div class="rowItem">
         <div class="header" style="margin-top:50px;">
+          <div class="headerLine" />
           <div class="headerText">{$_("home.section4.title")}</div>
           <div class="headerLine" />
         </div>
@@ -241,7 +245,7 @@
           <div class="award awardModify">
             <div
               class="awardIcon awardIconModify"
-              style="background-color:#A09162;"
+              style="background-color:#d1a765;"
             >
               <img alt="medal" src="images/group.svg" />
             </div>
@@ -257,9 +261,9 @@
           <div class="award awardModify">
             <div
               class="awardIcon awardIconModify"
-              style="background-color:#A09162;"
+              style="background-color:#d1a765;"
             >
-              <img alt="certificate" src="images/like.svg" />
+              <img alt="certificate" src="images/check.svg" />
             </div>
             <div class="awardTextContainer awardTextContainerModify">
               <div class="awardTitle">
@@ -273,9 +277,9 @@
           <div class="award awardModify">
             <div
               class="awardIcon awardIconModify"
-              style="background-color:#A09162;"
+              style="background-color:#d1a765;"
             >
-              <img alt="certificate" src="images/chart.svg" />
+              <img alt="certificate" src="images/lightbulb.svg" />
             </div>
             <div class="awardTextContainer awardTextContainerModify">
               <div class="awardTitle">
@@ -289,9 +293,9 @@
           <div class="award awardModify">
             <div
               class="awardIcon awardIconModify"
-              style="background-color:#A09162;"
+              style="background-color:#d1a765;"
             >
-              <img alt="medal" src="images/geography.svg" />
+              <img alt="medal" src="images/heart.svg" />
             </div>
             <div class="awardTextContainer awardTextContainerModify">
               <div class="awardTitle">
@@ -305,9 +309,9 @@
           <div class="award awardModify">
             <div
               class="awardIcon awardIconModify"
-              style="background-color:#A09162;"
+              style="background-color:#d1a765;"
             >
-              <img alt="certificate" src="images/collaboration.svg" />
+              <img alt="certificate" src="images/star.svg" />
             </div>
             <div class="awardTextContainer awardTextContainerModify">
               <div class="awardTitle">
@@ -321,9 +325,9 @@
           <div class="award awardModify">
             <div
               class="awardIcon awardIconModify"
-              style="background-color:#A09162;"
+              style="background-color:#d1a765;"
             >
-              <img alt="certificate" src="images/business.svg" />
+              <img alt="certificate" src="images/handshake.svg" />
             </div>
             <div class="awardTextContainer awardTextContainerModify">
               <div class="awardTitle">
@@ -337,9 +341,9 @@
           <div class="award awardModify">
             <div
               class="awardIcon awardIconModify"
-              style="background-color:#A09162;"
+              style="background-color:#d1a765;"
             >
-              <img alt="certificate" src="images/medal.svg" />
+              <img alt="certificate" src="images/technical_chart.svg" />
             </div>
             <div class="awardTextContainer awardTextContainerModify">
               <div class="awardTitle">
@@ -356,6 +360,7 @@
     <div class="row">
       <div class="rowItem section5">
         <div class="header" style="margin-top:50px;">
+          <div class="headerLine" />
           <div class="headerText">{$_("home.section5.title")}</div>
           <div class="headerLine" />
         </div>
@@ -385,10 +390,8 @@
           </div>
 
           <div class="testimonialBackgroundBlock">
-            <div class="testimonialArrows">
-              <div class="testimonialArrow">{`>`}</div>
-              <div class="testimonialArrow">{`<`}</div>
-            </div>
+            <div class="testimonialArrow">{`<`}</div>
+            <div class="testimonialArrow">{`>`}</div>
             <div class="testimonialButton">LEER MAS</div>
           </div>
         </div>
@@ -422,7 +425,7 @@
   .section3Button {
     cursor: pointer;
     background-color: #cccccc;
-    color: #000000;
+    color: #333333;
     width: 150px;
     height: 40px;
     display: flex;
@@ -471,18 +474,20 @@
     font-weight: 700;
     font-size: 24px;
     padding: 10px 20px;
+    font-family: "Merriweather";
+    font-weight: bold;
   }
   .blocksDescription {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 18px;
     padding: 10px 20px;
     margin-top: -30px;
   }
   .blocksButton {
     font-size: 18px;
-    background-color: #6f8db1;
+    background-color: #d1a765;
     cursor: pointer;
-    color: #ffffff;
+    color: #00355f;
     width: 150px;
     height: 40px;
     display: flex;
@@ -496,7 +501,7 @@
   }
 
   .blocksButton:hover {
-    background-color: #afcff5;
+    background-color: #d1a765;
   }
 
   .blocksDiv {
@@ -505,7 +510,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 30%;
-    background-color: #021c32;
+    background-color: #00355f;
     height: 500px;
     color: #ffffff;
     margin: 10px;
@@ -609,6 +614,7 @@
     align-items: center;
     justify-content: space-between;
     width: 80%;
+    margin: 0px auto;
     z-index: 1;
     position: relative;
   }
@@ -617,11 +623,12 @@
     height: 320px;
     padding: 10px;
     background-color: #f3f3f3;
-    border: 2px solid #a09162;
+    border: 2px solid #d1a765;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   .testimonialBlock.selected {
     background-color: #f2efe5;
@@ -636,7 +643,7 @@
     width: 50px;
     border-radius: 25px;
     background-color: #cccccc;
-    margin-right:10px;
+    margin-right: 10px;
   }
   .testimonialName {
     font-weight: 600;
@@ -655,26 +662,19 @@
     position: absolute;
     right: 0px;
     margin-top: -250px;
-    width: 750px;
+    width: 100vw;
     height: 380px;
-    background-color: #a09162;
+    background-color: #d1a765;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-
-  .testimonialArrows {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
-    margin-left: 250px;
+    align-items: flex-end;
   }
 
   .testimonialArrow {
     height: 50px;
     width: 50px;
-    background-color: #cccccc;
+    background-color: #00355f;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -685,28 +685,30 @@
     cursor: pointer;
     font-weight: 100;
     transition: 0.5s;
-    margin: 10px;
+    margin: 0px 10px;
+    margin-bottom: 40px;
+    color: #ffffff;
   }
   .testimonialArrow:hover {
-    background-color: #ffffff;
+    background-color: #1a68a6;
   }
 
   .testimonialButton {
     cursor: pointer;
-    background-color: #cccccc;
-    color: #000000;
+    background-color: #00355f;
+    color: #ffffff;
     width: 150px;
-    height: 40px;
+    height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-right: 20px;
     transition: 0.5s;
-    margin-left: 50px;
+    margin: 0px 10px;
+    margin-bottom: 40px;
   }
   .testimonialButton:hover {
-    background-color: #ffffff;
+    background-color: #1a68a6;
   }
   .section5 {
     min-height: 582px;
@@ -794,12 +796,21 @@
       background-color: transparent;
       margin-bottom: 50px;
     }
-    .testimonialArrows {
-      margin-left: 0px;
-      flex-direction: row-reverse;
+    .testimonialArrow {
+      margin: 0px 10px;
+      margin-top: 20px;
     }
     .testimonialButton {
-      margin: 0px;
+      margin: 0px 10px;
+      margin-top: 20px;
+    }
+    .section3Button {
+      font-size: 14px;
+      width: 140px;
+    }
+    .section3InvestButton {
+      font-size: 14px;
+      width: 140px;
     }
   }
 </style>

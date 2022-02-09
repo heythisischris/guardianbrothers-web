@@ -6,6 +6,8 @@
     window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_about.jpg')";
+    document.querySelectorAll("#body")[0].style.backgroundPosition =
+      "50% 100px";
   });
 </script>
 
@@ -32,6 +34,7 @@
       <img alt="" class="rowItem" src="images/fernando_cover.jpg" />
       <div class="rowItem">
         <div class="header" style="margin-top:50px;">
+          <div class="headerLine" />
           <div class="headerText">{$_("about.section1.title")}</div>
           <div class="headerLine" />
         </div>
@@ -47,9 +50,10 @@
             <p>
               {$_("about.section1.paragraph3")}
             </p>
-            <p>
+            <p class="section1Quote">
               {$_("about.section1.quote")}
             </p>
+            <div class="section1QuoteImage">❞</div>
           </div>
         </div>
       </div>
@@ -61,13 +65,14 @@
     <div class="row">
       <div class="rowItem">
         <div class="header" style="margin-top:50px;">
+          <div class="headerLine" />
           <div class="headerText">{$_("about.section2.title")}</div>
           <div class="headerLine" />
         </div>
         <div class="subHeaderText">{$_("about.section2.subtitle")}</div>
         <div class="award">
-          <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="medal" src="images/medal.svg" />
+          <div class="awardIcon" style="background-color:#d1a765;">
+            <img alt="medal" src="images/classroom.svg" />
           </div>
           <div class="awardTextContainer">
             <div class="awardTitle">{$_("about.section2.badge1.title")}</div>
@@ -77,8 +82,8 @@
           </div>
         </div>
         <div class="award">
-          <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="certificate" src="images/certificate.svg" />
+          <div class="awardIcon" style="background-color:#d1a765;">
+            <img alt="certificate" src="images/support.svg" />
           </div>
           <div class="awardTextContainer">
             <div class="awardTitle">
@@ -90,8 +95,8 @@
           </div>
         </div>
         <div class="award">
-          <div class="awardIcon" style="background-color:#A09162;">
-            <img alt="certificate" src="images/certificate.svg" />
+          <div class="awardIcon" style="background-color:#d1a765;">
+            <img alt="certificate" src="images/confidentiality.svg" />
           </div>
           <div class="awardTextContainer">
             <div class="awardTitle">
@@ -108,10 +113,11 @@
   </div>
   <img alt="" class="rowItem desktop" src="images/about1.jpg" />
 </div>
-<div class="pageContainer" style="min-height:650px;">
+<div class="pageContainer" style="min-height:550px;">
   <div class="pageContainerInner">
     <div>
       <div class="header" style="margin-top:50px;">
+        <div class="headerLine" />
         <div class="headerText">
           {$_("about.section3.title")}
         </div>
@@ -136,7 +142,7 @@
   </div>
 </div>
 <div class="blueContainer">
-  <div class="subHeaderText">{$_("about.section4.title")}</div>
+  <div class="subHeaderText" style="color:#ffffff">{$_("about.section4.title")}</div>
   <div class="row">
     <ul class="rowItem">
       <li>{$_("about.section4.bullet1")}</li>
@@ -164,10 +170,10 @@
       style="display:flex;flex-direction:column;justify-content:center;align-items:center;"
     >
       <div class="header" style="margin-top:50px;">
+        <div class="headerLine" />
         <div class="headerText">{$_("about.section5.title")}</div>
         <div class="headerLine" />
       </div>
-      <div class="subHeaderText">{$_("about.section5.subtitle")}</div>
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
@@ -210,7 +216,21 @@
     background-color: #021c32;
     color: #ffffff;
     padding: 50px;
-    margin-top: -250px;
+    margin-top: -100px;
+  }
+  .section1Quote {
+    font-style: italic;
+    font-size: 24px;
+    color: #888888;
+    z-index: 1;
+    position: relative;
+  }
+  .section1QuoteImage {
+    font-size: 170px;
+    color: #ddd;
+    width: 100%;
+    text-align: right;
+    margin-top: -130px;
   }
   @media only screen and (max-width: 850px) {
     .row {
@@ -233,6 +253,11 @@
     }
     .awardTextContainer {
       width: 200px;
+    }
+
+    .awardIcon {
+      margin-right: 20px;
+      margin-left: -10px;
     }
   }
 </style>

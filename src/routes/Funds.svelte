@@ -129,7 +129,9 @@
   onMount(() => {
     window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
-      "url('images/background_funds.jpg')";
+      "url('images/transparent.png')";
+    document.querySelectorAll("#body")[0].style.backgroundPosition =
+      "50% 100px";
     setTimeout(() => {
       asOfDate = `as of ${new Date(stats[0].id).toLocaleDateString()}`;
       google.charts.load("current", { packages: ["corechart"] });
@@ -262,10 +264,13 @@
   });
 </script>
 
-<div class="pageContainerTop">
+<div
+  class="pageContainerTop"
+  style="background:linear-gradient(#354558ee, #354558ee), url('images/gbfund1.svg');background-size:cover;"
+>
   <div
     class="pageContainerInner"
-    style="color:#ffffff;font-size:22px;height:284px;"
+    style="color:#ffffff;font-size:22px;height:400px;"
   >
     {#await stats}
       <div />
@@ -274,21 +279,21 @@
       <div id="stats" in:fade>
         <div class="statsContainer">
           <div class="infoBorder">
-            <div>Fund Assets</div>
+            <div>{$_("funds.main.fundAssets")}</div>
             <div>{formatter.format(stats[0].value)}</div>
           </div>
           <div class="infoBorder">
-            <div>Shares Outstanding</div>
+            <div>{$_("funds.main.sharesOutstanding")}</div>
             <div>{formatter.format(stats[0].shares).slice(1)}</div>
           </div>
         </div>
         <div class="statsContainer">
           <div class="infoBorder">
-            <div>NAV</div>
+            <div>{$_("funds.main.nav")}</div>
             <div>{formatter.format(stats[0].value / stats[0].shares)}</div>
           </div>
           <div class="infoBorder">
-            <div>NAV Change</div>
+            <div>{$_("funds.main.navChange")}</div>
             <div>
               {formatter.format(
                 stats[0].value / stats[0].shares -
@@ -311,7 +316,7 @@
           href="https://calendly.com/guardianbrothers/15min"
           in:fade={{ delay: 250 }}
         >
-          INVEST NOW
+          {$_("funds.main.investNow")}
         </a>
       </div>
     {/await}
@@ -320,94 +325,108 @@
 <div class="pageContainerMiddle">
   <div
     class="pageContainerInner"
-    style="color:#000000;font-size:22px;min-height:auto;"
+    style="color:#333333;font-size:22px;min-height:auto;"
   >
     <div style="display:flex;flex-direction:row;justify-content:space-between;">
-      <a href={"#"} on:click={() => goToSection("sectionOverview")}>
-        OVERVIEW
+      <a
+        href={"javascript:void(0)"}
+        on:click={() => goToSection("sectionOverview")}
+      >
+        {$_("funds.overview.title")}
       </a>
-      <a href={"#"} on:click={() => goToSection("sectionHowItWorks")}>
-        HOW IT WORKS
+      <a
+        href={"javascript:void(0)"}
+        on:click={() => goToSection("sectionHowItWorks")}
+      >
+        {$_("funds.howItWorks.title")}
       </a>
-      <a href={"#"} on:click={() => goToSection("sectionPerformance")}>
-        PERFORMANCE
+      <a
+        href={"javascript:void(0)"}
+        on:click={() => goToSection("sectionPerformance")}
+      >
+        {$_("funds.performance.title")}
       </a>
-      <a href={"#"} on:click={() => goToSection("sectionFundFacts")}>
-        FUND FACTS
+      <a
+        href={"javascript:void(0)"}
+        on:click={() => goToSection("sectionFundFacts")}
+      >
+        {$_("funds.fundFacts.title")}
       </a>
-      <a href={"#"} on:click={() => goToSection("sectionTopHoldings")}>
-        HOLDINGS
+      <a
+        href={"javascript:void(0)"}
+        on:click={() => goToSection("sectionTopHoldings")}
+      >
+        {$_("funds.holdings.title")}
       </a>
-      <a href={"#"} on:click={() => goToSection("sectionDiversification")}>
-        DIVERSIFICATION
+      <a
+        href={"javascript:void(0)"}
+        on:click={() => goToSection("sectionDiversification")}
+      >
+        {$_("funds.diversification.title")}
       </a>
-      <a href={"#"} on:click={() => goToSection("sectionTeam")}> TEAM </a>
     </div>
   </div>
 </div>
 <div class="pageContainer">
   <div class="pageContainerInner">
-    <h1 id="sectionOverview">Overview</h1>
+    <h1 id="sectionOverview">{$_("funds.overview.title")}</h1>
     <div class="textBlock">
-      <h2>How We Invest</h2>
+      <h2>{$_("funds.overview.section1.title")}</h2>
       <p>
-        We believe investing is about transparency, honesty, and accessibility
-        for all our investors at any time. We created this fund with the goal of
-        downside protection during market declines while seeking long term
-        capital appreciation. Our number one goal is to provide exceptional
-        returns while minimizing risk.
+        {$_("funds.overview.section1.paragraph1")}
       </p>
-      <h2>Fund Strategy</h2>
       <p>
-        • Guardian Brothers invests in mid-large cap U.S companies with
-        long-term competitive advantages and relevancy, quality management teams
-        and positive performance on fund’s criteria.
-        <br />
-        • Our team focus in value investing. We only invest in companies that have
-        being rigorously monitored and have passed all our filters.
-        <br />
-        • The fund seeks to be independent of the market’s conditions generating
-        income in any circumstances. Our main goal is to always be on top of the
-        markets.
-        <br />
-        <br />
+        {$_("funds.overview.section1.paragraph2")}
       </p>
+      <br/>
+      <h2>{$_("funds.overview.section2.title")}</h2>
+      <p>
+        {$_("funds.overview.section2.paragraph1")}
+      </p>
+      <p>
+        {$_("funds.overview.section2.paragraph2")}
+      </p>
+      <br/>
     </div>
     <h1 id="sectionHowItWorks" style={isMobile ? "margin-bottom:30px;" : ""}>
-      How it works
+      {$_("funds.howItWorks.title")}
     </h1>
     <div class="textBlock">
       <div class="howItWorksBlocks">
         <div in:fade={{ delay: 500, duration: 500 }}>
           <p class="howItWorksBlocksNumber">1</p>
-          <p class="howItWorksBlocksTitle">We buy</p>
+          <p class="howItWorksBlocksTitle">
+            {$_("funds.howItWorks.block1.title")}
+          </p>
           <p>
-            Guardian Brothers Holdings find opportunities in the stock market.
-            Creates a solid portfolio for all of our investors
+            {$_("funds.howItWorks.block1.description")}
           </p>
         </div>
         <div in:fade={{ delay: 1000, duration: 500 }}>
           <p class="howItWorksBlocksNumber">2</p>
-          <p class="howItWorksBlocksTitle">You Invest</p>
+          <p class="howItWorksBlocksTitle">
+            {$_("funds.howItWorks.block2.title")}
+          </p>
           <p>
-            You become a partner and receive benefits of the returns generated
-            by Guardian Brothers Fund
+            {$_("funds.howItWorks.block2.description")}
           </p>
         </div>
         <div in:fade={{ delay: 1500, duration: 500 }}>
           <p class="howItWorksBlocksNumber">3</p>
-          <p class="howItWorksBlocksTitle">Capital Appreciation</p>
+          <p class="howItWorksBlocksTitle">
+            {$_("funds.howItWorks.block3.title")}
+          </p>
           <p>
-            Our portfolio appreciates and receives dividends. You get the
-            benefit of compounded interest and capital appreciation
+            {$_("funds.howItWorks.block3.description")}
           </p>
         </div>
         <div in:fade={{ delay: 2000, duration: 500 }}>
           <p class="howItWorksBlocksNumber">4</p>
-          <p class="howItWorksBlocksTitle">You get paid</p>
+          <p class="howItWorksBlocksTitle">
+            {$_("funds.howItWorks.block4.title")}
+          </p>
           <p>
-            Your investment appreciates and we help capture your profits. No
-            limits on withdrawals, no hidden fees. Easy access.
+            {$_("funds.howItWorks.block4.description")}
           </p>
         </div>
       </div>
@@ -416,10 +435,12 @@
       id="sectionPerformance"
       style="display:flex;align-items:flex-end;justify-content:space-between"
     >
-      <div>Performance <span class="asOfDate">{asOfDate}</span></div>
+      <div>
+        {$_("funds.performance.title")} <span class="asOfDate">{asOfDate}</span>
+      </div>
       <a
         style="float:right;font-size:14px;"
-        href={"#"}
+        href={"javascript:void(0)"}
         on:click={() => {
           exportCsv("performance");
         }}
@@ -448,16 +469,16 @@
           }}
           style="cursor:pointer;background-color:{positionsSelected
             ? '#aaaaaa'
-            : '#00000011'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
+            : '#33333311'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
         >
-          {isMobile ? "" : "Top "}Holdings
+          Holdings
         </div>
         <div
           on:click={() => {
             positionsSelected = false;
           }}
           style="cursor:pointer;background-color:{positionsSelected
-            ? '#00000011'
+            ? '#33333311'
             : '#aaaaaa'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
         >
           Trades
@@ -469,7 +490,7 @@
       </div>
       <a
         style="float:right;font-size:14px;"
-        href={"#"}
+        href={"javascript:void(0)"}
         on:click={() => {
           exportCsv(positionsSelected ? "positions" : "trades");
         }}
@@ -535,7 +556,7 @@
           </table>
           <div style="display:flex;width:100%;justify-content:center;">
             <a
-              href={"#"}
+              href={"javascript:void(0)"}
               on:click={() => {
                 if (displayedPositions.length === 10) {
                   displayedPositions = positions.positions;
@@ -544,7 +565,7 @@
                 }
               }}
             >
-              {displayedPositions.length === 10 ? "Expand" : "Collapse"}
+              {displayedPositions.length === 10 ? "Extend" : "Collapse"}
             </a>
           </div>
         {/await}
@@ -576,7 +597,7 @@
         </table>
         <div style="display:flex;width:100%;justify-content:center;">
           <a
-            href={"#"}
+            href={"javascript:void(0)"}
             on:click={() => {
               if (displayedTrades.length === 10) {
                 displayedTrades = trades;
@@ -585,25 +606,28 @@
               }
             }}
           >
-            {displayedTrades.length === 10 ? "Expand" : "Collapse"}
+            {displayedTrades.length === 10 ? "Extend" : "Collapse"}
           </a>
         </div>
       {/if}
     </div>
     <h1 id="sectionDiversification">
-      <div>Diversification <span class="asOfDate">{asOfDate}</span></div>
+      <div>
+        {$_("funds.diversification.title")}
+        <span class="asOfDate">{asOfDate}</span>
+      </div>
     </h1>
     <div class="textBlock diversificationCharts">
       <div style="width: 50%; height: 350px;">
-        <h2>Sectors</h2>
+        <h2>{$_("funds.diversification.sectors")}</h2>
         <div id="diversificationChart" style="height:300px" />
       </div>
       <div style="width: 50%; height: 350px;">
-        <h2>Market Cap</h2>
+        <h2>{$_("funds.diversification.marketCap")}</h2>
         <div id="marketCapChart" style="height:300px" />
       </div>
     </div>
-    <h1 id="sectionFundFacts">Fund Facts</h1>
+    <h1 id="sectionFundFacts">{$_("funds.fundFacts.title")}</h1>
     <div class="textBlock">
       {#await stats}
         <div />
@@ -618,27 +642,27 @@
             </thead>
             <tbody>
               <tr>
-                <td>Fund Objective</td>
-                <td>Capital Appreciation and income</td>
+                <td>{$_("funds.fundFacts.fundObjective.title")}</td>
+                <td>{$_("funds.fundFacts.fundObjective.description")}</td>
               </tr>
               <tr>
-                <td>Fund Strategy</td>
-                <td>U.S Mid-Large Cap Long/Short Equity Fund</td>
+                <td>{$_("funds.fundFacts.fundStrategy.title")}</td>
+                <td>{$_("funds.fundFacts.fundStrategy.description")}</td>
               </tr>
               <tr>
-                <td>Fund Asset</td>
+                <td>{$_("funds.fundFacts.fundAsset.title")}</td>
                 <td>{formatter.format(stats[0].value)}</td>
               </tr>
               <tr>
-                <td>NAV</td>
+                <td>{$_("funds.fundFacts.nav.title")}</td>
                 <td>{formatter.format(stats[0].value / stats[0].shares)}</td>
               </tr>
               <tr>
-                <td>Ticker</td>
-                <td>GBH</td>
+                <td>{$_("funds.fundFacts.ticker.title")}</td>
+                <td>{$_("funds.fundFacts.ticker.description")}</td>
               </tr>
               <tr>
-                <td>Number of Holdings</td>
+                <td>{$_("funds.fundFacts.numberOfHoldings.title")}</td>
                 {#await positions}
                   <td />
                 {:then positions}
@@ -646,16 +670,14 @@
                 {/await}
               </tr>
               <tr>
-                <td>Distribution Frequency</td>
-                <td>Quarterly</td>
+                <td>{$_("funds.fundFacts.distributionFrequency.title")}</td>
+                <td
+                  >{$_("funds.fundFacts.distributionFrequency.description")}</td
+                >
               </tr>
               <tr>
-                <td>Gross Expense Ratio</td>
-                <td>1%</td>
-              </tr>
-              <tr>
-                <td>Fund Inception</td>
-                <td>02/13/2020</td>
+                <td>{$_("funds.fundFacts.grossExpenseRatio.title")}</td>
+                <td>{$_("funds.fundFacts.grossExpenseRatio.description")}</td>
               </tr>
             </tbody>
           </table>
@@ -668,28 +690,34 @@
             </thead>
             <tbody>
               <tr>
-                <td>Primary Benchmark</td>
-                <td>S&P500</td>
+                <td>{$_("funds.fundFacts.primaryBenchmark.title")}</td>
+                <td>{$_("funds.fundFacts.primaryBenchmark.description")}</td>
               </tr>
               <tr>
-                <td>Minimum Investment</td>
-                <td>$1,000</td>
+                <td>{$_("funds.fundFacts.minimumInvestment.title")}</td>
+                <td>{$_("funds.fundFacts.minimumInvestment.description")}</td>
               </tr>
               <tr>
-                <td>Minimum Subsequent Investment</td>
-                <td>$100</td>
+                <td
+                  >{$_("funds.fundFacts.minimumSubsequentInvestment.title")}</td
+                >
+                <td
+                  >{$_(
+                    "funds.fundFacts.minimumSubsequentInvestment.description"
+                  )}</td
+                >
               </tr>
               <tr>
-                <td>Management Fees</td>
-                <td>2%</td>
+                <td>{$_("funds.fundFacts.managementFees.title")}</td>
+                <td>{$_("funds.fundFacts.managementFees.description")}</td>
               </tr>
               <tr>
-                <td>Transaction Fees</td>
-                <td>3%</td>
+                <td>{$_("funds.fundFacts.transactionFees.title")}</td>
+                <td>{$_("funds.fundFacts.transactionFees.description")}</td>
               </tr>
               <tr>
-                <td>Performance Fees</td>
-                <td>15%</td>
+                <td>{$_("funds.fundFacts.performanceFees.title")}</td>
+                <td>{$_("funds.fundFacts.performanceFees.description")}</td>
               </tr>
             </tbody>
           </table>
