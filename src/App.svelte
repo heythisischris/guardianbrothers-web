@@ -8,6 +8,8 @@
   import About from "./routes/About.svelte";
   import ContactUs from "./routes/ContactUs.svelte";
   import Funds from "./routes/Funds.svelte";
+  import EquityFund1 from "./routes/equityFund1.svelte";
+  import HybridFund from "./routes/hybridFund.svelte";
   import Team from "./routes/Team.svelte";
   import { _, addMessages, getLocaleFromNavigator, init } from "svelte-i18n";
   import es from "./es.json";
@@ -101,6 +103,8 @@
     <Route path="/about" component={About} />
     <Route path="/contactus" component={ContactUs} />
     <Route path="/funds" component={Funds} />
+    <Route path="/equityFund1" component={EquityFund1} />
+    <Route path="/hybridFund" component={HybridFund} />
     <Route path="/team" component={Team} />
     <div class="navContainer blocksContainer">
       <div class="navContainerInner blocks" style="width:100%">
@@ -143,12 +147,12 @@
               <a href="/termsofservice">{$_("app.terms")}</a>
             </div>
             <div class="blocksMenu">
-              <a href="/funds#sectionOverview">{$_("app.overview")}</a>
-              <a href="/funds#sectionHowItWorks">{$_("app.howItWorks")}</a>
-              <a href="/funds#sectionPerformance">{$_("app.performance")}</a>
-              <a href="/funds#sectionFundFacts">{$_("app.fundFacts")}</a>
-              <a href="/funds#sectionTopHoldings">{$_("app.holdings")}</a>
-              <a href="/funds#sectionDiversification"
+              <a href="/equityFund1#sectionOverview">{$_("app.overview")}</a>
+              <a href="/equityFund1#sectionHowItWorks">{$_("app.howItWorks")}</a>
+              <a href="/equityFund1#sectionPerformance">{$_("app.performance")}</a>
+              <a href="/equityFund1#sectionFundFacts">{$_("app.fundFacts")}</a>
+              <a href="/equityFund1#sectionTopHoldings">{$_("app.holdings")}</a>
+              <a href="/equityFund1#sectionDiversification"
                 >{$_("app.diversification")}</a
               >
             </div>

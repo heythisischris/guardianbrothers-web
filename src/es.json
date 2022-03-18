@@ -60,9 +60,15 @@
         "button": "MÁS"
       }
     },
-    "section3": {
-      "title": "Guardian Equity Fund I",
-      "description": "Explora una forma diferente de invertir de acuerdo con tus necesidades",
+    "sectionFunds": {
+      "equityFund1": {
+        "title": "Guardian Equity Fund I",
+        "description": "Explora una forma diferente de invertir de acuerdo con tus necesidades"
+      },
+      "hybridFund": {
+        "title": "Guardian Hybrid Fund",
+        "description": "El fondo invierte activamente en una combinación de las criptomonedas más populares y acciones y/o ETF de alta capitalización"
+      },
       "button": "LEER MÁS",
       "investButton": "INVIERTE AHORA"
     },
@@ -206,6 +212,21 @@
   },
   "funds": {
     "main": {
+      "title": "Fondos",
+      "subtitle": " ",
+      "goBack": "Regresa"
+    },
+    "equityFund1": {
+      "title": "Guardian Equity Fund I",
+      "subtitle": "Explora una forma diferente de invertir de acuerdo con tus necesidades"
+    },
+    "hybridFund": {
+      "title": "Guardian Hybrid Fund",
+      "subtitle": "El fondo invierte activamente en una combinación de las criptomonedas más populares y acciones y/o ETF de alta capitalización"
+    }
+  },
+  "equityFund1": {
+    "main": {
       "title": "Guardian Brother Holdings - Investors Shares",
       "fundAssets": "Activos del Fondo",
       "sharesOutstanding": "Acciones en circulación",
@@ -257,6 +278,126 @@
       "fundStrategy": {
         "title": "Estrategia del fondo",
         "description": "U.S Mid-Large Cap Long/Short Equity Fund"
+      },
+      "fundAsset": {
+        "title": "Activos del fondo",
+        "description": ""
+      },
+      "nav": {
+        "title": "NAV",
+        "description": ""
+      },
+      "ticker": {
+        "title": "Ticker",
+        "description": "GBH"
+      },
+      "numberOfHoldings": {
+        "title": "Número de activos",
+        "description": ""
+      },
+      "distributionFrequency": {
+        "title": "Frequencia de distribución",
+        "description": "Anual"
+      },
+      "grossExpenseRatio": {
+        "title": "Ratio de gastos bruto",
+        "description": "1%"
+      },
+      "fundInception": {
+        "title": "",
+        "description": ""
+      },
+      "primaryBenchmark": {
+        "title": "Índice de referencia",
+        "description": "S&P500"
+      },
+      "minimumInvestment": {
+        "title": "Inversión mínima",
+        "description": "$1,000"
+      },
+      "minimumSubsequentInvestment": {
+        "title": "Inversión subsiguiente Mínima",
+        "description": "$100"
+      },
+      "managementFees": {
+        "title": "Comisión de gestión",
+        "description": "2%"
+      },
+      "transactionFees": {
+        "title": "Tarifa de transacción",
+        "description": "3%"
+      },
+      "performanceFees": {
+        "title": "Comisión de rendimiento",
+        "description": "20%"
+      }
+    },
+    "holdings": {
+      "title": "Holdings"
+    },
+    "diversification": {
+      "title": "Diversificación",
+      "sectors": "Sectores",
+      "marketCap": "Capitalizacion mercado"
+    }
+  },
+  "hybridFund": {
+    "main": {
+      "title": "Guardian Hybrid Fund - Investor Shares",
+      "fundAssets": "Activos del Fondo",
+      "sharesOutstanding": "Acciones en circulación",
+      "nav": "NAV",
+      "navChange": "Cambio de NAV",
+      "investNow": "INVIERTE AHORA"
+    },
+    "overview": {
+      "title": "General",
+      "section1": {
+        "title": "Filosofia",
+        "paragraph1": "Creemos que una cartera adecuada y bien diversificada de criptomonedas y acciones de alta calidad puede protegerse de la alta volatilidad y producir un rendimiento ajustado al riesgo significativamente más alto para nuestros socios al largo plazo."
+      },
+      "section2": {
+        "title": "Objetivo",
+        "paragraph1": "El principal objetivo del fondo es otorgar a los inversores la posibilidad de diversificar sus inversiones en una gama más amplia de clases de activos y obtener mayores rendimientos ajustados al riesgo.",
+        "paragraph2": "Los inversores podrán acceder a los mercados de criptomonedas sin exponerse a la alta volatilidad de estos activos, teniendo en cuenta que el fondo se protegerá invirtiendo parte del capital invertido en acciones de valor de capitalización media-alta y ETF mientras mantiene una porción media en un cartera diversificada de criptomonedas."
+      },
+      "section3": {
+        "title": "Estrategia",
+        "paragraph1": "El fondo invierte activamente en una combinación de las criptomonedas más populares y acciones y/o ETF de alta capitalización.",
+        "paragraph2": "Las estrategias utilizadas por el fondo incluyen, entre otras, arbitraje de índices de acciones, eventos macroglobales, posiciones largas/cortas, criptomonedas discrecionales y uso de apalancamiento en situaciones especiales."
+      }
+    },
+    "howItWorks": {
+      "title": "Como funciona",
+      "block1": {
+        "title": "Compramos",
+        "description": "Guardian Brothers Holdings encuentra oportunidades en el mercado de valores. Crea una cartera sólida para todos nuestros inversores."
+      },
+      "block2": {
+        "title": "Tu inviertes",
+        "description": "Te conviertes en socio y recibes beneficios de los rendimientos generados por Guardian Brothers Equity Fund I"
+      },
+      "block3": {
+        "title": "Apreciacion del capital",
+        "description": "Nuestra cartera se aprecia y recibe dividendos. Obtiene el beneficio del interés compuesto y la revalorización del capital"
+      },
+      "block4": {
+        "title": "Redistribucion",
+        "description": "Tu inversión se valoriza y te ayudamos a capturar tus ganancias. Sin límites de retiros, sin comisiones ocultas. Fácil acceso."
+      }
+    },
+    "performance": {
+      "title": "Rendimiento"
+    },
+    "fundFacts": {
+      "title": "Terminos",
+      "fundObjective": {
+        "title": "Objetivo del fondo",
+        "description": "Apreciacion de capital"
+      },
+      "fundStrategy": {
+        "title": "Estrategia del fondo",
+        "description": "U.S Crypto & Equity Long/Short Fund"
       },
       "fundAsset": {
         "title": "Activos del fondo",
