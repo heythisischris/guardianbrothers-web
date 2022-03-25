@@ -130,8 +130,9 @@
     window.scrollTo(0, 0);
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/transparent.png')";
-    document.querySelectorAll("#body")[0].style.backgroundPosition =
-      "50% 100px";
+    document.querySelectorAll("#body")[0].style.backgroundPosition = `50% ${
+      isMobile ? "50" : "100"
+    }px`;
     setTimeout(() => {
       asOfDate = `as of ${new Date(stats[0].id).toLocaleDateString()}`;
       google.charts.load("current", { packages: ["corechart"] });

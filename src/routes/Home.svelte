@@ -14,15 +14,35 @@
     let response = await data.json();
     return response;
   }
-  var stats = loadAPI("https://lambda.guardianbrothers.com/stats");
-  stats.then((innerStats) => {
-    stats = innerStats;
+  var equityFund1Stats = loadAPI(
+    "https://lambda.guardianbrothers.com/stats/equityFund1"
+  );
+  equityFund1Stats.then((innerStats) => {
+    equityFund1Stats = innerStats;
+  });
+  var hybridFundStats = loadAPI(
+    "https://lambda.guardianbrothers.com/stats/hybridFund"
+  );
+  hybridFundStats.then((innerStats) => {
+    hybridFundStats = innerStats;
   });
 
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  let mailingListEmail = "";
+  let addedToMailingList = false;
+  async function addToMailingList() {
+    await fetch(`https://lambda.guardianbrothers.com/mailinglist`, {
+      method: "post",
+      body: JSON.stringify({
+        email: mailingListEmail,
+      }),
+    });
+    addedToMailingList = true;
+  }
 </script>
 
 <div class="pageContainerTop" style="margin-top: -110px;">
@@ -152,74 +172,74 @@
   </div>
 </div>
 
-<div class="pageContainer section3">
+<div class="pageContainer sectionFunds">
   <div
     class="pageContainerInner"
     style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
     <div
-      class="pageContainerInner section3Inner"
+      class="pageContainerInner sectionFundsInner"
       style="color:#ffffff;font-size:22px;"
     >
-      {#await stats}
+      {#await equityFund1Stats}
         <div />
-      {:then stats}
-        <div class="section3TopContainer">
-          <div class="section3Title">
-            {$_("home.section3.title")}
+      {:then equityFund1Stats}
+        <div class="sectionFundsTopContainer">
+          <div class="sectionFundsTitle">
+            {$_("home.sectionFunds.equityFund1.title")}
           </div>
-          <div class="section3Description">
-            {$_("home.section3.description")}
+          <div class="sectionFundsDescription">
+            {$_("home.sectionFunds.equityFund1.description")}
           </div>
-          <div class="section3ButtonContainer">
+          <div class="sectionFundsButtonContainer">
             <div
               on:click={() => {
                 navigate("/funds");
               }}
-              class="section3Button"
+              class="sectionFundsButton"
             >
-              {$_("home.section3.button")}
+              {$_("home.sectionFunds.button")}
             </div>
-
-            <div
-              on:click={() => {
-                window.location = "https://calendly.com/guardianbrothers/15min";
-              }}
-              class="section3InvestButton"
+            <a
+              target="_blank"
+              href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad-gbh"
+              class="sectionFundsInvestButton"
             >
-              {$_("home.section3.investButton")}
-            </div>
+              {$_("home.sectionFunds.investButton")}
+            </a>
           </div>
         </div>
         <div id="stats" in:fade>
           <div class="statsContainer">
             <div class="infoBorder">
               <div>{$_("funds.main.fundAssets")}</div>
-              <div>{formatter.format(stats[0].value)}</div>
+              <div>{formatter.format(equityFund1Stats[0].value)}</div>
             </div>
             <div class="infoBorder">
               <div>{$_("funds.main.sharesOutstanding")}</div>
-              <div>{formatter.format(stats[0].shares).slice(1)}</div>
+              <div>{formatter.format(equityFund1Stats[0].shares).slice(1)}</div>
             </div>
           </div>
           <div class="statsContainer">
             <div class="infoBorder">
               <div>{$_("funds.main.nav")}</div>
               <div>
-                {formatter.format(stats[0].value / stats[0].shares)}
+                {formatter.format(
+                  equityFund1Stats[0].value / equityFund1Stats[0].shares
+                )}
               </div>
             </div>
             <div class="infoBorder">
               <div>{$_("funds.main.navChange")}</div>
               <div>
                 {formatter.format(
-                  stats[0].value / stats[0].shares -
-                    stats[1].value / stats[1].shares
+                  equityFund1Stats[0].value / equityFund1Stats[0].shares -
+                    equityFund1Stats[1].value / equityFund1Stats[1].shares
                 )}
                 ({(
-                  ((stats[0].value / stats[0].shares -
-                    stats[1].value / stats[1].shares) /
-                    (stats[1].value / stats[1].shares)) *
+                  ((equityFund1Stats[0].value / equityFund1Stats[0].shares -
+                    equityFund1Stats[1].value / equityFund1Stats[1].shares) /
+                    (equityFund1Stats[1].value / equityFund1Stats[1].shares)) *
                   100
                 ).toFixed(2) + "%"})
               </div>
@@ -400,6 +420,45 @@
   </div>
 </div>
 
+<div class="pageContainer" style="min-height:400px;">
+  <div class="pageContainerInner" style="padding-bottom:0px;">
+    <div class="row">
+      <div class="rowItem" style="justify-content:center;">
+        <div class="header" style="margin-top:100px;">
+          <div class="headerLine" />
+          <div class="headerText">{$_("contact.section3.title")}</div>
+          <div class="headerLine" />
+        </div>
+        <div class="subHeaderText">{$_("contact.section3.subtitle")}</div>
+        <div class="containerOne">
+          <div class="containerOneText">
+            {$_("contact.section3.description")}
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          {#if addedToMailingList}
+            <p style="margin:40px;">
+              {$_("contact.section3.form.success")}
+            </p>
+          {:else}
+            <div class="row subscribeContainer">
+              <input
+                bind:value={mailingListEmail}
+                placeholder={$_("contact.section3.form.email")}
+              />
+              <button
+                on:click={() => {
+                  addToMailingList();
+                }}>{$_("contact.section3.form.submit")}</button
+              >
+            </div>
+          {/if}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
   .containerOne {
     display: flex;
@@ -413,16 +472,16 @@
     font-size: 20px;
   }
 
-  .section3Title {
+  .sectionFundsTitle {
     font-size: 50px;
     font-weight: 600;
   }
-  .section3Description {
+  .sectionFundsDescription {
     font-size: 26px;
     font-weight: 600;
     margin-bottom: 25px;
   }
-  .section3Button {
+  .sectionFundsButton {
     cursor: pointer;
     background-color: #cccccc;
     color: #333333;
@@ -435,10 +494,10 @@
     margin-right: 20px;
     transition: 0.5s;
   }
-  .section3Button:hover {
+  .sectionFundsButton:hover {
     background-color: #ffffff;
   }
-  .section3InvestButton {
+  .sectionFundsInvestButton {
     cursor: pointer;
     background-color: #102e50;
     color: #ffffff;
@@ -449,13 +508,14 @@
     align-items: center;
     justify-content: center;
     transition: 0.5s;
+    text-decoration-line: none;
   }
-  .section3InvestButton:hover {
+  .sectionFundsInvestButton:hover {
     background-color: #2c6db6;
   }
 
-  .section3 {
-    min-height: 600px;
+  .sectionFunds {
+    min-height: 200px;
     background: linear-gradient(#354558ee, #354558ee), url("images/gbfund1.svg");
     background-size: cover;
     color: #ffffff;
@@ -589,13 +649,14 @@
     animation-delay: 15s;
   }
 
-  .section3TopContainer {
+  .sectionFundsTopContainer {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    margin-top: 20px;
   }
-  .section3ButtonContainer {
+  .sectionFundsButtonContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -604,8 +665,8 @@
   #stats {
     margin-top: 100px;
   }
-  .section3Inner {
-    height: 450px;
+  .sectionFundsInner {
+    height: 410px;
   }
 
   .testimonialBlocks {
@@ -714,6 +775,33 @@
     min-height: 582px;
   }
 
+  input {
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+    font-family: arial;
+  }
+  button {
+    all: unset;
+    background-color: #6f8db1;
+    color: #ffffff;
+    padding: 10px 20px;
+    min-width: 150px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  button:hover {
+    background-color: #9bc8ff;
+  }
+  .subscribeContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 40px;
+    width: 600px;
+  }
+
   @media only screen and (max-width: 850px) {
     .blocks {
       flex-direction: column;
@@ -740,26 +828,27 @@
       font-size: 20px;
     }
 
-    .section3 {
+    .sectionFunds {
       background-size: 250%;
       background-position: -250px 0px;
       min-height: 300px;
     }
-    .section3Title {
+    .sectionFundsTitle {
       font-size: 30px;
     }
-    .section3Description {
+    .sectionFundsDescription {
       margin-top: 20px;
       font-size: 18px;
       max-width: 100%;
     }
-    .section3TopContainer {
+    .sectionFundsTopContainer {
       flex-direction: column;
+      margin-top:0px;
     }
     #stats {
       margin-top: 20px;
     }
-    .section3Inner {
+    .sectionFundsInner {
       height: 100%;
     }
 
@@ -804,13 +893,18 @@
       margin: 0px 10px;
       margin-top: 20px;
     }
-    .section3Button {
+    .sectionFundsButton {
       font-size: 14px;
       width: 140px;
     }
-    .section3InvestButton {
+    .sectionFundsInvestButton {
       font-size: 14px;
       width: 140px;
+    }
+    .subscribeContainer {
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 200px;
     }
   }
 </style>

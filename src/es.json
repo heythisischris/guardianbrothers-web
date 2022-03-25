@@ -60,9 +60,11 @@
         "button": "MÁS"
       }
     },
-    "section3": {
-      "title": "Guardian Equity Fund I",
-      "description": "Explora una forma diferente de invertir de acuerdo con tus necesidades",
+    "sectionFunds": {
+      "equityFund1": {
+        "title": "Guardian Equity Fund I",
+        "description": "Explora una forma diferente de invertir de acuerdo con tus necesidades"
+      },
       "button": "LEER MÁS",
       "investButton": "INVIERTE AHORA"
     },

@@ -4,10 +4,14 @@
   import { _ } from "svelte-i18n";
   onMount(() => {
     window.scrollTo(0, 0);
+    const isMobile = window.matchMedia(
+        "only screen and (max-width: 760px)"
+      ).matches;
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_contactus.jpg')";
-    document.querySelectorAll("#body")[0].style.backgroundPosition =
-      "50% 100px";
+    document.querySelectorAll("#body")[0].style.backgroundPosition = `50% ${
+      isMobile ? "50" : "100"
+    }px`;
   });
   let firstName = "";
   let lastName = "";

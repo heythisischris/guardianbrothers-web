@@ -1820,6 +1820,11 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
+svelte-burger-menu@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/svelte-burger-menu/-/svelte-burger-menu-1.0.5.tgz#5ae6410da31a502ae28352a963bde35ac1bf0e13"
+  integrity sha512-lP2WqzO5awqgMQ+wuIoBqFASZhtbfjJsSJ529+cW6DpBY4Xg5TZsf3zMwG6QYUD/J7wy2cLYKiUmY2qdDHQdmw==
+
 svelte-i18n@^3.3.13:
   version "3.3.13"
   resolved "https://registry.yarnpkg.com/svelte-i18n/-/svelte-i18n-3.3.13.tgz#05350bb86291de604cc6365f1105c11fbff54c76"
