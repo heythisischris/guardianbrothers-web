@@ -7,13 +7,21 @@
     const isActive = href === "/" ? isCurrent : isPartiallyCurrent || isCurrent;
 
     // The object returned here is spread on the anchor element's attributes
-    if (isActive) {
-      return { class: "active" };
+    if (location.pathname === "/") {
+      if (isActive) {
+        return { class: "homeActive" };
+      } else {
+        return { class: "homeInactive" };
+      }
+    } else {
+      if (isActive) {
+        return { class: "active" };
+      }
     }
     return {};
   }
 </script>
 
-<Link to="{to}" getProps="{getProps}">
+<Link {to} {getProps}>
   <slot />
 </Link>

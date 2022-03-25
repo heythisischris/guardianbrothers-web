@@ -11,18 +11,18 @@ html {
   width: 100%;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+#body {
+  font-family: 'Lato', 'Segoe UI', Tahoma, Verdana, sans-serif;
   font-size: 16px;
   margin: 0;
   padding: 0;
   background-color: #201c30;
-  color: #000000;
+  color: #333333;
   display: flex;
   justify-content: center;
-  background-image: url('images/background.jpg');
+  background-image: url('images/background_home.jpg');
   background-repeat: no-repeat;
-  background-position: 50% 0px;
+  background-position: 50% 100px;
 }
 
 .container {
@@ -35,19 +35,21 @@ nav {
   width: 100%;
   display: flex;
   align-items: center;
+  z-index: 1;
+  position: relative;
 }
 
 .footer {
   padding-top: 8px;
   text-align: center;
   font-size: 10px;
-  background-color: #dddddde5;
+  background-color: #dddddd;
   color: #000000;
   padding-bottom: 12px;
 }
 
 .navContainer {
-  background-color: #ffffffe5;
+  background-color: #ffffff;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -61,7 +63,8 @@ nav {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 1140px;
+  width: 100%;
+  max-width: 1363px;
 }
 
 .navTitle {
@@ -75,7 +78,6 @@ nav {
   all: unset;
   cursor: pointer;
   margin: 0px 5px;
-  font-size: 36px;
   font-family: 'alegreya-regular';
 }
 
@@ -85,17 +87,27 @@ nav {
 
 .navLinks {
   height: 30px;
+  font-weight: 500;
 }
 
 .navLinks a {
-  color: #2a2d37;
+  color: #888888;
   padding: 15px;
   display: inline-block;
   text-decoration: none;
 }
 
 .navLinks a.active {
-  font-weight: 600;
+  color: #C49C4B;
+}
+
+
+.navLinks a.homeInactive {
+  color: #ffffff;
+}
+
+.navLinks a.homeActive {
+  color: #C49C4B;
 }
 
 a:hover {
@@ -103,14 +115,13 @@ a:hover {
 }
 
 .logo {
-  height: 100px;
-  width: 167px;
+  height: 60px;
   float: left;
-  margin-top: -12px;
+  margin-top: 0px;
 }
 
 .pageContainerTop {
-  background-color: #2d3a4770;
+  background-color: #00000070;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -147,29 +158,33 @@ a:hover {
 }
 
 .pageContainer {
-  background-color: #ffffffe5;
+  background-color: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  min-height: calc( 100vh - 172px);
+  min-height: calc(100vh - 172px);
 }
 
 .pageContainerInner {
   padding: 10px 10px;
-  width: 1140px;
   min-height: 200px;
-  max-width: 90vw;
+  width: 100%;
+  max-width: 1363px;
 }
 
 h1 {
   font-size: 30px;
   padding-bottom: 5px;
   border-bottom: 2px solid #AAAAAA;
+  font-family: 'Merriweather';
+  color: #00355f;
 }
 
 h2 {
   margin-left: 10px;
   font-size: 20px;
+  font-family: 'Merriweather';
+  color: #00355f;
 }
 
 p {
@@ -188,7 +203,7 @@ a {
 
 .navSocial {
   float: right;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .title {
@@ -206,7 +221,7 @@ a {
 }
 
 #statsTitle {
-  margin-top: 10px;
+  margin-top: 65px;
   margin-bottom: 20px;
   margin-left: 42px;
   font-size: 14px;
@@ -246,21 +261,36 @@ tbody tr:nth-child(odd) {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 25%;
 }
 
 .teamBlocksInner img {
-  height: 150px;
-  width: 150px;
+  height: 250px;
+  width: 250px;
   background-color: #AAAAAA;
   margin-bottom: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.teamBlocksInnerText {
+  margin-top: -35px;
+  background-color: #F2EFE5;
+  text-align: center;
+  padding: 5px;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .teamBlocksInner h2 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   margin: 0px;
+}
+
+.teamBlocksInner span {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0px;
+  color: #888888;
 }
 
 .investDiv {
@@ -339,94 +369,229 @@ table td {
   font-size: 16px;
 }
 
+#title {
+  font-size: 30px;
+  text-align: left;
+  color: #C49C4B;
+}
+
+#subtitle {
+  font-size: 14px;
+  text-align: right;
+  color: #335a7e;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
+}
+
+.mainTitle {
+  font-size: 50px;
+  font-weight: 600;
+  margin-top: -80px;
+  width: 600px;
+}
+
+.mainSubtitle {
+  width: 600px;
+  margin-top: 10px;
+}
+
+.award {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.awardTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 300px;
+}
+
+.awardTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Merriweather';
+  color: #00355f;
+  font-weight: bold;
+}
+
+.awardSubtitle {
+  font-size: 16px;
+}
+
+.awardIcon {
+  min-width: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: #00355f;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-right: 40px;
+}
+
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #00355f;
+}
+
+.headerText {
+  font-size: 20px;
+  text-align: center;
+}
+
+.headerLine {
+  width: 50px;
+  height: 3px;
+  background-color: #a09162;
+  margin-bottom: -5px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.subHeaderText {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  color: #00355f;
+  text-align: center;
+}
+
 @media only screen and (max-width: 850px) {
+
+  .mainTitle {
+    font-size: 30px;
+    margin-top: -100px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mainSubtitle {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+
   body {
     font-size: 14px;
   }
+
   .container {
     width: 100%;
     padding: 0px;
     min-height: calc(100vh - 50px);
   }
+
   .navContainer {
     padding: 0px;
     width: 100%;
     text-align: center;
   }
+
   .navContainerInner {
     flex-direction: column;
   }
+
   .navTitle {
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .logo {
-    height: 40px;
-    width: 70px;
-    margin-top: 4px;
+    height: 30px;
+    margin-top: 5px;
   }
+
   #title {
-    font-size: 19px;
+    font-size: 17px;
     text-align: left;
   }
+
   #subtitle {
-    font-size: 14px;
-    text-align: left;
+    font-size: 12px;
   }
+
   .pageContainerMiddle {
     display: none;
   }
+
   #stats {
     flex-direction: row;
     font-size: 14px;
   }
+
   #statsTitle {
     text-align: center;
     margin-left: 0px;
     margin-bottom: 10px;
   }
+
   .statsContainer {
     flex-direction: column;
     height: 125px;
     align-items: center;
   }
+
   .infoBorder {
     width: 80%;
     min-width: unset;
   }
+
   .navLinks {
     margin-top: 5px;
+    font-size: 11px;
   }
+
   .navLinks a {
-    padding: 8px;
+    padding: 4px;
   }
+
   .pageContainer {
     padding: 0px 20px;
-    min-height: calc( 100vh - 142px);
+    min-height: calc(100vh - 142px);
   }
-  .navSocial {
-    display: none;
-  }
+
   a:hover {
     text-decoration: none !important;
   }
+
   .footer {
     margin: 0px;
     width: 100%;
   }
+
   h1 {
     font-size: 22px;
   }
+
   h2 {
     font-size: 18px;
   }
+
   .diversificationCharts {
     flex-direction: column;
   }
+
   .diversificationCharts div {
     width: 100% !important;
   }
+
   .teamBlocks {
     flex-direction: column;
     width: 100%;
@@ -434,10 +599,11 @@ table td {
     margin-bottom: 0;
     margin-top: 25px;
   }
+
   .teamBlocksInner {
-    margin-bottom: 25px;
-    width: unset;
+    margin-bottom: 50px;
   }
+
   .investDiv {
     margin: 0px;
     margin-top: 150px;
@@ -446,34 +612,47 @@ table td {
     align-items: center;
     justify-content: center;
   }
+
   .fundFactsBlocks {
     flex-direction: column;
   }
+
   .fundFactsBlocks table {
     margin: 0px;
     margin-bottom: 30px;
     width: 100% !important;
   }
+
   .fundFactsBlocks tr {
     line-height: 1.5;
   }
+
   .howItWorksBlocks {
     flex-direction: column;
   }
+
   .howItWorksBlocks div {
     width: 100%;
     margin: 0px;
     padding: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
+
   .howItWorksBlocks p {
     margin: 30px;
   }
+
   .howItWorksBlocksNumber {
     margin-top: -30px !important;
     margin-bottom: -30px !important;
   }
+
   .asOfDate {
     display: block;
   }
+
+  .investDiv {
+    margin-top: 30px;
+  }
+
 }

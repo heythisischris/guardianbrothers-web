@@ -2,6 +2,7 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
+import json from '@rollup/plugin-json';
 
 const isDev = Boolean(process.env.ROLLUP_WATCH);
 
@@ -13,18 +14,17 @@ export default [
       sourcemap: true,
       format: "iife",
       name: "app",
-      file: "public/bundle.js"
+      file: "public/bundle.js",
+      inlineDynamicImports: true
     },
     plugins: [
       svelte({
-        hydratable: true,
-        css: css => {
-          css.write("public/bundle.css");
-        }
+        hydratable: true
       }),
       resolve(),
       commonjs(),
-      !isDev && terser()
+      !isDev && terser(),
+      json(),
     ]
   },
   // Server bundle
@@ -34,7 +34,8 @@ export default [
       sourcemap: false,
       format: "cjs",
       name: "app",
-      file: "public/App.js"
+      file: "public/App.js",
+      inlineDynamicImports: true
     },
     plugins: [
       svelte({
@@ -42,7 +43,8 @@ export default [
       }),
       resolve(),
       commonjs(),
-      !isDev && terser()
+      !isDev && terser(),
+      json(),
     ]
   }
 ];
