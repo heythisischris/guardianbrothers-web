@@ -377,46 +377,6 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="rowItem section5">
-        <div class="header" style="margin-top:50px;">
-          <div class="headerLine" />
-          <div class="headerText">{$_("home.section5.title")}</div>
-          <div class="headerLine" />
-        </div>
-        <div class="subHeaderText">{$_("home.section5.subtitle")}</div>
-        <div class="row">
-          <div class="testimonialBlocks">
-            {#each [0, 1, 2] as item}
-              <div class="testimonialBlock {item == 2 ? 'selected' : ''}">
-                <div class="testimonialDescription">
-                  Praesentium cumque doloribus explicabo dicta suscipit et
-                  maiores. Vel qui ea velit tenetur fugiat. Dignissimos culpa
-                  facilis maiores voluptatum autem sint recusandae et aut.
-                  Expedita id natus vel blanditiis omnis ad ad. Quidem cumque
-                  molestiae consequatur.
-                </div>
-                <div class="testimonialAuthor">
-                  <div class="testimonialImage" />
-                  <div>
-                    <div class="testimonialName">Annabell Brown</div>
-                    <div class="testimonialLocation">
-                      Kessler, Hauck And Gusikowski
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {/each}
-          </div>
-
-          <div class="testimonialBackgroundBlock">
-            <div class="testimonialArrow">{`<`}</div>
-            <div class="testimonialArrow">{`>`}</div>
-            <div class="testimonialButton">LEER MAS</div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
