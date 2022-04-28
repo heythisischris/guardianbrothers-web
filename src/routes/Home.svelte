@@ -194,7 +194,7 @@
           <div class="sectionFundsButtonContainer">
             <div
               on:click={() => {
-                navigate("/equityFund1");
+                navigate("/funds");
               }}
               class="sectionFundsButton"
             >
@@ -212,17 +212,17 @@
         <div id="stats" in:fade>
           <div class="statsContainer">
             <div class="infoBorder">
-              <div>{$_("equityFund1.main.fundAssets")}</div>
+              <div>{$_("funds.main.fundAssets")}</div>
               <div>{formatter.format(equityFund1Stats[0].value)}</div>
             </div>
             <div class="infoBorder">
-              <div>{$_("equityFund1.main.sharesOutstanding")}</div>
+              <div>{$_("funds.main.sharesOutstanding")}</div>
               <div>{formatter.format(equityFund1Stats[0].shares).slice(1)}</div>
             </div>
           </div>
           <div class="statsContainer">
             <div class="infoBorder">
-              <div>{$_("equityFund1.main.nav")}</div>
+              <div>{$_("funds.main.nav")}</div>
               <div>
                 {formatter.format(
                   equityFund1Stats[0].value / equityFund1Stats[0].shares
@@ -230,7 +230,7 @@
               </div>
             </div>
             <div class="infoBorder">
-              <div>{$_("equityFund1.main.navChange")}</div>
+              <div>{$_("funds.main.navChange")}</div>
               <div>
                 {formatter.format(
                   equityFund1Stats[0].value / equityFund1Stats[0].shares -
@@ -240,85 +240,6 @@
                   ((equityFund1Stats[0].value / equityFund1Stats[0].shares -
                     equityFund1Stats[1].value / equityFund1Stats[1].shares) /
                     (equityFund1Stats[1].value / equityFund1Stats[1].shares)) *
-                  100
-                ).toFixed(2) + "%"})
-              </div>
-            </div>
-          </div>
-        </div>
-      {/await}
-    </div>
-  </div>
-</div>
-
-<div class="pageContainer sectionFunds">
-  <div
-    class="pageContainerInner"
-    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
-  >
-    <div
-      class="pageContainerInner sectionFundsInner"
-      style="color:#ffffff;font-size:22px;"
-    >
-      {#await hybridFundStats}
-        <div />
-      {:then hybridFundStats}
-        <div class="sectionFundsTopContainer">
-          <div class="sectionFundsTitle">
-            {$_("home.sectionFunds.hybridFund.title")}
-          </div>
-          <div class="sectionFundsDescription">
-            {$_("home.sectionFunds.hybridFund.description")}
-          </div>
-          <div class="sectionFundsButtonContainer">
-            <div
-              on:click={() => {
-                navigate("/hybridFund");
-              }}
-              class="sectionFundsButton"
-            >
-              {$_("home.sectionFunds.button")}
-            </div>
-            <a
-              target="_blank"
-              href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad-gbh"
-              class="sectionFundsInvestButton"
-            >
-              {$_("home.sectionFunds.investButton")}
-            </a>
-          </div>
-        </div>
-        <div id="stats" in:fade>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.fundAssets")}</div>
-              <div>{formatter.format(hybridFundStats[0].value)}</div>
-            </div>
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.sharesOutstanding")}</div>
-              <div>{formatter.format(hybridFundStats[0].shares).slice(1)}</div>
-            </div>
-          </div>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.nav")}</div>
-              <div>
-                {formatter.format(
-                  hybridFundStats[0].value / hybridFundStats[0].shares
-                )}
-              </div>
-            </div>
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.navChange")}</div>
-              <div>
-                {formatter.format(
-                  hybridFundStats[0].value / hybridFundStats[0].shares -
-                    hybridFundStats[1].value / hybridFundStats[1].shares
-                )}
-                ({(
-                  ((hybridFundStats[0].value / hybridFundStats[0].shares -
-                    hybridFundStats[1].value / hybridFundStats[1].shares) /
-                    (hybridFundStats[1].value / hybridFundStats[1].shares)) *
                   100
                 ).toFixed(2) + "%"})
               </div>
@@ -452,46 +373,6 @@
                 {$_("home.section4.badge7.description")}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="rowItem section5">
-        <div class="header" style="margin-top:50px;">
-          <div class="headerLine" />
-          <div class="headerText">{$_("home.section5.title")}</div>
-          <div class="headerLine" />
-        </div>
-        <div class="subHeaderText">{$_("home.section5.subtitle")}</div>
-        <div class="row">
-          <div class="testimonialBlocks">
-            {#each [0, 1, 2] as item}
-              <div class="testimonialBlock {item == 2 ? 'selected' : ''}">
-                <div class="testimonialDescription">
-                  Praesentium cumque doloribus explicabo dicta suscipit et
-                  maiores. Vel qui ea velit tenetur fugiat. Dignissimos culpa
-                  facilis maiores voluptatum autem sint recusandae et aut.
-                  Expedita id natus vel blanditiis omnis ad ad. Quidem cumque
-                  molestiae consequatur.
-                </div>
-                <div class="testimonialAuthor">
-                  <div class="testimonialImage" />
-                  <div>
-                    <div class="testimonialName">Annabell Brown</div>
-                    <div class="testimonialLocation">
-                      Kessler, Hauck And Gusikowski
-                    </div>
-                  </div>
-                </div>
-              </div>
-            {/each}
-          </div>
-
-          <div class="testimonialBackgroundBlock">
-            <div class="testimonialArrow">{`<`}</div>
-            <div class="testimonialArrow">{`>`}</div>
-            <div class="testimonialButton">LEER MAS</div>
           </div>
         </div>
       </div>

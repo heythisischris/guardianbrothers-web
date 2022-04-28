@@ -11,6 +11,7 @@
   import EquityFund1 from "./routes/equityFund1.svelte";
   import HybridFund from "./routes/hybridFund.svelte";
   import Team from "./routes/Team.svelte";
+  import BurgerMenu from "svelte-burger-menu";
   import { _, addMessages, getLocaleFromNavigator, init } from "svelte-i18n";
   import es from "./es.json";
   addMessages("es", es);
@@ -41,7 +42,8 @@
           var windowYOffset = window.pageYOffset,
             elBackgrounPos =
               "50% " +
-              (windowYOffset * speed + (pathname === "/" ? 0 : 100)) +
+              (windowYOffset * speed +
+                (pathname === "/" ? 0 : isMobile ? 50 : 100)) +
               "px";
           el.style.backgroundPosition = elBackgrounPos;
         });
@@ -73,9 +75,11 @@
                 src="/images/logo.svg"
               />
               <div
+                class="titleContainer"
                 style="display:flex;flex-direction:column;justify-content:center;color:#333333;"
               >
                 <div id="title">Guardian Brothers Holdings</div>
+                <div id="titleLine" />
                 <div
                   id="subtitle"
                   style={pathname === "/" ? "color:#ffffff" : ""}
@@ -88,13 +92,35 @@
           <div
             style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;"
           >
-            <div class="navLinks">
-              <NavLink to="/">{$_("app.home")}</NavLink>
-              <NavLink to="/about">{$_("app.about")}</NavLink>
-              <NavLink to="/contactus">{$_("app.contact")}</NavLink>
-              <NavLink to="/funds">{$_("app.funds")}</NavLink>
-              <NavLink to="/team">{$_("app.team")}</NavLink>
-            </div>
+            {#if isMobile}
+              <BurgerMenu
+              duration={0.2}
+              width="100%"
+                paddingTop="100px"
+                padding="30px"
+                menuColor="#ffffff"
+                burgerColor={pathname === "/" ? "#ffffff" : "#000000"}
+                backgroundColor="#284660"
+              >
+                <a class="mobileLinks {pathname === "/" ? "activeMobileLink" : ""}" href="/">{$_("app.home")}</a>
+                <p />
+                <a class="mobileLinks {pathname === "/about" ? "activeMobileLink" : ""}" href="/about">{$_("app.about")}</a>
+                <p />
+                <a class="mobileLinks {pathname === "/contactus" ? "activeMobileLink" : ""}" href="/contactus">{$_("app.contact")}</a>
+                <p />
+                <a class="mobileLinks {pathname === "/funds" ? "activeMobileLink" : ""}" href="/funds">{$_("app.funds")}</a>
+                <p />
+                <a class="mobileLinks {pathname === "/team" ? "activeMobileLink" : ""}" href="/team">{$_("app.team")}</a>
+              </BurgerMenu>
+            {:else}
+              <div class="navLinks">
+                <NavLink to="/">{$_("app.home")}</NavLink>
+                <NavLink to="/about">{$_("app.about")}</NavLink>
+                <NavLink to="/contactus">{$_("app.contact")}</NavLink>
+                <NavLink to="/funds">{$_("app.funds")}</NavLink>
+                <NavLink to="/team">{$_("app.team")}</NavLink>
+              </div>
+            {/if}
           </div>
         </div>
       </div>
@@ -262,6 +288,14 @@
     align-items: flex-start;
     width: 100%;
   }
+  #titleLine {
+    height: 1px;
+    width: 78%;
+    background-color: #c49c4b;
+    margin-left: auto;
+    margin-top: -5px;
+    margin-bottom: 3px;
+  }
 
   @media only screen and (max-width: 850px) {
     .blocks {
@@ -281,6 +315,23 @@
     }
     .blocksMenuContainer {
       flex-direction: column;
+    }
+    .logo {
+      display: none;
+    }
+    .navContainerInner {
+      align-items: flex-end;
+      margin-bottom: 24px;
+      margin-top: 8px;
+    }
+    .mobileLinks {
+      color: #ffffff !important;
+      text-decoration-line: none;
+      font-size: 24px;
+    }
+    .activeMobileLink {
+      text-decoration-line: underline;
+      color: #c49c4b !important;
     }
   }
 </style>

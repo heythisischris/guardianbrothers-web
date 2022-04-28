@@ -654,5 +654,9 @@ table td {
   .investDiv {
     margin-top: 30px;
   }
+  button {
+    top: 23px !important;
+    left: 10px !important;
+  }
 
 }
