@@ -194,7 +194,7 @@
           <div class="sectionFundsButtonContainer">
             <div
               on:click={() => {
-                navigate("/funds");
+                navigate("/equityFund1");
               }}
               class="sectionFundsButton"
             >
@@ -212,17 +212,17 @@
         <div id="stats" in:fade>
           <div class="statsContainer">
             <div class="infoBorder">
-              <div>{$_("funds.main.fundAssets")}</div>
+              <div>{$_("equityFund1.main.fundAssets")}</div>
               <div>{formatter.format(equityFund1Stats[0].value)}</div>
             </div>
             <div class="infoBorder">
-              <div>{$_("funds.main.sharesOutstanding")}</div>
+              <div>{$_("equityFund1.main.sharesOutstanding")}</div>
               <div>{formatter.format(equityFund1Stats[0].shares).slice(1)}</div>
             </div>
           </div>
           <div class="statsContainer">
             <div class="infoBorder">
-              <div>{$_("funds.main.nav")}</div>
+              <div>{$_("equityFund1.main.nav")}</div>
               <div>
                 {formatter.format(
                   equityFund1Stats[0].value / equityFund1Stats[0].shares
@@ -230,7 +230,7 @@
               </div>
             </div>
             <div class="infoBorder">
-              <div>{$_("funds.main.navChange")}</div>
+              <div>{$_("equityFund1.main.navChange")}</div>
               <div>
                 {formatter.format(
                   equityFund1Stats[0].value / equityFund1Stats[0].shares -
@@ -240,6 +240,85 @@
                   ((equityFund1Stats[0].value / equityFund1Stats[0].shares -
                     equityFund1Stats[1].value / equityFund1Stats[1].shares) /
                     (equityFund1Stats[1].value / equityFund1Stats[1].shares)) *
+                  100
+                ).toFixed(2) + "%"})
+              </div>
+            </div>
+          </div>
+        </div>
+      {/await}
+    </div>
+  </div>
+</div>
+
+<div class="pageContainer sectionFunds">
+  <div
+    class="pageContainerInner"
+    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
+  >
+    <div
+      class="pageContainerInner sectionFundsInner"
+      style="color:#ffffff;font-size:22px;"
+    >
+      {#await hybridFundStats}
+        <div />
+      {:then hybridFundStats}
+        <div class="sectionFundsTopContainer">
+          <div class="sectionFundsTitle">
+            {$_("home.sectionFunds.hybridFund.title")}
+          </div>
+          <div class="sectionFundsDescription">
+            {$_("home.sectionFunds.hybridFund.description")}
+          </div>
+          <div class="sectionFundsButtonContainer">
+            <div
+              on:click={() => {
+                navigate("/hybridFund");
+              }}
+              class="sectionFundsButton"
+            >
+              {$_("home.sectionFunds.button")}
+            </div>
+            <a
+              target="_blank"
+              href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad-gbh"
+              class="sectionFundsInvestButton"
+            >
+              {$_("home.sectionFunds.investButton")}
+            </a>
+          </div>
+        </div>
+        <div id="stats" in:fade>
+          <div class="statsContainer">
+            <div class="infoBorder">
+              <div>{$_("hybridFund.main.fundAssets")}</div>
+              <div>{formatter.format(hybridFundStats[0].value)}</div>
+            </div>
+            <div class="infoBorder">
+              <div>{$_("hybridFund.main.sharesOutstanding")}</div>
+              <div>{formatter.format(hybridFundStats[0].shares).slice(1)}</div>
+            </div>
+          </div>
+          <div class="statsContainer">
+            <div class="infoBorder">
+              <div>{$_("hybridFund.main.nav")}</div>
+              <div>
+                {formatter.format(
+                  hybridFundStats[0].value / hybridFundStats[0].shares
+                )}
+              </div>
+            </div>
+            <div class="infoBorder">
+              <div>{$_("hybridFund.main.navChange")}</div>
+              <div>
+                {formatter.format(
+                  hybridFundStats[0].value / hybridFundStats[0].shares -
+                    hybridFundStats[1].value / hybridFundStats[1].shares
+                )}
+                ({(
+                  ((hybridFundStats[0].value / hybridFundStats[0].shares -
+                    hybridFundStats[1].value / hybridFundStats[1].shares) /
+                    (hybridFundStats[1].value / hybridFundStats[1].shares)) *
                   100
                 ).toFixed(2) + "%"})
               </div>
@@ -629,112 +708,6 @@
     height: 410px;
   }
 
-  .testimonialBlocks {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0px auto;
-    z-index: 1;
-    position: relative;
-  }
-  .testimonialBlock {
-    width: 320px;
-    height: 320px;
-    padding: 10px;
-    background-color: #f3f3f3;
-    border: 2px solid #d1a765;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-  .testimonialBlock.selected {
-    background-color: #f2efe5;
-  }
-  .testimonialDescription {
-    font-style: italic;
-    line-height: 2;
-    color: #888888;
-  }
-  .testimonialImage {
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    background-color: #cccccc;
-    margin-right: 10px;
-  }
-  .testimonialName {
-    font-weight: 600;
-  }
-  .testimonialLocation {
-    color: #888888;
-  }
-  .testimonialAuthor {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .testimonialBackgroundBlock {
-    position: absolute;
-    right: 0px;
-    margin-top: -250px;
-    width: 100vw;
-    height: 380px;
-    background-color: #d1a765;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-  }
-
-  .testimonialArrow {
-    height: 50px;
-    width: 50px;
-    background-color: #00355f;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 30px;
-    cursor: pointer;
-    font-weight: 100;
-    transition: 0.5s;
-    margin: 0px 10px;
-    margin-bottom: 40px;
-    color: #ffffff;
-  }
-  .testimonialArrow:hover {
-    background-color: #1a68a6;
-  }
-
-  .testimonialButton {
-    cursor: pointer;
-    background-color: #00355f;
-    color: #ffffff;
-    width: 150px;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s;
-    margin: 0px 10px;
-    margin-bottom: 40px;
-  }
-  .testimonialButton:hover {
-    background-color: #1a68a6;
-  }
-  .section5 {
-    min-height: 582px;
-  }
-
   input {
     width: 100%;
     margin: 5px;
@@ -803,7 +776,7 @@
     }
     .sectionFundsTopContainer {
       flex-direction: column;
-      margin-top:0px;
+      margin-top: 0px;
     }
     #stats {
       margin-top: 20px;
@@ -827,31 +800,6 @@
     }
     .awardSubtitle {
       font-size: 20px;
-    }
-    .testimonialBlocks {
-      flex-direction: column;
-      width: 100%;
-    }
-    .testimonialBlock {
-      margin: 10px 0px;
-    }
-    .testimonialBackgroundBlock {
-      position: relative;
-      margin-top: 0px;
-      width: 100%;
-      height: 100%;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      margin-bottom: 50px;
-    }
-    .testimonialArrow {
-      margin: 0px 10px;
-      margin-top: 20px;
-    }
-    .testimonialButton {
-      margin: 0px 10px;
-      margin-top: 20px;
     }
     .sectionFundsButton {
       font-size: 14px;
