@@ -11,6 +11,10 @@
   import EquityFund1 from "./routes/equityFund1.svelte";
   import HybridFund from "./routes/hybridFund.svelte";
   import Team from "./routes/Team.svelte";
+  import Login from "./routes/Login.svelte";
+  import Signup from "./routes/Signup.svelte";
+  import Reset from "./routes/Reset.svelte";
+  import Account from "./routes/Account.svelte";
   import BurgerMenu from "svelte-burger-menu";
   import { _, addMessages, getLocaleFromNavigator, init } from "svelte-i18n";
   import es from "./es.json";
@@ -19,6 +23,7 @@
     fallbackLocale: "es",
     initialLocale: getLocaleFromNavigator(),
   });
+  const Auth = aws_amplify_auth.Auth;
 
   // Used for SSR. A falsy value is ignored by the Router.
   export let url = "";
@@ -28,7 +33,6 @@
   //background scroll
   onMount(() => {
     unsub = globalHistory.listen(({ location, action }) => {
-      console.log(location, action);
       pathname = location.pathname;
     });
     (function () {
@@ -50,10 +54,22 @@
       };
     })();
   });
-
   onDestroy(() => {
     unsub();
   });
+
+  //check for auth session
+  let authenticated = false;
+  let userData = {};
+  const authCheck = async () => {
+    try {
+      userData = (await Auth.currentSession()).getIdToken().payload;
+      authenticated = true;
+    } catch (err) {
+      authenticated = false;
+    }
+  };
+  authCheck();
 </script>
 
 <Router {url}>
@@ -94,25 +110,83 @@
           >
             {#if isMobile}
               <BurgerMenu
-              duration={0.2}
-              width="100%"
+                duration={0.2}
+                width="100%"
                 paddingTop="100px"
                 padding="30px"
                 menuColor="#ffffff"
                 burgerColor={pathname === "/" ? "#ffffff" : "#000000"}
                 backgroundColor="#284660"
               >
-                <a class="mobileLinks {pathname === "/" ? "activeMobileLink" : ""}" href="/">{$_("app.home")}</a>
+                <a
+                  class="mobileLinks {pathname === '/'
+                    ? 'activeMobileLink'
+                    : ''}"
+                  href="/">{$_("app.home")}</a
+                >
                 <p />
-                <a class="mobileLinks {pathname === "/about" ? "activeMobileLink" : ""}" href="/about">{$_("app.about")}</a>
+                <a
+                  class="mobileLinks {pathname === '/about'
+                    ? 'activeMobileLink'
+                    : ''}"
+                  href="/about">{$_("app.about")}</a
+                >
                 <p />
-                <a class="mobileLinks {pathname === "/contactus" ? "activeMobileLink" : ""}" href="/contactus">{$_("app.contact")}</a>
+                <a
+                  class="mobileLinks {pathname === '/contactus'
+                    ? 'activeMobileLink'
+                    : ''}"
+                  href="/contactus">{$_("app.contact")}</a
+                >
                 <p />
-                <a class="mobileLinks {pathname === "/funds" ? "activeMobileLink" : ""}" href="/funds">{$_("app.funds")}</a>
+                <a
+                  class="mobileLinks {pathname === '/funds'
+                    ? 'activeMobileLink'
+                    : ''}"
+                  href="/funds">{$_("app.funds")}</a
+                >
                 <p />
-                <a class="mobileLinks {pathname === "/team" ? "activeMobileLink" : ""}" href="/team">{$_("app.team")}</a>
+                <a
+                  class="mobileLinks {pathname === '/team'
+                    ? 'activeMobileLink'
+                    : ''}"
+                  href="/team">{$_("app.team")}</a
+                >
               </BurgerMenu>
             {:else}
+              <div
+                class="navLinks"
+                style="display:flex;flex-direction:row;align-items:center;justify-content:center;margin-bottom:-5px;margin-top:-5px;"
+              >
+                {#if authenticated}
+                  <div
+                    style="margin-right:5px;color:{pathname === '/'
+                      ? '#ffffff'
+                      : '#000000'}"
+                  >
+                    Welcome, {userData.given_name}!
+                  </div>
+                  <div style="background-color:#000000;margin-right:10px;">
+                    <NavLink to="/account">Account</NavLink>
+                  </div>
+                  <div style="background-color:#555555">
+                    <a
+                      class="authLink"
+                      href="javascript:void(0)"
+                      on:click={() => {
+                        authenticated = false;
+                      }}>Logout</a
+                    >
+                  </div>
+                {:else}
+                  <div style="background-color:#000000;margin-right:10px;">
+                    <NavLink to="/login">{$_("app.login")}</NavLink>
+                  </div>
+                  <div style="background-color:#555555">
+                    <NavLink to="/signup">{$_("app.signup")}</NavLink>
+                  </div>
+                {/if}
+              </div>
               <div class="navLinks">
                 <NavLink to="/">{$_("app.home")}</NavLink>
                 <NavLink to="/about">{$_("app.about")}</NavLink>
@@ -132,6 +206,8 @@
     <Route path="/equityFund1" component={EquityFund1} />
     <Route path="/hybridFund" component={HybridFund} />
     <Route path="/team" component={Team} />
+    <Route path="/login" component={Login} />
+    <Route path="/signup" component={Signup} />
     <div class="navContainer blocksContainer">
       <div class="navContainerInner blocks" style="width:100%">
         <div class="blocksInner">
@@ -174,8 +250,11 @@
             </div>
             <div class="blocksMenu">
               <a href="/equityFund1#sectionOverview">{$_("app.overview")}</a>
-              <a href="/equityFund1#sectionHowItWorks">{$_("app.howItWorks")}</a>
-              <a href="/equityFund1#sectionPerformance">{$_("app.performance")}</a>
+              <a href="/equityFund1#sectionHowItWorks">{$_("app.howItWorks")}</a
+              >
+              <a href="/equityFund1#sectionPerformance"
+                >{$_("app.performance")}</a
+              >
               <a href="/equityFund1#sectionFundFacts">{$_("app.fundFacts")}</a>
               <a href="/equityFund1#sectionTopHoldings">{$_("app.holdings")}</a>
               <a href="/equityFund1#sectionDiversification"

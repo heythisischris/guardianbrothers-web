@@ -471,6 +471,11 @@ table td {
   text-align: center;
 }
 
+.authLink {
+  padding: 5px 10px !important;
+  color: #ffffff !important;
+}
+
 @media only screen and (max-width: 850px) {
 
   .mainTitle {
