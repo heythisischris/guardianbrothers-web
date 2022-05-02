@@ -196,8 +196,8 @@
             </div>
             <div class="contactContainer">
               <img alt="location" src="images/footer_location.svg" />
-              <a target="_blank" href="https://goo.gl/maps/wq7EaAxM3nkQ9EC1A"
-                >601 Brickell Key Drive, Miami, FL{isMobile ? `` : `33131`}</a
+              <a target="_blank" href="https://goo.gl/maps/bTjBTtdwFqquXE4AA"
+                >1620 NW 143rd terrace, Pembroke Pines, FL 33028</a
               >
             </div>
           </div>
