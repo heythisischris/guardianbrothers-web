@@ -9,7 +9,7 @@
     const authClass = ["/login", "/signup", "/account"].includes(href) ? `authLink` : ``;
 
     // The object returned here is spread on the anchor element's attributes
-    if (location.pathname === "/") {
+    if (["/","/hybridFund"].includes(location.pathname)) {
       if (isActive) {
         return { class: `homeActive ${authClass}` };
       } else {

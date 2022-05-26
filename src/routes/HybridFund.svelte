@@ -1,27 +1,13 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { _ } from "svelte-i18n";
   import { navigate } from "svelte-routing";
-  var isMobile = window.matchMedia(
-    "only screen and (max-width: 760px)"
-  ).matches;
-
-  function goToSection(section) {
-    document.getElementById(section).scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
-  }
-  async function loadAPI(url) {
-    let data = await fetch(url);
-    let response = await data.json();
-    return response;
-  }
-  var stats = loadAPI("https://lambda.guardianbrothers.com/stats/hybridFund");
-  stats.then((innerStats) => {
-    stats = innerStats;
+  import { _ } from "svelte-i18n";
+  onMount(() => {
+    window.scrollTo(0, 0);
+    document.querySelectorAll("#body")[0].style.backgroundImage =
+      "url('images/hybrid_cover.jpg')";
+    document.querySelectorAll("#body")[0].style.backgroundPosition = "50% 0px";
   });
 
   let formatter = new Intl.NumberFormat("en-US", {
@@ -29,736 +15,656 @@
     currency: "USD",
   });
 
-  let positionsSelected = true;
-  var displayedPositions = [];
-  var positions = loadAPI(
-    "https://lambda.guardianbrothers.com/positions/hybridFund"
-  );
-  positions.then((innerPositions) => {
-    positions = innerPositions;
-    displayedPositions = positions.positions.slice(0, 10);
-  });
-
-  var displayedTrades = [];
-  var trades = loadAPI("https://lambda.guardianbrothers.com/trades/hybridFund");
-  trades.then((innerTrades) => {
-    trades = innerTrades;
-    displayedTrades = trades.slice(0, 10);
-  });
-
-  let teamIndex = 0;
-
-  async function exportCsv(csvType) {
-    let array = [];
-    if (csvType === "performance") {
-      array = stats.map((obj, index) => [
-        obj.id.substring(0, 10),
-        "$" + (obj.value / obj.shares).toFixed(2),
-        obj.shares,
-        "$" + obj.value,
-        index < stats.length - 1
-          ? `${(
-              (obj.value /
-                obj.shares /
-                (stats[index + 1].value / stats[index + 1].shares) -
-                1) *
-              100
-            ).toFixed(2)}%`
-          : "0.00%",
-      ]);
-      array.unshift([
-        "Date",
-        "NAV",
-        "Shares Outstanding",
-        "Fund Assets",
-        "Daily % Return",
-      ]);
-    } else if (csvType === "positions") {
-      array = positions.positions.map((obj, index) => [
-        obj.instrument.symbol,
-        obj.name,
-        obj.longQuantity,
-        obj.marketValue,
-        `${((obj.marketValue / positions.liquidationValue) * 100).toFixed(2)}%`,
-        `${(
-          ((obj.marketValue / obj.longQuantity - obj.averagePrice) /
-            obj.averagePrice) *
-          100
-        ).toFixed(2)}%`,
-        obj.sector,
-        obj.industry,
-        obj.marketCap,
-        obj.peRatio,
-        obj.dividendYield,
-        obj.priceBookRatio,
-        obj.beta,
-      ]);
-      array.unshift([
-        "Ticker",
-        "Name",
-        "Number of Shares",
-        "Market Value",
-        "Weight",
-        "Total Gain",
-        "Sector",
-        "Industry",
-        "Market Cap",
-        "P/E Ratio",
-        "Dividend Yield",
-        "Price/Book Ratio",
-        "Beta",
-      ]);
-    } else if (csvType === "trades") {
-      array = trades.map((obj, index) => [
-        obj.ticker,
-        obj.company,
-        obj.date,
-        obj.order,
-        obj.shares,
-      ]);
-      array.unshift(["Ticker", "Company", "Date", "Order", "Shares"]);
-    }
-
-    let csvContent =
-      "data:text/csv;charset=utf-8," + array.map((e) => e.join(",")).join("\n");
-    let encodedUri = encodeURI(csvContent);
-    let link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `guardian_brothers_${csvType}_export.csv`);
-    document.body.appendChild(link);
-    link.click();
+  let mailingListEmail = "";
+  let addedToMailingList = false;
+  async function addToMailingList() {
+    await fetch(`https://lambda.guardianbrothers.com/mailinglist`, {
+      method: "post",
+      body: JSON.stringify({
+        email: mailingListEmail,
+      }),
+    });
+    addedToMailingList = true;
   }
-  let asOfDate = "";
-  onMount(() => {
-    window.scrollTo(0, 0);
-    document.querySelectorAll("#body")[0].style.backgroundImage =
-      "url('images/transparent.png')";
-    document.querySelectorAll("#body")[0].style.backgroundPosition =
-      "50% 100px";
-    setTimeout(() => {
-      asOfDate = `as of ${new Date(stats[0].id).toLocaleDateString()}`;
-      google.charts.load("current", { packages: ["corechart"] });
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        let performanceArray = stats.map((obj, index) => [
-          new Date(new Date(obj.id).getTime() + 3600 * 1000 * 24),
-          +(parseFloat(obj.value) / parseFloat(obj.shares)).toFixed(2),
-          //parseFloat(obj.value)
-        ]);
-        //console.log(array);
-        var performanceChart = new google.visualization.AreaChart(
-          document.getElementById("performanceChart")
-        );
-        let performanceData = new google.visualization.DataTable();
-        performanceData.addColumn("date", "Month");
-        performanceData.addColumn("number", "Price");
-        performanceData.addRows(performanceArray);
-        performanceChart.draw(performanceData, {
-          legend: { position: "none" },
-          backgroundColor: { fill: "transparent" },
-          chartArea: {
-            left: isMobile ? 50 : 75,
-            top: 5,
-            width: "100%",
-            height: "90%",
-          },
-          vAxis: {
-            format: "currency",
-            viewWindow: {
-              min: 4,
-              max: 14,
-            },
-          },
-          hAxis: {
-            gridlines: { units: { months: { format: ["MMM YYYY"] } } },
-            minorGridlines: { units: { days: { format: [] } } },
-          },
-        });
-
-        let diversificationArray = [];
-        for (let obj of positions.positions) {
-          let findIndex = diversificationArray.findIndex(
-            (innerObj) => innerObj[0] === obj.sector
-          );
-          if (findIndex === -1) {
-            diversificationArray.push([obj.sector, obj.marketValue]);
-          } else {
-            diversificationArray[findIndex][1] += obj.marketValue;
-          }
-        }
-
-        diversificationArray.push(["Cash", positions.cashBalance]);
-
-        var diversificationChart = new google.visualization.PieChart(
-          document.getElementById("diversificationChart")
-        );
-        google.visualization.events.addListener(
-          diversificationChart,
-          "ready",
-          function () {
-            document.getElementById("diversificationChart").style.display =
-              null;
-          }
-        );
-        let diversificationData = new google.visualization.DataTable();
-        diversificationData.addColumn("string", "sector");
-        diversificationData.addColumn("number", "marketValue");
-        diversificationData.addRows(diversificationArray);
-        diversificationChart.draw(diversificationData, {
-          legend: { position: "right" },
-          colors: ["#2a314a", "#415777", "#617da1", "#8aaacd", "#b5d8f5"],
-          backgroundColor: { fill: "transparent" },
-          chartArea: {
-            top: 10,
-            width: "100%",
-            height: isMobile ? "80%" : "100%",
-          },
-          // chartArea: {left: '10%', width: '100%', height: '65%'},
-          forceIFrame: true,
-          pieHole: isMobile ? 0.4 : 0,
-        });
-
-        let marketCapArray = [
-          ["Micro Cap", 0],
-          ["Small Cap", 0],
-          ["Mid Cap", 0],
-          ["Large Cap", 0],
-          ["Mega Cap", 0],
-        ];
-        for (let obj of positions.positions) {
-          if (obj.marketCap >= 0 && obj.marketCap < 300000000) {
-            marketCapArray[0][1] += obj.marketValue;
-          }
-          if (obj.marketCap >= 300000000 && obj.marketCap < 2000000000) {
-            marketCapArray[1][1] += obj.marketValue;
-          }
-          if (obj.marketCap >= 2000000000 && obj.marketCap < 10000000000) {
-            marketCapArray[2][1] += obj.marketValue;
-          }
-          if (obj.marketCap >= 10000000000 && obj.marketCap < 200000000000) {
-            marketCapArray[3][1] += obj.marketValue;
-          }
-          if (obj.marketCap >= 200000000000) {
-            marketCapArray[4][1] += obj.marketValue;
-          }
-        }
-
-        var marketCapChart = new window.google.visualization.PieChart(
-          document.getElementById("marketCapChart")
-        );
-        let marketCapData = new google.visualization.DataTable();
-        marketCapData.addColumn("string", "sector");
-        marketCapData.addColumn("number", "marketValue");
-        marketCapData.addRows(marketCapArray);
-
-        marketCapChart.draw(marketCapData, {
-          legend: { position: "right", textStyle: { fontSize: 14 } },
-          colors: ["#8aaacd", "#b5d8f5", "#2a314a", "#415777", "#617da1"],
-          backgroundColor: { fill: "transparent" },
-          chartArea: {
-            width: "100%",
-            height: "100%",
-          },
-          forceIFrame: true,
-          pieHole: isMobile ? 0.4 : 0,
-        });
-      }
-    }, 1500); //find way to detect google charts loaded instead of timeout
-  });
 </script>
 
-<div
-  class="pageContainerTop"
-  style="background:linear-gradient(#354558ee, #354558ee), url('images/gbfund1.svg');background-size:cover;"
->
+<div class="pageContainerTop" style="margin-top: -110px;">
   <div
     class="pageContainerInner"
-    style="color:#ffffff;font-size:22px;height:400px;"
+    style="color:#ffffff;font-size:22px;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
-    <a
-      style="color:#ffffff;text-decoration-line:none;font-size:14px;margin:10px;"
-      href={"javascript:void(0)"}
-      on:click={() => navigate("/funds")}
+    <div
+      class="mainTitle"
+      style="margin-top:-20px;color:#D1A765;font-family:'alegreya-regular';"
+      in:fade={{ delay: 250, duration: 500 }}
     >
-      ← {$_("funds.main.goBack")}
-    </a>
-    {#await stats}
-      <div />
-    {:then stats}
-      <div id="statsTitle">{$_("hybridFund.main.title")}</div>
-      <div id="stats" in:fade>
-        <div class="statsContainer">
-          <div class="infoBorder">
-            <div>{$_("hybridFund.main.fundAssets")}</div>
-            <div>{formatter.format(stats[0].value)}</div>
-          </div>
-          <div class="infoBorder">
-            <div>{$_("hybridFund.main.sharesOutstanding")}</div>
-            <div>{formatter.format(stats[0].shares).slice(1)}</div>
-          </div>
-        </div>
-        <div class="statsContainer">
-          <div class="infoBorder">
-            <div>{$_("hybridFund.main.nav")}</div>
-            <div>{formatter.format(stats[0].value / stats[0].shares)}</div>
-          </div>
-          <div class="infoBorder">
-            <div>{$_("hybridFund.main.navChange")}</div>
-            <div>
-              {formatter.format(
-                stats[0].value / stats[0].shares -
-                  stats[1].value / stats[1].shares
-              )}
-              ({(
-                ((stats[0].value / stats[0].shares -
-                  stats[1].value / stats[1].shares) /
-                  (stats[1].value / stats[1].shares)) *
-                100
-              ).toFixed(2) + "%"})
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="investDiv">
-        <a
-          class="investButton"
-          target="_blank"
-          href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad-gbh"
-          in:fade={{ delay: 250 }}
-        >
-          {$_("hybridFund.main.investNow")}
-        </a>
-      </div>
-    {/await}
-  </div>
-</div>
-<div class="pageContainerMiddle">
-  <div
-    class="pageContainerInner"
-    style="color:#333333;font-size:22px;min-height:auto;"
-  >
-    <div style="display:flex;flex-direction:row;justify-content:space-between;">
-      <a
-        href={"javascript:void(0)"}
-        on:click={() => goToSection("sectionOverview")}
-      >
-        {$_("hybridFund.overview.title")}
-      </a>
-      <a
-        href={"javascript:void(0)"}
-        on:click={() => goToSection("sectionHowItWorks")}
-      >
-        {$_("hybridFund.howItWorks.title")}
-      </a>
-      <a
-        href={"javascript:void(0)"}
-        on:click={() => goToSection("sectionPerformance")}
-      >
-        {$_("hybridFund.performance.title")}
-      </a>
-      <a
-        href={"javascript:void(0)"}
-        on:click={() => goToSection("sectionFundFacts")}
-      >
-        {$_("hybridFund.fundFacts.title")}
-      </a>
-      <a
-        href={"javascript:void(0)"}
-        on:click={() => goToSection("sectionTopHoldings")}
-      >
-        {$_("hybridFund.holdings.title")}
-      </a>
-      <a
-        href={"javascript:void(0)"}
-        on:click={() => goToSection("sectionDiversification")}
-      >
-        {$_("hybridFund.diversification.title")}
-      </a>
+      {$_("hybridFund.main.title")}
+    </div>
+    <div
+      in:fade={{ delay: 250, duration: 500 }}
+      style="width:50%;height:2px;background-color:#D1A765"
+    />
+    <div in:fade={{ delay: 250, duration: 500 }} class="mainSubtitle">
+      <div class="subtitle">{$_("hybridFund.main.subtitle")}</div>
     </div>
   </div>
 </div>
 <div class="pageContainer">
+  <div class="pageContainerInner" style="margin-top:60px;">
+    <div class="header">
+      <div class="headerLine" />
+      <div class="headerText">{$_("hybridFund.section1.title")}</div>
+      <div class="headerLine" />
+    </div>
+    <div class="containerOne">
+      <div class="containerOneText">
+        <div class="awardTitle">
+          {$_("hybridFund.section1.title1")}
+        </div>
+        <p>
+          {$_("hybridFund.section1.paragraph1")}
+        </p>
+        <div class="awardTitle">
+          {$_("hybridFund.section1.title2")}
+        </div>
+        <p>
+          {$_("hybridFund.section1.paragraph2")}
+        </p>
+        <p>
+          {$_("hybridFund.section1.paragraph3")}
+        </p>
+        <div class="awardTitle">
+          {$_("hybridFund.section1.title3")}
+        </div>
+        <p>
+          {$_("hybridFund.section1.paragraph4")}
+        </p>
+        <p>
+          {$_("hybridFund.section1.paragraph5")}
+        </p>
+      </div>
+      <div class="rowItem">
+        <img src="images/hybrid_image1.jpg" />
+      </div>
+    </div>
+    <div
+      style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;"
+    >
+      <div class="header">
+        <div class="headerLine" />
+        <div class="headerText">{$_("hybridFund.section2.title")}</div>
+        <div class="headerLine" />
+      </div>
+      <div class="subHeaderText">{$_("hybridFund.section2.subtitle")}</div>
+    </div>
+    <div class="blocks" style="margin-bottom:50px;">
+      <div class="blocksDiv">
+        <img class="blocksImage" alt="blocks" src="images/block1.jpg" />
+        <p class="blocksTitle">{$_("hybridFund.section2.box1.title")}</p>
+        <p class="blocksDescription">
+          {$_("hybridFund.section2.box1.description")}
+        </p>
+        <div
+          on:click={() => {
+            navigate("/funds");
+          }}
+          class="blocksButton"
+        >
+          {$_("hybridFund.section2.box1.button")}
+        </div>
+      </div>
+
+      <div class="blocksDiv">
+        <img class="blocksImage" alt="blocks" src="images/block2.jpg" />
+        <p class="blocksTitle">{$_("hybridFund.section2.box2.title")}</p>
+        <p class="blocksDescription">
+          {$_("hybridFund.section2.box2.description")}
+        </p>
+        <div
+          on:click={() => {
+            navigate("/funds");
+          }}
+          class="blocksButton"
+        >
+          {$_("hybridFund.section2.box2.button")}
+        </div>
+      </div>
+      <div class="blocksDiv">
+        <img class="blocksImage" alt="blocks" src="images/block3.jpg" />
+        <p class="blocksTitle">{$_("hybridFund.section2.box3.title")}</p>
+        <p class="blocksDescription">
+          {$_("hybridFund.section2.box3.description")}
+        </p>
+        <div
+          on:click={() => {
+            navigate("/funds");
+          }}
+          class="blocksButton"
+        >
+          {$_("hybridFund.section2.box3.button")}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pageContainer sectionFunds">
+  <div
+    class="pageContainerInner"
+    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
+  >
+    <div
+      class="pageContainerInner sectionFundsInner"
+      style="color:#ffffff;font-size:22px;"
+    >
+      <div />
+    </div>
+  </div>
+</div>
+
+<div class="pageContainer sectionFunds">
+  <div
+    class="pageContainerInner"
+    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
+  >
+    <div
+      class="pageContainerInner sectionFundsInner"
+      style="color:#ffffff;font-size:22px;"
+    >
+      <div />
+    </div>
+  </div>
+</div>
+
+<div class="pageContainer">
   <div class="pageContainerInner">
-    <h1 id="sectionOverview">{$_("hybridFund.overview.title")}</h1>
-    <div class="textBlock">
-      <h2>{$_("hybridFund.overview.section1.title")}</h2>
-      <p>
-        {$_("hybridFund.overview.section1.paragraph1")}
-      </p>
-      <br />
-      <h2>{$_("hybridFund.overview.section2.title")}</h2>
-      <p>
-        {$_("hybridFund.overview.section2.paragraph1")}
-      </p>
-      <p>
-        {$_("hybridFund.overview.section2.paragraph2")}
-      </p>
-      <br />
-      <h2>{$_("hybridFund.overview.section3.title")}</h2>
-      <p>
-        {$_("hybridFund.overview.section3.paragraph1")}
-      </p>
-      <p>
-        {$_("hybridFund.overview.section3.paragraph2")}
-      </p>
-      <br />
-    </div>
-    <h1 id="sectionHowItWorks" style={isMobile ? "margin-bottom:30px;" : ""}>
-      {$_("hybridFund.howItWorks.title")}
-    </h1>
-    <div class="textBlock">
-      <div class="howItWorksBlocks">
-        <div in:fade={{ delay: 500, duration: 500 }}>
-          <p class="howItWorksBlocksNumber">1</p>
-          <p class="howItWorksBlocksTitle">
-            {$_("hybridFund.howItWorks.block1.title")}
-          </p>
-          <p>
-            {$_("hybridFund.howItWorks.block1.description")}
-          </p>
+    <div class="row">
+      <div class="rowItem">
+        <div class="header" style="margin-top:50px;">
+          <div class="headerLine" />
+          <div class="headerText">{$_("hybridFund.section4.title")}</div>
+          <div class="headerLine" />
         </div>
-        <div in:fade={{ delay: 1000, duration: 500 }}>
-          <p class="howItWorksBlocksNumber">2</p>
-          <p class="howItWorksBlocksTitle">
-            {$_("hybridFund.howItWorks.block2.title")}
-          </p>
-          <p>
-            {$_("hybridFund.howItWorks.block2.description")}
-          </p>
-        </div>
-        <div in:fade={{ delay: 1500, duration: 500 }}>
-          <p class="howItWorksBlocksNumber">3</p>
-          <p class="howItWorksBlocksTitle">
-            {$_("hybridFund.howItWorks.block3.title")}
-          </p>
-          <p>
-            {$_("hybridFund.howItWorks.block3.description")}
-          </p>
-        </div>
-        <div in:fade={{ delay: 2000, duration: 500 }}>
-          <p class="howItWorksBlocksNumber">4</p>
-          <p class="howItWorksBlocksTitle">
-            {$_("hybridFund.howItWorks.block4.title")}
-          </p>
-          <p>
-            {$_("hybridFund.howItWorks.block4.description")}
-          </p>
-        </div>
-      </div>
-    </div>
-    <h1
-      id="sectionPerformance"
-      style="display:flex;align-items:flex-end;justify-content:space-between"
-    >
-      <div>
-        {$_("hybridFund.performance.title")}
-        <span class="asOfDate">{asOfDate}</span>
-      </div>
-      <a
-        style="float:right;font-size:14px;"
-        href={"javascript:void(0)"}
-        on:click={() => {
-          exportCsv("performance");
-        }}
-      >
-        Download CSV
-      </a>
-    </h1>
-
-    <div class="textBlock">
-      <p style="display:flex;flex-direction:row;justify-content:flex-end;" />
-      <div
-        id="performanceChart"
-        style="width: 100%; height: {isMobile ? '300px' : '500px'}"
-        in:fade={{ delay: 2000 }}
-      />
-    </div>
-
-    <h1
-      id="sectionTopHoldings"
-      style="display:flex;align-items:flex-end;justify-content:space-between"
-    >
-      <div style="display:flex;">
-        <div
-          on:click={() => {
-            positionsSelected = true;
-          }}
-          style="cursor:pointer;background-color:{positionsSelected
-            ? '#aaaaaa'
-            : '#33333311'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
-        >
-          Holdings
-        </div>
-        <div
-          on:click={() => {
-            positionsSelected = false;
-          }}
-          style="cursor:pointer;background-color:{positionsSelected
-            ? '#33333311'
-            : '#aaaaaa'};padding:0px 10px;border-top-right-radius:10px;border-top-left-radius:10px;margin-bottom:-5px;margin-right:5px;"
-        >
-          Trades
-        </div>
-        <span
-          style="display:{isMobile ? 'none' : 'relative'};align-self:flex-end"
-          class="asOfDate">{asOfDate}</span
-        >
-      </div>
-      <a
-        style="float:right;font-size:14px;"
-        href={"javascript:void(0)"}
-        on:click={() => {
-          exportCsv(positionsSelected ? "positions" : "trades");
-        }}
-      >
-        Download CSV
-      </a>
-    </h1>
-    <div class="textBlock">
-      {#if positionsSelected}
-        {#await positions}
-          <div />
-        {:then positions}
-          <table style="width:100%;{isMobile ? 'font-size:11px;' : ''}" in:fade>
-            <thead>
-              <tr style="text-align: {isMobile ? 'center' : 'left'};">
-                <th>Ticker</th>
-                <th style="display: {isMobile ? 'none' : 'unset'}">Name</th>
-                <th># of Shares</th>
-                <th>Market Value</th>
-                <th>Weight</th>
-                <th>Total Gain</th>
-              </tr>
-            </thead>
-            <tbody>
-              {#each displayedPositions as item}
-                <tr>
-                  <td>{item.instrument.symbol}</td>
-                  <td style="display: {isMobile ? 'none' : 'unset'}"
-                    >{item.name}</td
-                  >
-                  <td>{item.longQuantity}</td>
-                  <td>{formatter.format(item.marketValue)}</td>
-                  <td>
-                    {(
-                      (item.marketValue / positions.liquidationValue) *
-                      100
-                    ).toFixed(2)}%
-                  </td>
-                  <td>
-                    {(
-                      ((item.marketValue / item.longQuantity -
-                        item.averagePrice) /
-                        item.averagePrice) *
-                      100
-                    ).toFixed(2)}%
-                  </td>
-                </tr>
-              {/each}
-              <tr />
-              {#if displayedPositions.length !== 10}
-                <tr style="height:60px;">
-                  <td>Cash</td>
-                  <td>{formatter.format(positions.cashBalance)}</td>
-                  <td>
-                    {(
-                      (positions.cashBalance / positions.liquidationValue) *
-                      100
-                    ).toFixed(2) + "%"}
-                  </td>
-                </tr>
-              {/if}
-            </tbody>
-          </table>
-          <div style="display:flex;width:100%;justify-content:center;">
-            <a
-              href={"javascript:void(0)"}
-              on:click={() => {
-                if (displayedPositions.length === 10) {
-                  displayedPositions = positions.positions;
-                } else {
-                  displayedPositions = positions.positions.slice(0, 10);
-                }
-              }}
+        <div class="subHeaderText">{$_("hybridFund.section4.subtitle")}</div>
+        <div class="row" style="text-align:center;">
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#d1a765;"
             >
-              {displayedPositions.length === 10 ? "Extend" : "Collapse"}
-            </a>
+              <img alt="medal" src="images/group.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("hybridFund.section4.badge1.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("hybridFund.section4.badge1.description")}
+              </div>
+            </div>
           </div>
-        {/await}
-      {:else}
-        <table style="width:100%;" in:fade>
-          <thead>
-            <tr style="text-align: {isMobile ? 'center' : 'left'};">
-              <th>Ticker</th>
-              <th style="display: {isMobile ? 'none' : 'unset'}">Company</th>
-              <th>Date</th>
-              <th>Order</th>
-              <th>Shares</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each displayedTrades as item}
-              <tr>
-                <td>{item.ticker}</td>
-                <td style="display: {isMobile ? 'none' : 'unset'}"
-                  >{item.company}</td
-                >
-                <td>{new Date(item.date).toLocaleDateString()}</td>
-                <td>{item.order}</td>
-                <td>{item.shares}</td>
-              </tr>
-            {/each}
-            <tr />
-          </tbody>
-        </table>
-        <div style="display:flex;width:100%;justify-content:center;">
-          <a
-            href={"javascript:void(0)"}
-            on:click={() => {
-              if (displayedTrades.length === 10) {
-                displayedTrades = trades;
-              } else {
-                displayedTrades = trades.slice(0, 10);
-              }
-            }}
-          >
-            {displayedTrades.length === 10 ? "Extend" : "Collapse"}
-          </a>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#d1a765;"
+            >
+              <img alt="certificate" src="images/check.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("hybridFund.section4.badge2.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("hybridFund.section4.badge2.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#d1a765;"
+            >
+              <img alt="certificate" src="images/lightbulb.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("hybridFund.section4.badge3.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("hybridFund.section4.badge3.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#d1a765;"
+            >
+              <img alt="medal" src="images/heart.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("hybridFund.section4.badge4.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("hybridFund.section4.badge4.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#d1a765;"
+            >
+              <img alt="certificate" src="images/star.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("hybridFund.section4.badge5.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("hybridFund.section4.badge5.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#d1a765;"
+            >
+              <img alt="certificate" src="images/handshake.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("hybridFund.section4.badge6.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("hybridFund.section4.badge6.description")}
+              </div>
+            </div>
+          </div>
+          <div class="award awardModify">
+            <div
+              class="awardIcon awardIconModify"
+              style="background-color:#d1a765;"
+            >
+              <img alt="certificate" src="images/technical_chart.svg" />
+            </div>
+            <div class="awardTextContainer awardTextContainerModify">
+              <div class="awardTitle">
+                {$_("hybridFund.section4.badge7.title")}
+              </div>
+              <div class="awardSubtitle">
+                {$_("hybridFund.section4.badge7.description")}
+              </div>
+            </div>
+          </div>
         </div>
-      {/if}
-    </div>
-    <h1 id="sectionDiversification">
-      <div>
-        {$_("hybridFund.diversification.title")}
-        <span class="asOfDate">{asOfDate}</span>
-      </div>
-    </h1>
-    <div class="textBlock diversificationCharts">
-      <div style="width: 50%; height: 350px;">
-        <h2>{$_("hybridFund.diversification.sectors")}</h2>
-        <div id="diversificationChart" style="height:300px" />
-      </div>
-      <div style="width: 50%; height: 350px;">
-        <h2>{$_("hybridFund.diversification.marketCap")}</h2>
-        <div id="marketCapChart" style="height:300px" />
       </div>
     </div>
-    <h1 id="sectionFundFacts">{$_("hybridFund.fundFacts.title")}</h1>
-    <div class="textBlock">
-      {#await stats}
-        <div />
-      {:then stats}
-        <div class="fundFactsBlocks" in:fade>
-          <table style="width:48%;">
-            <thead>
-              <tr>
-                <th style="width:30%;" />
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.fundObjective.title")}</td>
-                <td>{$_("hybridFund.fundFacts.fundObjective.description")}</td>
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.fundStrategy.title")}</td>
-                <td>{$_("hybridFund.fundFacts.fundStrategy.description")}</td>
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.fundAsset.title")}</td>
-                <td>{formatter.format(stats[0].value)}</td>
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.nav.title")}</td>
-                <td>{formatter.format(stats[0].value / stats[0].shares)}</td>
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.ticker.title")}</td>
-                <td>{$_("hybridFund.fundFacts.ticker.description")}</td>
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.numberOfHoldings.title")}</td>
-                {#await positions}
-                  <td />
-                {:then positions}
-                  <td in:fade>{positions.positions.length}</td>
-                {/await}
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.distributionFrequency.title")}</td
-                >
-                <td
-                  >{$_(
-                    "hybridFund.fundFacts.distributionFrequency.description"
-                  )}</td
-                >
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.grossExpenseRatio.title")}</td>
-                <td
-                  >{$_(
-                    "hybridFund.fundFacts.grossExpenseRatio.description"
-                  )}</td
-                >
-              </tr>
-            </tbody>
-          </table>
-          <table style="width:48%;">
-            <thead>
-              <tr>
-                <th style="width:35%;" />
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.primaryBenchmark.title")}</td>
-                <td
-                  >{$_("hybridFund.fundFacts.primaryBenchmark.description")}</td
-                >
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.minimumInvestment.title")}</td>
-                <td
-                  >{$_(
-                    "hybridFund.fundFacts.minimumInvestment.description"
-                  )}</td
-                >
-              </tr>
-              <tr>
-                <td
-                  >{$_(
-                    "hybridFund.fundFacts.minimumSubsequentInvestment.title"
-                  )}</td
-                >
-                <td
-                  >{$_(
-                    "hybridFund.fundFacts.minimumSubsequentInvestment.description"
-                  )}</td
-                >
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.managementFees.title")}</td>
-                <td>{$_("hybridFund.fundFacts.managementFees.description")}</td>
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.transactionFees.title")}</td>
-                <td>{$_("hybridFund.fundFacts.transactionFees.description")}</td
-                >
-              </tr>
-              <tr>
-                <td>{$_("hybridFund.fundFacts.performanceFees.title")}</td>
-                <td>{$_("hybridFund.fundFacts.performanceFees.description")}</td
-                >
-              </tr>
-            </tbody>
-          </table>
+  </div>
+</div>
+
+<div class="pageContainer" style="min-height:400px;">
+  <div class="pageContainerInner" style="padding-bottom:0px;">
+    <div class="row">
+      <div class="rowItem" style="justify-content:center;">
+        <div class="header" style="margin-top:100px;">
+          <div class="headerLine" />
+          <div class="headerText">{$_("contact.section3.title")}</div>
+          <div class="headerLine" />
         </div>
-      {/await}
+        <div class="subHeaderText">{$_("contact.section3.subtitle")}</div>
+        <div class="containerOne">
+          <div class="containerOneText">
+            {$_("contact.section3.description")}
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          {#if addedToMailingList}
+            <p style="margin:40px;">
+              {$_("contact.section3.form.success")}
+            </p>
+          {:else}
+            <div class="row subscribeContainer">
+              <input
+                bind:value={mailingListEmail}
+                placeholder={$_("contact.section3.form.email")}
+              />
+              <button
+                on:click={() => {
+                  addToMailingList();
+                }}>{$_("contact.section3.form.submit")}</button
+              >
+            </div>
+          {/if}
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <style>
+  .containerOne {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #888888;
+  }
+  .containerOneText {
+    max-width: 800px;
+    font-size: 20px;
+  }
+
+  .sectionFundsTitle {
+    font-size: 50px;
+    font-weight: 600;
+  }
+  .sectionFundsDescription {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  .sectionFundsButton {
+    cursor: pointer;
+    background-color: #cccccc;
+    color: #333333;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    transition: 0.5s;
+  }
+  .sectionFundsButton:hover {
+    background-color: #ffffff;
+  }
+  .sectionFundsInvestButton {
+    cursor: pointer;
+    background-color: #102e50;
+    color: #ffffff;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    text-decoration-line: none;
+  }
+  .sectionFundsInvestButton:hover {
+    background-color: #2c6db6;
+  }
+
+  .sectionFunds {
+    min-height: 200px;
+    background: linear-gradient(#354558ee, #354558ee), url("images/gbfund1.svg");
+    background-size: cover;
+    color: #ffffff;
+  }
+
+  .blocks {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .blocksImage {
+    width: 100%;
+  }
+  .blocksTitle {
+    font-weight: 700;
+    font-size: 24px;
+    padding: 10px 20px;
+    font-family: "Merriweather";
+    font-weight: bold;
+  }
+  .blocksDescription {
+    font-weight: 400;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin-top: -30px;
+  }
+  .blocksButton {
+    font-size: 18px;
+    background-color: #d1a765;
+    cursor: pointer;
+    color: #00355f;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin-top: 480px;
+    margin-left: 20px;
+    transition: 0.2s;
+  }
+
+  .blocksButton:hover {
+    background-color: #d1a765;
+  }
+
+  .blocksDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 30%;
+    background-color: #00355f;
+    height: 500px;
+    color: #ffffff;
+    margin: 10px;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .awardModify {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 15px;
+  }
+  .awardIconModify {
+    margin-right: 0px;
+  }
+  .awardTextContainerModify {
+    align-items: center;
+    text-align: center;
+  }
+
+  @keyframes subtitleAnimation {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    20% {
+      opacity: 1;
+    }
+    30% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    60% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 0;
+    }
+    80% {
+      opacity: 0;
+    }
+    90% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .subtitle1,
+  .subtitle2,
+  .subtitle3,
+  .subtitle4 {
+    opacity: 0;
+    animation: subtitleAnimation 20s infinite;
+    transition: all;
+    position: absolute;
+  }
+  .subtitle1 {
+    animation-delay: 0s;
+  }
+  .subtitle2 {
+    animation-delay: 5s;
+  }
+  .subtitle3 {
+    animation-delay: 10s;
+  }
+  .subtitle4 {
+    animation-delay: 15s;
+  }
+
+  .sectionFundsTopContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  .sectionFundsButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  #stats {
+    margin-top: 100px;
+  }
+  .sectionFundsInner {
+    height: 410px;
+  }
+
+  input {
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+    font-family: arial;
+  }
+  button {
+    all: unset;
+    background-color: #6f8db1;
+    color: #ffffff;
+    padding: 10px 20px;
+    min-width: 150px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  button:hover {
+    background-color: #9bc8ff;
+  }
+  .subscribeContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 40px;
+    width: 600px;
+  }
+  .rowItem {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 850px) {
+    .rowItem {
+      width: 100%;
+    }
+    .blocks {
+      flex-direction: column;
+    }
+
+    .blocksDiv {
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+      margin-bottom: 50px;
+    }
+
+    .awardTextContainerModify {
+      max-width: 100% !important;
+    }
+
+    .containerOne {
+      flex-direction: column;
+    }
+    .awardTextContainer {
+      max-width: 150px;
+    }
+    .blocksDescription {
+      font-size: 20px;
+    }
+
+    .sectionFunds {
+      background-size: 250%;
+      background-position: -250px 0px;
+      min-height: 300px;
+    }
+    .sectionFundsTitle {
+      font-size: 30px;
+    }
+    .sectionFundsDescription {
+      margin-top: 20px;
+      font-size: 18px;
+      max-width: 100%;
+    }
+    .sectionFundsTopContainer {
+      flex-direction: column;
+      margin-top: 0px;
+    }
+    #stats {
+      margin-top: 20px;
+    }
+    .sectionFundsInner {
+      height: 100%;
+    }
+
+    .awardModify2 {
+      display: inline-flex;
+      flex-direction: column;
+      padding: 15px;
+    }
+    .awardIconModify2 {
+      margin-right: 0px;
+    }
+    .awardTextContainerModify2 {
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+    }
+    .awardSubtitle {
+      font-size: 20px;
+    }
+    .sectionFundsButton {
+      font-size: 14px;
+      width: 140px;
+    }
+    .sectionFundsInvestButton {
+      font-size: 14px;
+      width: 140px;
+    }
+    .subscribeContainer {
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 200px;
+    }
+  }
 </style>

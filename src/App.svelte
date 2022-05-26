@@ -47,7 +47,11 @@
             elBackgrounPos =
               "50% " +
               (windowYOffset * speed +
-                (pathname === "/" ? 0 : isMobile ? 50 : 100)) +
+                (["/", "/hybridFund"].includes(pathname)
+                  ? 0
+                  : isMobile
+                  ? 50
+                  : 100)) +
               "px";
           el.style.backgroundPosition = elBackgrounPos;
         });
@@ -77,13 +81,17 @@
     <nav>
       <div
         class="navContainer"
-        style={pathname === "/" ? "background-color:transparent" : ""}
+        style={["/", "/hybridFund"].includes(pathname)
+          ? "background-color:transparent"
+          : ""}
       >
         <div class="navContainerInner">
           <div class="navTitle">
             <NavLink to="/">
               <img
-                style="margin-right:10px;{pathname === '/'
+                style="margin-right:10px;{['/', '/hybridFund'].includes(
+                  pathname
+                )
                   ? 'filter: brightness(10)'
                   : ''}"
                 class="logo"
@@ -98,7 +106,9 @@
                 <div id="titleLine" />
                 <div
                   id="subtitle"
-                  style={pathname === "/" ? "color:#ffffff" : ""}
+                  style={["/", "/hybridFund"].includes(pathname)
+                    ? "color:#ffffff"
+                    : ""}
                 >
                   GESTIÓN FINANCIERA
                 </div>
@@ -115,7 +125,9 @@
                 paddingTop="100px"
                 padding="30px"
                 menuColor="#ffffff"
-                burgerColor={pathname === "/" ? "#ffffff" : "#000000"}
+                burgerColor={["/", "/hybridFund"].includes(pathname)
+                  ? "#ffffff"
+                  : "#000000"}
                 backgroundColor="#284660"
               >
                 <a
