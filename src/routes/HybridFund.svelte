@@ -9,14 +9,27 @@
       "url('images/hybrid_cover.jpg')";
     document.querySelectorAll("#body")[0].style.backgroundPosition = "50% 0px";
   });
-
-  let formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
+  let firstName = "";
+  let lastName = "";
+  let telephone = "";
+  let email = "";
   let mailingListEmail = "";
+  let message = "";
+  let messageSent = false;
   let addedToMailingList = false;
+  async function sendMessage() {
+    await fetch(`https://lambda.guardianbrothers.com/contact`, {
+      method: "post",
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        telephone: telephone,
+        message: message,
+      }),
+    });
+    messageSent = true;
+  }
   async function addToMailingList() {
     await fetch(`https://lambda.guardianbrothers.com/mailinglist`, {
       method: "post",
@@ -40,13 +53,18 @@
     >
       {$_("hybridFund.main.title")}
     </div>
-    <div
-      in:fade={{ delay: 250, duration: 500 }}
-      style="width:50%;height:2px;background-color:#D1A765"
-    />
+    <div class="topLine" in:fade={{ delay: 250, duration: 500 }} />
     <div in:fade={{ delay: 250, duration: 500 }} class="mainSubtitle">
       <div class="subtitle">{$_("hybridFund.main.subtitle")}</div>
     </div>
+    <a
+      target="_blank"
+      href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad-gbh"
+      in:fade={{ delay: 250, duration: 500 }}
+      class="topButton"
+    >
+      {$_("hybridFund.main.button")}
+    </a>
   </div>
 </div>
 <div class="pageContainer">
@@ -83,9 +101,7 @@
           {$_("hybridFund.section1.paragraph5")}
         </p>
       </div>
-      <div class="rowItem">
-        <img src="images/hybrid_image1.jpg" />
-      </div>
+      <img class="hybridImage1" alt="" src="images/hybrid_image1.jpg" />
     </div>
     <div
       style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;"
@@ -95,256 +111,286 @@
         <div class="headerText">{$_("hybridFund.section2.title")}</div>
         <div class="headerLine" />
       </div>
-      <div class="subHeaderText">{$_("hybridFund.section2.subtitle")}</div>
     </div>
     <div class="blocks" style="margin-bottom:50px;">
-      <div class="blocksDiv">
-        <img class="blocksImage" alt="blocks" src="images/block1.jpg" />
-        <p class="blocksTitle">{$_("hybridFund.section2.box1.title")}</p>
-        <p class="blocksDescription">
-          {$_("hybridFund.section2.box1.description")}
-        </p>
-        <div
-          on:click={() => {
-            navigate("/funds");
-          }}
-          class="blocksButton"
-        >
-          {$_("hybridFund.section2.box1.button")}
+      <div class="block">
+        <div class="blockNumber">1</div>
+        <div class="blockTitle">{$_("hybridFund.section2.block1.title")}</div>
+        <div class="blockDescription">
+          {$_("hybridFund.section2.block1.description")}
         </div>
       </div>
-
-      <div class="blocksDiv">
-        <img class="blocksImage" alt="blocks" src="images/block2.jpg" />
-        <p class="blocksTitle">{$_("hybridFund.section2.box2.title")}</p>
-        <p class="blocksDescription">
-          {$_("hybridFund.section2.box2.description")}
-        </p>
-        <div
-          on:click={() => {
-            navigate("/funds");
-          }}
-          class="blocksButton"
-        >
-          {$_("hybridFund.section2.box2.button")}
+      <div class="block">
+        <div class="blockNumber">2</div>
+        <div class="blockTitle">{$_("hybridFund.section2.block2.title")}</div>
+        <div class="blockDescription">
+          {$_("hybridFund.section2.block2.description")}
         </div>
       </div>
-      <div class="blocksDiv">
-        <img class="blocksImage" alt="blocks" src="images/block3.jpg" />
-        <p class="blocksTitle">{$_("hybridFund.section2.box3.title")}</p>
-        <p class="blocksDescription">
-          {$_("hybridFund.section2.box3.description")}
-        </p>
-        <div
-          on:click={() => {
-            navigate("/funds");
-          }}
-          class="blocksButton"
-        >
-          {$_("hybridFund.section2.box3.button")}
+      <div class="block">
+        <div class="blockNumber">3</div>
+        <div class="blockTitle">{$_("hybridFund.section2.block3.title")}</div>
+        <div class="blockDescription">
+          {$_("hybridFund.section2.block3.description")}
+        </div>
+      </div>
+      <div class="block">
+        <div class="blockNumber">4</div>
+        <div class="blockTitle">{$_("hybridFund.section2.block4.title")}</div>
+        <div class="blockDescription">
+          {$_("hybridFund.section2.block4.description")}
         </div>
       </div>
     </div>
+    <div class="asterisk">{$_("hybridFund.section2.asterisk")}</div>
   </div>
 </div>
 
-<div class="pageContainer sectionFunds">
+<div class="pageContainer section3">
   <div
     class="pageContainerInner"
-    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
+    style="display:flex;flex-direction:column;justify-content:center;align-items:center;"
   >
-    <div
-      class="pageContainerInner sectionFundsInner"
-      style="color:#ffffff;font-size:22px;"
-    >
-      <div />
+    <div class="header" style="margin-top:40px;">
+      <div class="headerLine" />
+      <div class="headerText" style="color:#ffffff">
+        {$_("hybridFund.section3.title")}
+      </div>
+      <div class="headerLine" />
     </div>
-  </div>
-</div>
-
-<div class="pageContainer sectionFunds">
-  <div
-    class="pageContainerInner"
-    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
-  >
-    <div
-      class="pageContainerInner sectionFundsInner"
-      style="color:#ffffff;font-size:22px;"
-    >
-      <div />
+    <div class="blocks" style="margin-bottom:50px;">
+      <div class="block2">
+        <img class="block2Image" alt="" src="images/hybrid_thumb1.png" />
+        <div class="block2Title">
+          {$_("hybridFund.section3.block1.title")}
+        </div>
+        <div class="block2Description">
+          {$_("hybridFund.section3.block1.description")}
+        </div>
+      </div>
+      <div class="block2">
+        <img class="block2Image" alt="" src="images/hybrid_thumb2.png" />
+        <div class="block2Title">
+          {$_("hybridFund.section3.block2.title")}
+        </div>
+        <div class="block2Description">
+          {$_("hybridFund.section3.block2.description")}
+        </div>
+      </div>
+      <div class="block2">
+        <img class="block2Image" alt="" src="images/hybrid_thumb3.png" />
+        <div class="block2Title">
+          {$_("hybridFund.section3.block3.title")}
+        </div>
+        <div class="block2Description">
+          {$_("hybridFund.section3.block3.description")}
+        </div>
+      </div>
+      <div class="block2">
+        <img class="block2Image" alt="" src="images/hybrid_thumb4.png" />
+        <div class="block2Title">
+          {$_("hybridFund.section3.block4.title")}
+        </div>
+        <div class="block2Description">
+          {$_("hybridFund.section3.block4.description")}
+        </div>
+      </div>
+      <div class="block2">
+        <img class="block2Image" alt="" src="images/hybrid_thumb5.png" />
+        <div class="block2Title">
+          {$_("hybridFund.section3.block5.title")}
+        </div>
+        <div class="block2Description">
+          {$_("hybridFund.section3.block5.description")}
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="pageContainer">
   <div class="pageContainerInner">
-    <div class="row">
-      <div class="rowItem">
-        <div class="header" style="margin-top:50px;">
-          <div class="headerLine" />
-          <div class="headerText">{$_("hybridFund.section4.title")}</div>
-          <div class="headerLine" />
+    <div
+      style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;"
+    >
+      <div class="header">
+        <div class="headerLine" />
+        <div class="headerText">{$_("hybridFund.section4.title")}</div>
+        <div class="headerLine" />
+      </div>
+    </div>
+    <img class="section4image" alt="" src="images/hybrid_robot.png" />
+    <div class="blocks3 section4" style="margin-bottom:50px;margin-top:40px;">
+      <div class="block3">
+        <div class="block3Title">{$_("hybridFund.section4.block1.title")}</div>
+        <div class="block3Description">
+          {$_("hybridFund.section4.block1.description")}
         </div>
-        <div class="subHeaderText">{$_("hybridFund.section4.subtitle")}</div>
-        <div class="row" style="text-align:center;">
-          <div class="award awardModify">
-            <div
-              class="awardIcon awardIconModify"
-              style="background-color:#d1a765;"
-            >
-              <img alt="medal" src="images/group.svg" />
-            </div>
-            <div class="awardTextContainer awardTextContainerModify">
-              <div class="awardTitle">
-                {$_("hybridFund.section4.badge1.title")}
-              </div>
-              <div class="awardSubtitle">
-                {$_("hybridFund.section4.badge1.description")}
-              </div>
-            </div>
-          </div>
-          <div class="award awardModify">
-            <div
-              class="awardIcon awardIconModify"
-              style="background-color:#d1a765;"
-            >
-              <img alt="certificate" src="images/check.svg" />
-            </div>
-            <div class="awardTextContainer awardTextContainerModify">
-              <div class="awardTitle">
-                {$_("hybridFund.section4.badge2.title")}
-              </div>
-              <div class="awardSubtitle">
-                {$_("hybridFund.section4.badge2.description")}
-              </div>
-            </div>
-          </div>
-          <div class="award awardModify">
-            <div
-              class="awardIcon awardIconModify"
-              style="background-color:#d1a765;"
-            >
-              <img alt="certificate" src="images/lightbulb.svg" />
-            </div>
-            <div class="awardTextContainer awardTextContainerModify">
-              <div class="awardTitle">
-                {$_("hybridFund.section4.badge3.title")}
-              </div>
-              <div class="awardSubtitle">
-                {$_("hybridFund.section4.badge3.description")}
-              </div>
-            </div>
-          </div>
-          <div class="award awardModify">
-            <div
-              class="awardIcon awardIconModify"
-              style="background-color:#d1a765;"
-            >
-              <img alt="medal" src="images/heart.svg" />
-            </div>
-            <div class="awardTextContainer awardTextContainerModify">
-              <div class="awardTitle">
-                {$_("hybridFund.section4.badge4.title")}
-              </div>
-              <div class="awardSubtitle">
-                {$_("hybridFund.section4.badge4.description")}
-              </div>
-            </div>
-          </div>
-          <div class="award awardModify">
-            <div
-              class="awardIcon awardIconModify"
-              style="background-color:#d1a765;"
-            >
-              <img alt="certificate" src="images/star.svg" />
-            </div>
-            <div class="awardTextContainer awardTextContainerModify">
-              <div class="awardTitle">
-                {$_("hybridFund.section4.badge5.title")}
-              </div>
-              <div class="awardSubtitle">
-                {$_("hybridFund.section4.badge5.description")}
-              </div>
-            </div>
-          </div>
-          <div class="award awardModify">
-            <div
-              class="awardIcon awardIconModify"
-              style="background-color:#d1a765;"
-            >
-              <img alt="certificate" src="images/handshake.svg" />
-            </div>
-            <div class="awardTextContainer awardTextContainerModify">
-              <div class="awardTitle">
-                {$_("hybridFund.section4.badge6.title")}
-              </div>
-              <div class="awardSubtitle">
-                {$_("hybridFund.section4.badge6.description")}
-              </div>
-            </div>
-          </div>
-          <div class="award awardModify">
-            <div
-              class="awardIcon awardIconModify"
-              style="background-color:#d1a765;"
-            >
-              <img alt="certificate" src="images/technical_chart.svg" />
-            </div>
-            <div class="awardTextContainer awardTextContainerModify">
-              <div class="awardTitle">
-                {$_("hybridFund.section4.badge7.title")}
-              </div>
-              <div class="awardSubtitle">
-                {$_("hybridFund.section4.badge7.description")}
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class="block3">
+        <div class="block3Title">{$_("hybridFund.section4.block2.title")}</div>
+        <div class="block3Description">
+          {$_("hybridFund.section4.block2.description")}
+        </div>
+      </div>
+      <div class="block3">
+        <div class="block3Title">{$_("hybridFund.section4.block3.title")}</div>
+        <div class="block3Description">
+          {$_("hybridFund.section4.block3.description")}
         </div>
       </div>
     </div>
+
+    <div class="header">
+      <div class="headerLine" />
+      <div class="headerText">{$_("hybridFund.section5.title")}</div>
+      <div class="headerLine" />
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:50%;border-right-width:0px;"
+            >{$_("hybridFund.section5.table1.title")}</th
+          >
+          <th style="width:50%;border-left-width:0px;" />
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{$_("hybridFund.section5.table1.row1.title")}</td>
+          <td>{$_("hybridFund.section5.table1.row1.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table1.row2.title")}</td>
+          <td>{$_("hybridFund.section5.table1.row2.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table1.row3.title")}</td>
+          <td>{$_("hybridFund.section5.table1.row3.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table1.row4.title")}</td>
+          <td>{$_("hybridFund.section5.table1.row4.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table1.row5.title")}</td>
+          <td>{$_("hybridFund.section5.table1.row5.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table1.row6.title")}</td>
+          <td>{$_("hybridFund.section5.table1.row6.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table1.row7.title")}</td>
+          <td>{$_("hybridFund.section5.table1.row7.description")}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:50%;border-right-width:0px;"
+            >{$_("hybridFund.section5.table2.title")}</th
+          >
+          <th style="width:50%;border-left-width:0px;" />
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{$_("hybridFund.section5.table2.row1.title")}</td>
+          <td>{$_("hybridFund.section5.table2.row1.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table2.row2.title")}</td>
+          <td>{$_("hybridFund.section5.table2.row2.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table2.row3.title")}</td>
+          <td>{$_("hybridFund.section5.table2.row3.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table2.row4.title")}</td>
+          <td>{$_("hybridFund.section5.table2.row4.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table2.row5.title")}</td>
+          <td>{$_("hybridFund.section5.table2.row5.description")}</td>
+        </tr>
+        <tr>
+          <td>{$_("hybridFund.section5.table2.row6.title")}</td>
+          <td>{$_("hybridFund.section5.table2.row6.description")}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<div class="pageContainer" style="min-height:400px;">
-  <div class="pageContainerInner" style="padding-bottom:0px;">
-    <div class="row">
-      <div class="rowItem" style="justify-content:center;">
-        <div class="header" style="margin-top:100px;">
-          <div class="headerLine" />
-          <div class="headerText">{$_("contact.section3.title")}</div>
-          <div class="headerLine" />
-        </div>
-        <div class="subHeaderText">{$_("contact.section3.subtitle")}</div>
-        <div class="containerOne">
-          <div class="containerOneText">
-            {$_("contact.section3.description")}
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;">
-          {#if addedToMailingList}
-            <p style="margin:40px;">
-              {$_("contact.section3.form.success")}
-            </p>
-          {:else}
-            <div class="row subscribeContainer">
-              <input
-                bind:value={mailingListEmail}
-                placeholder={$_("contact.section3.form.email")}
-              />
-              <button
-                on:click={() => {
-                  addToMailingList();
-                }}>{$_("contact.section3.form.submit")}</button
-              >
-            </div>
-          {/if}
-        </div>
+<div class="pageContainer section6">
+  <div
+    class="pageContainerInner"
+    style="display:flex;flex-direction:column;justify-content:center;align-items:center;"
+  >
+    <div class="header" style="margin-bottom:20px;">
+      <div class="headerLine" />
+      <div class="headerText" style="color:#ffffff;">
+        {$_("hybridFund.section6.title")}
       </div>
+      <div class="headerLine" />
     </div>
+    {#if messageSent}
+      <p>{$_("contact.section2.form.success")}</p>
+    {:else}
+      <div class="sendMessageContainer">
+        <div class="row">
+          <input
+            bind:value={firstName}
+            class="rowItem"
+            placeholder={$_("contact.section2.form.firstName")}
+          />
+        </div>
+        <div class="row">
+          <input
+            bind:value={email}
+            placeholder={$_("contact.section2.form.email")}
+          />
+        </div>
+        <div class="row">
+          <input
+            bind:value={telephone}
+            placeholder={$_("contact.section2.form.telephone")}
+          />
+        </div>
+        <div class="row">
+          <textarea
+            bind:value={message}
+            style="min-height:200px"
+            placeholder={$_("contact.section2.form.message")}
+          />
+        </div>
+        <button
+          on:click={() => {
+            sendMessage();
+          }}
+          style="float:right;">{$_("contact.section2.form.submit")}</button
+        >
+      </div>
+    {/if}
   </div>
 </div>
 
 <style>
+  .topButton {
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    background-color: #d1a765;
+    padding: 10px 50px;
+    margin-top: 30px;
+    text-decoration-line: none;
+  }
   .containerOne {
     display: flex;
     flex-direction: row;
@@ -357,51 +403,22 @@
     font-size: 20px;
   }
 
-  .sectionFundsTitle {
-    font-size: 50px;
-    font-weight: 600;
-  }
-  .sectionFundsDescription {
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 25px;
-  }
-  .sectionFundsButton {
-    cursor: pointer;
-    background-color: #cccccc;
-    color: #333333;
-    width: 150px;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-    transition: 0.5s;
-  }
-  .sectionFundsButton:hover {
-    background-color: #ffffff;
-  }
-  .sectionFundsInvestButton {
-    cursor: pointer;
-    background-color: #102e50;
+  .section3 {
+    min-height: 200px;
+    background: url("images/hybrid_image2.jpg");
+    background-size: cover;
     color: #ffffff;
-    width: 200px;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s;
-    text-decoration-line: none;
-  }
-  .sectionFundsInvestButton:hover {
-    background-color: #2c6db6;
   }
 
-  .sectionFunds {
-    min-height: 200px;
-    background: linear-gradient(#354558ee, #354558ee), url("images/gbfund1.svg");
+  .section4 {
+    min-height: 800px;
+    background: url("images/hybrid_image3.jpg");
+    background-size: cover;
+  }
+
+  .section6 {
+    min-height: 600px;
+    background: url("images/hybrid_footer.jpg");
     background-size: cover;
     color: #ffffff;
   }
@@ -412,149 +429,142 @@
     justify-content: space-between;
     align-items: center;
   }
-  .blocksImage {
+
+  .hybridImage1 {
+    width: 40%;
+  }
+
+  table {
     width: 100%;
   }
-  .blocksTitle {
-    font-weight: 700;
-    font-size: 24px;
-    padding: 10px 20px;
-    font-family: "Merriweather";
-    font-weight: bold;
+  .block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 325px;
+    width: 25%;
   }
-  .blocksDescription {
-    font-weight: 400;
-    font-size: 18px;
-    padding: 10px 20px;
-    margin-top: -30px;
-  }
-  .blocksButton {
-    font-size: 18px;
+  .blockNumber {
     background-color: #d1a765;
-    cursor: pointer;
     color: #00355f;
-    width: 150px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    margin-top: 480px;
-    margin-left: 20px;
-    transition: 0.2s;
-  }
-
-  .blocksButton:hover {
-    background-color: #d1a765;
-  }
-
-  .blocksDiv {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 30%;
-    background-color: #00355f;
-    height: 500px;
-    color: #ffffff;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
     margin: 10px;
-    border-radius: 0px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-
-  .awardModify {
-    display: inline-flex;
-    flex-direction: column;
-    padding: 15px;
+  .blockTitle {
+    color: #00355f;
+    margin: 10px;
+    font-size: 24px;
   }
-  .awardIconModify {
-    margin-right: 0px;
-  }
-  .awardTextContainerModify {
-    align-items: center;
+  .blockDescription {
+    color: #000000;
+    margin: 10px;
     text-align: center;
   }
-
-  @keyframes subtitleAnimation {
-    0% {
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    20% {
-      opacity: 1;
-    }
-    30% {
-      opacity: 0;
-    }
-    40% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    60% {
-      opacity: 0;
-    }
-    70% {
-      opacity: 0;
-    }
-    80% {
-      opacity: 0;
-    }
-    90% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 0;
-    }
+  .asterisk {
+    text-align: center;
+    margin-bottom: 50px;
   }
 
-  .subtitle1,
-  .subtitle2,
-  .subtitle3,
-  .subtitle4 {
-    opacity: 0;
-    animation: subtitleAnimation 20s infinite;
-    transition: all;
-    position: absolute;
-  }
-  .subtitle1 {
-    animation-delay: 0s;
-  }
-  .subtitle2 {
-    animation-delay: 5s;
-  }
-  .subtitle3 {
-    animation-delay: 10s;
-  }
-  .subtitle4 {
-    animation-delay: 15s;
-  }
-
-  .sectionFundsTopContainer {
+  .block2 {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+    min-height: 425px;
+    width: 20%;
   }
-  .sectionFundsButtonContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+  .block2Image {
+    width: 125px;
+    height: 125px;
+    margin: 10px;
+    color: #ffffff;
   }
-  #stats {
-    margin-top: 100px;
+  .block2Title {
+    color: #00355f;
+    margin: 10px;
+    font-size: 20px;
+    color: #ffffff;
   }
-  .sectionFundsInner {
-    height: 410px;
+  .block2Description {
+    margin: 10px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
   }
 
-  input {
+  .blocks3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .block3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    background-color: #ffffff;
+    border: 10px solid #cccccc;
+    margin: 10px;
+  }
+  .block3Title {
+    color: #00355f;
+    margin: 10px;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  .block3Description {
+    margin: 10px;
+    text-align: center;
+    color: #000000;
+    font-size: 16px;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 20px 0px;
+  }
+  tbody tr {
+    background-color: #ffffff;
+  }
+  th {
+    background-color: #bacad9;
+    color: #00355f;
+    text-align: left;
+    padding: 10px;
+    text-transform: uppercase;
+    border: 1px solid #707070;
+  }
+  td {
+    border: 1px solid #707070;
+    padding: 10px;
+  }
+  .topLine {
+    width: 50%;
+    height: 2px;
+    background-color: #d1a765;
+    margin: 0px;
+  }
+
+  .section4image {
+    position: absolute;
+    height: 75%;
+  }
+
+  input,
+  textarea {
     width: 100%;
     margin: 5px;
     padding: 10px;
@@ -573,98 +583,50 @@
   button:hover {
     background-color: #9bc8ff;
   }
-  .subscribeContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 40px;
-    width: 600px;
-  }
-  .rowItem {
+  .sendMessageContainer {
     width: 50%;
   }
 
   @media only screen and (max-width: 850px) {
-    .rowItem {
-      width: 100%;
+    .topButton {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hybridImage1 {
+      width: 100vw;
     }
     .blocks {
       flex-direction: column;
     }
-
-    .blocksDiv {
-      width: 100%;
-      margin: 0px;
-      padding: 0px;
-      margin-bottom: 50px;
-    }
-
-    .awardTextContainerModify {
-      max-width: 100% !important;
-    }
-
     .containerOne {
       flex-direction: column;
     }
-    .awardTextContainer {
-      max-width: 150px;
-    }
-    .blocksDescription {
-      font-size: 20px;
-    }
-
-    .sectionFunds {
+    .section3 {
       background-size: 250%;
       background-position: -250px 0px;
       min-height: 300px;
     }
-    .sectionFundsTitle {
-      font-size: 30px;
+    .block,
+    .block2 {
+      width: 100%;
     }
-    .sectionFundsDescription {
-      margin-top: 20px;
-      font-size: 18px;
-      max-width: 100%;
-    }
-    .sectionFundsTopContainer {
-      flex-direction: column;
-      margin-top: 0px;
-    }
-    #stats {
-      margin-top: 20px;
-    }
-    .sectionFundsInner {
-      height: 100%;
+    .topLine {
+      width: 100%;
+      margin: 0px;
     }
 
-    .awardModify2 {
-      display: inline-flex;
-      flex-direction: column;
-      padding: 15px;
+    .sendMessageContainer {
+      width: 80%;
     }
-    .awardIconModify2 {
-      margin-right: 0px;
-    }
-    .awardTextContainerModify2 {
-      align-items: center;
+    .mainTitle {
       text-align: center;
-      max-width: 100%;
+      font-size: 26px;
     }
-    .awardSubtitle {
-      font-size: 20px;
+    .block3 {
+      width: 80%;
     }
-    .sectionFundsButton {
-      font-size: 14px;
-      width: 140px;
-    }
-    .sectionFundsInvestButton {
-      font-size: 14px;
-      width: 140px;
-    }
-    .subscribeContainer {
-      flex-direction: column;
-      width: 100%;
-      margin-bottom: 200px;
+    .section4image {
+      z-index: -1;
     }
   }
 </style>

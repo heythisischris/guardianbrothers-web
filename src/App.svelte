@@ -166,7 +166,7 @@
                 >
               </BurgerMenu>
             {:else}
-              <div
+              <!-- <div
                 class="navLinks"
                 style="display:flex;flex-direction:row;align-items:center;justify-content:center;margin-bottom:-5px;margin-top:-5px;"
               >
@@ -198,7 +198,7 @@
                     <NavLink to="/signup">{$_("app.signup")}</NavLink>
                   </div>
                 {/if}
-              </div>
+              </div> -->
               <div class="navLinks">
                 <NavLink to="/">{$_("app.home")}</NavLink>
                 <NavLink to="/about">{$_("app.about")}</NavLink>
@@ -292,7 +292,7 @@
             <div class="contactContainer">
               <img alt="location" src="images/footer_location.svg" />
               <a target="_blank" href="https://goo.gl/maps/bTjBTtdwFqquXE4AA"
-                >1620 NW 143rd terrace, Pembroke Pines, FL 33028</a
+                >1620 NW 143rd Terrace, Pembroke Pines, FL 33028</a
               >
             </div>
           </div>

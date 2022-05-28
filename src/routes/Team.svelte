@@ -5,8 +5,8 @@
   onMount(() => {
     window.scrollTo(0, 0);
     const isMobile = window.matchMedia(
-        "only screen and (max-width: 760px)"
-      ).matches;
+      "only screen and (max-width: 760px)"
+    ).matches;
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_team.jpg')";
     document.querySelectorAll("#body")[0].style.backgroundPosition = `50% ${
@@ -47,21 +47,21 @@
         <img alt="" src="images/fernando.jpg" />
         <div class="teamBlocksInnerText">
           <h2>Fernando Guardia</h2>
-          <span>Founder & Chief Executive Officer</span>
+          <span>Founder & CEO</span>
         </div>
       </div>
       <div class="teamBlocksInner">
         <img alt="" src="images/sebastian.jpg" />
         <div class="teamBlocksInnerText">
           <h2>Sebastian Ewel</h2>
-          <span>Chairman & Chief Financial Office</span>
+          <span>Chairman & Chief Financial Officer</span>
         </div>
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/manuel.jpg" />
+        <img alt="" src="images/matias.jpg" />
         <div class="teamBlocksInnerText">
-          <h2>Manuel Sauma</h2>
-          <span>Chief Marketing Officer</span>
+          <h2>Matias Martinez</h2>
+          <span>Chief Sales Officer</span>
         </div>
       </div>
       <div class="teamBlocksInner">
@@ -100,10 +100,10 @@
         </div>
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/matias.jpg" />
+        <img alt="" src="images/manuel.jpg" />
         <div class="teamBlocksInnerText">
-          <h2>Matias Martinez</h2>
-          <span>Founder & CEO of TocToc S.R.L</span>
+          <h2>Manuel Sauma</h2>
+          <span>Growth Lead at Mano Pagos</span>
         </div>
       </div>
       <div class="teamBlocksInner">
@@ -129,16 +129,22 @@
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
-        <img alt="" src="images/tdameritrade.jpg" />
-      </div>
-      <div class="teamBlocksInner">
         <img alt="" src="images/interactivebrokers.jpg" />
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/prodisma.jpg" />
+        <img alt="" src="images/paxos.jpg" />
       </div>
       <div class="teamBlocksInner">
         <img alt="" src="images/investmentlawgroup.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/nav.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/summit.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/prodisma.jpg" />
       </div>
     </div>
   </div>

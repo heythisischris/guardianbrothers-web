@@ -57,11 +57,13 @@
     >
       {$_("home.main.title")}
     </div>
-    <div class="mainSubtitle">
-      <div class="subtitle1">{$_("home.main.subtitle1")}</div>
-      <div class="subtitle2">{$_("home.main.subtitle2")}</div>
-      <div class="subtitle3">{$_("home.main.subtitle3")}</div>
-      <div class="subtitle4">{$_("home.main.subtitle4")}</div>
+    <div in:fade={{ delay: 250, duration: 500 }} class="mainSubtitle">
+      <div class="subtitle">{$_("home.main.subtitle")}</div>
+      <div class="dynamicSubtitle">
+        <div class="subtitle1">{$_("home.main.subtitle1")}</div>
+        <div class="subtitle2">{$_("home.main.subtitle2")}</div>
+        <div class="subtitle3">{$_("home.main.subtitle3")}</div>
+      </div>
     </div>
   </div>
 </div>
@@ -251,7 +253,7 @@
   </div>
 </div>
 
-<div class="pageContainer sectionFunds">
+<div class="pageContainer sectionFunds2">
   <div
     class="pageContainerInner"
     style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
@@ -288,7 +290,7 @@
             </a>
           </div>
         </div>
-        <div id="stats" in:fade>
+        <!-- <div id="stats" in:fade>
           <div class="statsContainer">
             <div class="infoBorder">
               <div>{$_("hybridFund.main.fundAssets")}</div>
@@ -324,7 +326,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       {/await}
     </div>
   </div>
@@ -499,6 +501,9 @@
 </div>
 
 <style>
+  .mainTitle {
+    font-size: 30px;
+  }
   .containerOne {
     display: flex;
     flex-direction: row;
@@ -556,6 +561,13 @@
   .sectionFunds {
     min-height: 200px;
     background: linear-gradient(#354558ee, #354558ee), url("images/gbfund1.svg");
+    background-size: cover;
+    color: #ffffff;
+  }
+
+  .sectionFunds2 {
+    min-height: 200px;
+    background: url("images/hybrid_cover.jpg");
     background-size: cover;
     color: #ffffff;
   }
@@ -668,12 +680,12 @@
 
   .subtitle1,
   .subtitle2,
-  .subtitle3,
-  .subtitle4 {
+  .subtitle3 {
     opacity: 0;
-    animation: subtitleAnimation 20s infinite;
+    animation: subtitleAnimation 15s infinite;
     transition: all;
     position: absolute;
+    text-decoration-line: underline !important;
   }
   .subtitle1 {
     animation-delay: 0s;
@@ -684,8 +696,18 @@
   .subtitle3 {
     animation-delay: 10s;
   }
-  .subtitle4 {
-    animation-delay: 15s;
+
+  .mainSubtitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 50px;
+  }
+
+  .dynamicSubtitle {
+    margin-left: 15px;
+    font-weight: bold;
   }
 
   .sectionFundsTopContainer {
@@ -813,6 +835,15 @@
       flex-direction: column;
       width: 100%;
       margin-bottom: 200px;
+    }
+    .mainSubtitle {
+      font-size: 26px !important;
+    }
+    .dynamicSubtitle {
+      margin-left: 7px !important;
+    }
+    .mainTitle {
+      text-align: left !important;
     }
   }
 </style>
