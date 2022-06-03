@@ -15,15 +15,19 @@
     "diversification": "DIVERSIFICACIÓN",
     "copyright": "Derechos de autor",
     "contactBottom": "Contáctanos",
-    "exploreBottom": "Explorar"
+    "exploreBottom": "Explorar",
+    "login": "INICIAR SESIÓN",
+    "signup": "REGISTRARSE",
+    "equityFund1": "Guardian Equity Fund I",
+    "hybridFund": "Guardian Hybrid Fund"
   },
   "home": {
     "main": {
       "title": "Haz que tu dinero trabaje por ti.",
-      "subtitle1": "Descubre una forma alternativa de inversión.",
-      "subtitle2": "Mercados financieros y bursátiles de EE. UU. al alcance de tus posibilidades.",
-      "subtitle3": "Invierte de manera segura, simple y accesible para lograr tus propósitos financieros.",
-      "subtitle4": "Haz crecer tu patrimonio hoy, invierte en fondos de inversión alternativos."
+      "subtitle": "Invierte de forma",
+      "subtitle1": "Inteligente",
+      "subtitle2": "Sencilla",
+      "subtitle3": "Transparente"
     },
     "section1": {
       "title": "Acerca de Nosotros",
@@ -33,12 +37,12 @@
       "paragraph3": "Un pionero en inversión en LATAM impulsada por eventos macro, estrategias en corto, largo y diversificación de activos globales.",
       "paragraph4": "Guardian Brothers ha ganado una reputación por su compromiso con la integridad, transparencia y simplicidad con sus inversionistas.",
       "badge1": {
-        "title": "Nuestra Mision",
+        "title": "Nuestra Visión",
         "description": "Ser los líderes en gestión de activos globales en nuestra comunidad a través de un trabajo significativo y relaciones cercanas entre nuestros inversionistas y asociados."
       },
       "badge2": {
-        "title": "Nuestra Visión",
-        "description": "Democratizar los mercados de inversiones alternativas para latinoamérica. Brindando toda la transparencia, y accesibilidad con el objetivo de superar las expectativas de todos nuestros inversionistas"
+        "title": "Nuestra Mision",
+        "description": "Democratizar los mercados de inversiones alternativas para latinoamérica. Brindando toda la transparencia, y accesibilidad con el objetivo de superar las expectativas de todos nuestros inversionistas."
       }
     },
     "section2": {
@@ -64,6 +68,10 @@
       "equityFund1": {
         "title": "Guardian Equity Fund I",
         "description": "Explora una forma diferente de invertir de acuerdo con tus necesidades"
+      },
+      "hybridFund": {
+        "title": "Guardian Hybrid Fund",
+        "description": "El fondo invierte activamente en una combinación de las criptomonedas más populares y acciones y/o ETF de alta capitalización"
       },
       "button": "LEER MÁS",
       "investButton": "INVIERTE AHORA"
@@ -115,7 +123,7 @@
       "title": "GUARDIAN BROTHERS HOLDINGS",
       "subtitle": "¿Por qué elegirnos?",
       "paragraph1": "Creemos que los fondos de inversión no son exclusivos del inversionista sofisticado o con un gran patrimonio, son una herramienta que debe estar al alcance de todos sin importar cuánto dinero tengas.",
-      "paragraph2": "Creamos portafolios alternativos a la medida con inversiones a partir de $1,000 USD y ponemos a tu alcance mercados financieros y bursátiles de EE. UU., considerando tu estilo de vida, tus necesidades, tus proyectos y objetivos a mediano y largo plazo.",
+      "paragraph2": "Creamos portafolios alternativos a la medida con inversiones a partir de $10,000 USD y ponemos a tu alcance mercados financieros y bursátiles de EE. UU., considerando tu estilo de vida, tus necesidades, tus proyectos y objetivos a mediano y largo plazo.",
       "paragraph3": "Nuestro equipo profesional de gestores de carteras se encargan de buscar oportunidades en los mercados, diversificar el portafolio y gestionar el nivel de riesgo para lograr el rendimiento superior de tu inversión.",
       "quote": "Invertir debe ser un proceso simple y accesible, una experiencia interesante que te motive e inspire para lograr tus propósitos financieros."
     },
@@ -172,7 +180,7 @@
       "subtitle": " ",
       "badge1": {
         "title": "Sede",
-        "description": "1620 NW 143rd terrace, Pembroke Pines, FL 33028"
+        "description": "1620 NW 143rd Terrace, Pembroke Pines, FL 33028"
       },
       "badge2": {
         "title": "Telefono",
@@ -190,6 +198,7 @@
         "firstName": "Nombre",
         "lastName": "Apellido",
         "email": "Email",
+        "telephone": "Telefono",
         "message": "Mensaje",
         "submit": "Enviar",
         "success": "¡Mensaje enviado! Nos pondremos en contacto con usted lo antes posible."
@@ -207,6 +216,21 @@
     }
   },
   "funds": {
+    "main": {
+      "title": "Fondos",
+      "subtitle": " ",
+      "goBack": "Regresa"
+    },
+    "equityFund1": {
+      "title": "Guardian Equity Fund I",
+      "subtitle": "Explora una forma diferente de invertir de acuerdo con tus necesidades"
+    },
+    "hybridFund": {
+      "title": "Guardian Hybrid Fund",
+      "subtitle": "El fondo invierte activamente en una combinación de las criptomonedas más populares y acciones y/o ETF de alta capitalización"
+    }
+  },
+  "equityFund1": {
     "main": {
       "title": "Guardian Brother Holdings - Investors Shares",
       "fundAssets": "Activos del Fondo",
@@ -320,6 +344,146 @@
       "title": "Diversificación",
       "sectors": "Sectores",
       "marketCap": "Capitalizacion mercado"
+    }
+  },
+  "hybridFund": {
+    "main": {
+      "title": "Guardian Hybrid Fund, LP",
+      "subtitle": "Alternativa De Inversión En Criptomonedas Y Acciones",
+      "button": "Start Investing"
+    },
+    "section1": {
+      "title": "GENERAL",
+      "title1": "Filosofia",
+      "paragraph1": "Creemos que una cartera adecuada y bien diversificada de criptomonedas y acciones de alta calidad puede protegerse de la alta volatilidad y producir un rendimiento ajustado al riesgo significativamente más alto para nuestros socios a largo plazo.",
+      "title2": "Objetivo",
+      "paragraph2": "El principal objetivo del fondo es otorgar a los inversores la posibilidad de diversificar sus inversiones en una gama más amplia de clases de activos para obtener mayores rendimientos ajustados al riesgo en un solo lugar",
+      "paragraph3": "Los inversores podrán acceder a los mercados de criptomonedas sin exponerse a la alta volatilidad de estos activos, teniendo en cuenta que el fondo se protegerá invirtiendo parte del capital invertido en acciones de valor de capitalización media-alta y ETF mientras mantiene una porción media en un cartera diversificada de criptomonedas",
+      "title3": "Estrategia",
+      "paragraph4": "El fondo invierte activamente en una combinación de las criptomonedas más populares y acciones y/o ETF de alta capitalización",
+      "paragraph5": "Las estrategias utilizadas por el fondo incluyen, entre otras, eventos macro globales, posiciones largas/cortas, criptomonedas buy/hold y uso de ,apalancamiento en situaciones especiales."
+    },
+    "section2": {
+      "title": "COMO FUNCIONA",
+      "block1": {
+        "title": "Compramos",
+        "description": "Guardian Hybrid Fund, LP  busca oportunidades en el mercado de valores y criptomonedas. Crea una cartera híbrida para todos nuestros inversores."
+      },
+      "block2": {
+        "title": "Tu inviertes",
+        "description": "Te conviertes en socio y recibes beneficios de los rendimientos generados por Guardian Brothers Hybrid Fund, LP"
+      },
+      "block3": {
+        "title": "Gestionamos la inversión",
+        "description": "Guardian Hybrid Fund LP., toma decisiones diarias para obtener los mejores rendimientos de acuerdo a los movimientos del mercado."
+      },
+      "block4": {
+        "title": "Monitoreo de tu inversión",
+        "description": "Monitoreo del comportamiento de tu inversión. El momento en que puedas empezar a mover tus ganancias dependerá del tipo de inversor que sea"
+      },
+      "asterisk": "*Aunque no sea hora de retirar, es recomendable estar al pendiente del desempeño de tu inversión y aclarar todas tus dudas"
+    },
+    "section3": {
+      "title": "¿POR QUÉ INVERTIR EN GUARDIAN HYBRID FUND, LP?",
+      "block1": {
+        "title": "Invierte en el ecosistema blockchain a un menor riesgo",
+        "description": "Nuestro sistema de gestión híbrida nos permite acceder a una mayor variedad de activos digitales con una menor volatilidad mientras"
+      },
+      "block2": {
+        "title": "Diversificación estratégica",
+        "description": "Obtén una cartera estratégicamente diversificada en activos digitales y acciones. Compuesta de las top 10 criptomonedas más populares y acciones de la más alta calidad."
+      },
+      "block3": {
+        "title": "Alta Liquidez",
+        "description": "GHF invertirá en activos digitales y acciones de alta liquidez para un fácil acceso al capital de nuestros socios."
+      },
+      "block4": {
+        "title": "Ciberseguridad",
+        "description": "Proporcionamos a nuestros socios limitados acceso seguro a grandes cantidades de activos digitales, sin tener las cargas de comprarlos y resguardarlas."
+      },
+      "block5": {
+        "title": "Baja correlación al mercado",
+        "description": "Nuestra cartera de diferentes activos y estrategia de inversión múltiples permiten que seamos independientes a los ciclos del mercado."
+      }
+    },
+    "section4": {
+      "title": "Processo de inversión",
+      "block1": {
+        "title": "Estrategia de gestión activa",
+        "description": "Nos concentramos en los valores que consideran que ofrecen el mejor valor en relación con el riesgo, incluimos muchos de los índices y empresas de mediano-alto capital.  Con esta estrategia activa, podemos trabajar para evitar industrias y valores que pueden enfrentar problemas en el futuro y así posicionarse para un entorno y perspectiva macroeconómicos determinadas"
+      },
+      "block2": {
+        "title": "Generación de ideas",
+        "description": "Las ideas de inversión, y la investigación de GHF se generan internamente. A través de análisis fundamental de crédito y valoración, GHF presta especial atención a las empresas que consideran que brindan un producto o servicio \"esencial\", que tienen la capacidad de generar flujo de caja libre y crecimiento sostenible. Al invertir en activos digitales, el GHF analizará la estructura de los tokens, las capacidades tecnológicas, seguridad blockchain y la distribución de tokens entre otros factores para evaluar adecuadamente el riesgo/beneficio"
+      },
+      "block3": {
+        "title": "Monitoreo post-inversión",
+        "description": "Analizamos eventos macro o ocurrencia del catalizador esperado que puedan afectar nuestras posiciones y nuestra exposición al riesgo diariamente."
+      }
+    },
+    "section5": {
+      "title": "Terminos",
+      "table1": {
+        "title": "Key Terms",
+        "row1": {
+          "title": "Objetivo del fondo",
+          "description": "Apreciación de capital"
+        },
+        "row2": {
+          "title": "Estrategia del fondo",
+          "description": "Multi-strategy Crypto & Equity fund"
+        },
+        "row3": {
+          "title": "Inversion mínima",
+          "description": "$10,000"
+        },
+        "row4": {
+          "title": "Suscripción",
+          "description": "Mensual"
+        },
+        "row5": {
+          "title": "Comision de gestion",
+          "description": "2%"
+        },
+        "row6": {
+          "title": "Comisión de rendimiento",
+          "description": "20%"
+        },
+        "row7": {
+          "title": "Periodo de bloqueo",
+          "description": "12- meses, de cada contribución."
+        }
+      },
+      "table2": {
+        "title": "Fund details",
+        "row1": {
+          "title": "Administrador",
+          "description": "NAV Fund Administration Group"
+        },
+        "row2": {
+          "title": "Asesor legal",
+          "description": "The Investment Law Group of Davis Gillett Mottern & Sims LLC"
+        },
+        "row3": {
+          "title": "Auditora",
+          "description": "Summit LLC"
+        },
+        "row4": {
+          "title": "Socio bancario",
+          "description": "First Republic Bank"
+        },
+        "row5": {
+          "title": "Custodios",
+          "description": "Interactive Brokers and Paxos Trust Company"
+        },
+        "row6": {
+          "title": "Empresa de inversión",
+          "description": "Guardian Brothers Capital LLC"
+        }
+      }
+    },
+    "section6": {
+      "title": "Pida más información"
     }
   },
   "team": {

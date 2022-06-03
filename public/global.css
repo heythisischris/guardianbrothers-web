@@ -451,6 +451,7 @@ table td {
 .headerText {
   font-size: 20px;
   text-align: center;
+  font-family: 'Merriweather';
 }
 
 .headerLine {
@@ -469,6 +470,11 @@ table td {
   margin-bottom: 50px;
   color: #00355f;
   text-align: center;
+}
+
+.authLink {
+  padding: 5px 10px !important;
+  color: #ffffff !important;
 }
 
 @media only screen and (max-width: 850px) {
@@ -657,6 +663,9 @@ table td {
   button {
     top: 23px !important;
     left: 10px !important;
+  }
+  .pageContainerInner {
+    width: calc(100% - 20px);
   }
 
 }

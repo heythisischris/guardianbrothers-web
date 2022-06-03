@@ -6,19 +6,21 @@
   function getProps({ location, href, isPartiallyCurrent, isCurrent }) {
     const isActive = href === "/" ? isCurrent : isPartiallyCurrent || isCurrent;
 
+    const authClass = ["/login", "/signup", "/account"].includes(href) ? `authLink` : ``;
+
     // The object returned here is spread on the anchor element's attributes
-    if (location.pathname === "/") {
+    if (["/","/hybridFund"].includes(location.pathname)) {
       if (isActive) {
-        return { class: "homeActive" };
+        return { class: `homeActive ${authClass}` };
       } else {
-        return { class: "homeInactive" };
+        return { class: `homeInactive ${authClass}` };
       }
     } else {
       if (isActive) {
-        return { class: "active" };
+        return { class: `active ${authClass}` };
       }
     }
-    return {};
+    return {class: `${authClass}`};
   }
 </script>
 

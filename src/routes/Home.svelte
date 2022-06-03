@@ -9,28 +9,6 @@
       "url('images/background_home.jpg')";
     document.querySelectorAll("#body")[0].style.backgroundPosition = "50% 0px";
   });
-  async function loadAPI(url) {
-    let data = await fetch(url);
-    let response = await data.json();
-    return response;
-  }
-  var equityFund1Stats = loadAPI(
-    "https://lambda.guardianbrothers.com/stats/equityFund1"
-  );
-  equityFund1Stats.then((innerStats) => {
-    equityFund1Stats = innerStats;
-  });
-  var hybridFundStats = loadAPI(
-    "https://lambda.guardianbrothers.com/stats/hybridFund"
-  );
-  hybridFundStats.then((innerStats) => {
-    hybridFundStats = innerStats;
-  });
-
-  let formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
 
   let mailingListEmail = "";
   let addedToMailingList = false;
@@ -50,18 +28,18 @@
     class="pageContainerInner"
     style="color:#ffffff;font-size:22px;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
-    <div
-      class="mainTitle"
-      style="margin-top:-20px;"
-      in:fade={{ delay: 250, duration: 500 }}
-    >
+    <div class="mainTitle" in:fade={{ delay: 250, duration: 500 }}>
       {$_("home.main.title")}
     </div>
-    <div class="mainSubtitle">
-      <div class="subtitle1">{$_("home.main.subtitle1")}</div>
-      <div class="subtitle2">{$_("home.main.subtitle2")}</div>
-      <div class="subtitle3">{$_("home.main.subtitle3")}</div>
-      <div class="subtitle4">{$_("home.main.subtitle4")}</div>
+    <div class="subtitleContainer" in:fade={{ delay: 350, duration: 500 }}>
+      <div class="mainSubtitle">
+        {$_("home.main.subtitle")}
+      </div>
+      <div class="dynamicSubtitle">
+        <div class="subtitle1">{$_("home.main.subtitle1")}</div>
+        <div class="subtitle2">{$_("home.main.subtitle2")}</div>
+        <div class="subtitle3">{$_("home.main.subtitle3")}</div>
+      </div>
     </div>
   </div>
 </div>
@@ -134,7 +112,7 @@
         <p class="blocksDescription">{$_("home.section2.box1.description")}</p>
         <div
           on:click={() => {
-            navigate("/funds");
+            navigate("/hybridFund");
           }}
           class="blocksButton"
         >
@@ -148,7 +126,7 @@
         <p class="blocksDescription">{$_("home.section2.box2.description")}</p>
         <div
           on:click={() => {
-            navigate("/funds");
+            navigate("/hybridFund");
           }}
           class="blocksButton"
         >
@@ -161,7 +139,7 @@
         <p class="blocksDescription">{$_("home.section2.box3.description")}</p>
         <div
           on:click={() => {
-            navigate("/funds");
+            navigate("/hybridFund");
           }}
           class="blocksButton"
         >
@@ -171,19 +149,16 @@
     </div>
   </div>
 </div>
-
-<div class="pageContainer sectionFunds">
-  <div
-    class="pageContainerInner"
-    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
-  >
+<div class="fundsContainer">
+  <div class="pageContainer sectionFunds">
     <div
-      class="pageContainerInner sectionFundsInner"
-      style="color:#ffffff;font-size:22px;"
+      class="pageContainerInner"
+      style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
     >
-      {#await equityFund1Stats}
-        <div />
-      {:then equityFund1Stats}
+      <div
+        class="pageContainerInner sectionFundsInner"
+        style="color:#ffffff;font-size:22px;"
+      >
         <div class="sectionFundsTopContainer">
           <div class="sectionFundsTitle">
             {$_("home.sectionFunds.equityFund1.title")}
@@ -194,7 +169,7 @@
           <div class="sectionFundsButtonContainer">
             <div
               on:click={() => {
-                navigate("/funds");
+                navigate("/equityFund1");
               }}
               class="sectionFundsButton"
             >
@@ -209,48 +184,48 @@
             </a>
           </div>
         </div>
-        <div id="stats" in:fade>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("funds.main.fundAssets")}</div>
-              <div>{formatter.format(equityFund1Stats[0].value)}</div>
-            </div>
-            <div class="infoBorder">
-              <div>{$_("funds.main.sharesOutstanding")}</div>
-              <div>{formatter.format(equityFund1Stats[0].shares).slice(1)}</div>
-            </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pageContainer sectionFunds2">
+    <div
+      class="pageContainerInner"
+      style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
+    >
+      <div
+        class="pageContainerInner sectionFundsInner"
+        style="color:#ffffff;font-size:22px;"
+      >
+        <div class="sectionFundsTopContainer">
+          <div class="sectionFundsTitle">
+            {$_("home.sectionFunds.hybridFund.title")}
           </div>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("funds.main.nav")}</div>
-              <div>
-                {formatter.format(
-                  equityFund1Stats[0].value / equityFund1Stats[0].shares
-                )}
-              </div>
+          <div class="sectionFundsDescription">
+            {$_("home.sectionFunds.hybridFund.description")}
+          </div>
+          <div class="sectionFundsButtonContainer">
+            <div
+              on:click={() => {
+                navigate("/hybridFund");
+              }}
+              class="sectionFundsButton"
+            >
+              {$_("home.sectionFunds.button")}
             </div>
-            <div class="infoBorder">
-              <div>{$_("funds.main.navChange")}</div>
-              <div>
-                {formatter.format(
-                  equityFund1Stats[0].value / equityFund1Stats[0].shares -
-                    equityFund1Stats[1].value / equityFund1Stats[1].shares
-                )}
-                ({(
-                  ((equityFund1Stats[0].value / equityFund1Stats[0].shares -
-                    equityFund1Stats[1].value / equityFund1Stats[1].shares) /
-                    (equityFund1Stats[1].value / equityFund1Stats[1].shares)) *
-                  100
-                ).toFixed(2) + "%"})
-              </div>
-            </div>
+            <a
+              target="_blank"
+              href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad-gbh"
+              class="sectionFundsInvestButton"
+            >
+              {$_("home.sectionFunds.investButton")}
+            </a>
           </div>
         </div>
-      {/await}
+      </div>
     </div>
   </div>
 </div>
-
 <div class="pageContainer">
   <div class="pageContainerInner">
     <div class="row">
@@ -420,6 +395,11 @@
 </div>
 
 <style>
+  .mainTitle {
+    font-size: 30px;
+    margin-top: -80px;
+    margin-bottom: 20px;
+  }
   .containerOne {
     display: flex;
     flex-direction: row;
@@ -476,9 +456,24 @@
 
   .sectionFunds {
     min-height: 200px;
-    background: linear-gradient(#354558ee, #354558ee), url("images/gbfund1.svg");
+    background: linear-gradient(#35455899, #35455899),
+      url("images/equityBackground.jpg");
     background-size: cover;
     color: #ffffff;
+    width: calc(50% + 160px);
+    padding: 20px;
+    margin-right: -160px;
+    clip-path: polygon(0% 0%, 100% 0, 85% 100%, 0% 100%);
+  }
+
+  .sectionFunds2 {
+    min-height: 200px;
+    background: url("images/hybrid_cover.jpg");
+    background-size: cover;
+    color: #ffffff;
+    width: calc(50% + 160px);
+    padding: 20px;
+    padding-left: 150px;
   }
 
   .blocks {
@@ -589,10 +584,9 @@
 
   .subtitle1,
   .subtitle2,
-  .subtitle3,
-  .subtitle4 {
+  .subtitle3 {
     opacity: 0;
-    animation: subtitleAnimation 20s infinite;
+    animation: subtitleAnimation 15s infinite;
     transition: all;
     position: absolute;
   }
@@ -605,8 +599,22 @@
   .subtitle3 {
     animation-delay: 10s;
   }
-  .subtitle4 {
-    animation-delay: 15s;
+  .subtitleContainer {
+    border-left: 2px solid #c49c4b;
+    height: 140px;
+    padding-left: 20px;
+    margin-left: 20px;
+  }
+  .mainSubtitle {
+    font-size: 30px;
+  }
+  .dynamicSubtitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 80px;
+    margin-top: -10px;
   }
 
   .sectionFundsTopContainer {
@@ -614,7 +622,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-top: 20px;
+    margin-top: 100px;
   }
   .sectionFundsButtonContainer {
     display: flex;
@@ -622,117 +630,8 @@
     justify-content: space-between;
     align-items: flex-start;
   }
-  #stats {
-    margin-top: 100px;
-  }
   .sectionFundsInner {
     height: 410px;
-  }
-
-  .testimonialBlocks {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0px auto;
-    z-index: 1;
-    position: relative;
-  }
-  .testimonialBlock {
-    width: 320px;
-    height: 320px;
-    padding: 10px;
-    background-color: #f3f3f3;
-    border: 2px solid #d1a765;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-  .testimonialBlock.selected {
-    background-color: #f2efe5;
-  }
-  .testimonialDescription {
-    font-style: italic;
-    line-height: 2;
-    color: #888888;
-  }
-  .testimonialImage {
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    background-color: #cccccc;
-    margin-right: 10px;
-  }
-  .testimonialName {
-    font-weight: 600;
-  }
-  .testimonialLocation {
-    color: #888888;
-  }
-  .testimonialAuthor {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .testimonialBackgroundBlock {
-    position: absolute;
-    right: 0px;
-    margin-top: -250px;
-    width: 100vw;
-    height: 380px;
-    background-color: #d1a765;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-  }
-
-  .testimonialArrow {
-    height: 50px;
-    width: 50px;
-    background-color: #00355f;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 30px;
-    cursor: pointer;
-    font-weight: 100;
-    transition: 0.5s;
-    margin: 0px 10px;
-    margin-bottom: 40px;
-    color: #ffffff;
-  }
-  .testimonialArrow:hover {
-    background-color: #1a68a6;
-  }
-
-  .testimonialButton {
-    cursor: pointer;
-    background-color: #00355f;
-    color: #ffffff;
-    width: 150px;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    transition: 0.5s;
-    margin: 0px 10px;
-    margin-bottom: 40px;
-  }
-  .testimonialButton:hover {
-    background-color: #1a68a6;
-  }
-  .section5 {
-    min-height: 582px;
   }
 
   input {
@@ -760,6 +659,10 @@
     align-items: center;
     margin-top: 40px;
     width: 600px;
+  }
+  .fundsContainer {
+    display: flex;
+    flex-direction: row;
   }
 
   @media only screen and (max-width: 850px) {
@@ -792,6 +695,7 @@
       background-size: 250%;
       background-position: -250px 0px;
       min-height: 300px;
+      clip-path: none;
     }
     .sectionFundsTitle {
       font-size: 30px;
@@ -803,10 +707,7 @@
     }
     .sectionFundsTopContainer {
       flex-direction: column;
-      margin-top:0px;
-    }
-    #stats {
-      margin-top: 20px;
+      margin-top: 0px;
     }
     .sectionFundsInner {
       height: 100%;
@@ -828,31 +729,6 @@
     .awardSubtitle {
       font-size: 20px;
     }
-    .testimonialBlocks {
-      flex-direction: column;
-      width: 100%;
-    }
-    .testimonialBlock {
-      margin: 10px 0px;
-    }
-    .testimonialBackgroundBlock {
-      position: relative;
-      margin-top: 0px;
-      width: 100%;
-      height: 100%;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      margin-bottom: 50px;
-    }
-    .testimonialArrow {
-      margin: 0px 10px;
-      margin-top: 20px;
-    }
-    .testimonialButton {
-      margin: 0px 10px;
-      margin-top: 20px;
-    }
     .sectionFundsButton {
       font-size: 14px;
       width: 140px;
@@ -865,6 +741,29 @@
       flex-direction: column;
       width: 100%;
       margin-bottom: 200px;
+    }
+    .mainTitle {
+      font-size: 24px;
+      text-align: left !important;
+    }
+    .mainSubtitle {
+      font-size: 24px;
+      text-align: left !important;
+    }
+    .dynamicSubtitle {
+      font-size: 50px;
+    }
+    .fundsContainer {
+      flex-direction: column;
+    }
+    .sectionFunds,
+    .sectionFunds2 {
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
+    }
+    .subtitleContainer {
+      height: 100px;
     }
   }
 </style>

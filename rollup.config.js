@@ -21,7 +21,11 @@ export default [
       svelte({
         hydratable: true
       }),
-      resolve(),
+      resolve({
+        browser: true,
+        preferBuiltins: false,
+        dedupe: ["svelte"],
+      }),
       commonjs(),
       !isDev && terser(),
       json(),
@@ -41,7 +45,11 @@ export default [
       svelte({
         generate: "ssr"
       }),
-      resolve(),
+      resolve({
+        browser: true,
+        preferBuiltins: false,
+        dedupe: ["svelte"],
+      }),
       commonjs(),
       !isDev && terser(),
       json(),
