@@ -277,13 +277,6 @@
     class="pageContainerInner"
     style="color:#ffffff;font-size:22px;height:400px;"
   >
-    <a
-      style="color:#ffffff;text-decoration-line:none;font-size:14px;margin:10px;"
-      href={"javascript:void(0)"}
-      on:click={() => navigate("/funds")}
-    >
-      ← {$_("funds.main.goBack")}
-    </a>
     {#await stats}
       <div />
     {:then stats}

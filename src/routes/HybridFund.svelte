@@ -67,8 +67,8 @@
     </a>
   </div>
 </div>
-<div class="pageContainer">
-  <div class="pageContainerInner" style="margin-top:60px;">
+<div class="pageContainer" style="background-color:#F4F9FF;padding:40px 0px;">
+  <div class="pageContainerInner" style="margin-top:20px;">
     <div class="header">
       <div class="headerLine" />
       <div class="headerText">{$_("hybridFund.section1.title")}</div>
@@ -103,6 +103,10 @@
       </div>
       <img class="hybridImage1" alt="" src="images/hybrid_image1.jpg" />
     </div>
+  </div>
+</div>
+<div class="pageContainer" style="min-height:200px;">
+  <div class="pageContainerInner">
     <div
       style="display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:40px;"
     >
@@ -220,27 +224,31 @@
       </div>
     </div>
     <img class="section4image" alt="" src="images/hybrid_robot.png" />
-    <div class="blocks3 section4" style="margin-bottom:50px;margin-top:40px;">
-      <div class="block3">
+    <div class="blocks3 section4">
+      <div class="block3 block3_1">
         <div class="block3Title">{$_("hybridFund.section4.block1.title")}</div>
         <div class="block3Description">
           {$_("hybridFund.section4.block1.description")}
         </div>
       </div>
-      <div class="block3">
+      <div class="block3 block3_2">
         <div class="block3Title">{$_("hybridFund.section4.block2.title")}</div>
         <div class="block3Description">
           {$_("hybridFund.section4.block2.description")}
         </div>
       </div>
-      <div class="block3">
+      <div class="block3 block3_3">
         <div class="block3Title">{$_("hybridFund.section4.block3.title")}</div>
         <div class="block3Description">
           {$_("hybridFund.section4.block3.description")}
         </div>
       </div>
     </div>
+  </div>
+</div>
 
+<div class="pageContainer" style="background-color:#F4F9FF;padding:40px 0px;">
+  <div class="pageContainerInner">
     <div class="header">
       <div class="headerLine" />
       <div class="headerText">{$_("hybridFund.section5.title")}</div>
@@ -343,20 +351,15 @@
       <p>{$_("contact.section2.form.success")}</p>
     {:else}
       <div class="sendMessageContainer">
-        <div class="row">
+        <div class="messageRow">
           <input
             bind:value={firstName}
-            class="rowItem"
             placeholder={$_("contact.section2.form.firstName")}
           />
-        </div>
-        <div class="row">
           <input
             bind:value={email}
             placeholder={$_("contact.section2.form.email")}
           />
-        </div>
-        <div class="row">
           <input
             bind:value={telephone}
             placeholder={$_("contact.section2.form.telephone")}
@@ -365,7 +368,7 @@
         <div class="row">
           <textarea
             bind:value={message}
-            style="min-height:200px"
+            style="min-height:200px;max-width:967px;"
             placeholder={$_("contact.section2.form.message")}
           />
         </div>
@@ -401,6 +404,7 @@
   .containerOneText {
     max-width: 800px;
     font-size: 20px;
+    padding: 0px 20px;
   }
 
   .section3 {
@@ -428,15 +432,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin: 20px 0px;
   }
 
   .hybridImage1 {
     width: 40%;
   }
 
-  table {
-    width: 100%;
-  }
   .block {
     display: flex;
     flex-direction: column;
@@ -444,19 +446,24 @@
     align-items: center;
     min-height: 325px;
     width: 25%;
+    padding: 0px 20px;
+    border-left: 2px solid #aaaaaa;
+  }
+  .block:first-child {
+    border-left: none;
   }
   .blockNumber {
     background-color: #d1a765;
     color: #00355f;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     border-radius: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     margin: 10px;
   }
@@ -464,6 +471,9 @@
     color: #00355f;
     margin: 10px;
     font-size: 24px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
   }
   .blockDescription {
     color: #000000;
@@ -482,6 +492,8 @@
     align-items: center;
     min-height: 425px;
     width: 20%;
+    border: 1px solid #5288e2;
+    margin: 0px 10px;
   }
   .block2Image {
     width: 125px;
@@ -494,6 +506,8 @@
     margin: 10px;
     font-size: 20px;
     color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
   }
   .block2Description {
     margin: 10px;
@@ -507,34 +521,52 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 100px 0px;
+    margin: 50px 0px;
   }
 
   .block3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 400px;
+    align-items: flex-start;
+    width: 600px;
     background-color: #ffffff;
     border: 10px solid #cccccc;
     margin: 10px;
+    padding: 10px;
+    z-index: 1;
   }
   .block3Title {
     color: #00355f;
     margin: 10px;
     font-size: 20px;
     text-transform: uppercase;
+    font-weight: bold;
+    text-align: left;
   }
   .block3Description {
     margin: 10px;
-    text-align: center;
+    text-align: left;
     color: #000000;
     font-size: 16px;
   }
 
+  .block3_1 {
+    margin-left: 0px;
+  }
+  .block3_2 {
+    margin-left: 400px;
+  }
+  .block3_3 {
+    margin-left: -200px;
+  }
+
   table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
     border-collapse: collapse;
-    margin: 20px 0px;
   }
   tbody tr {
     background-color: #ffffff;
@@ -543,13 +575,17 @@
     background-color: #bacad9;
     color: #00355f;
     text-align: left;
-    padding: 10px;
+    padding: 20px;
     text-transform: uppercase;
     border: 1px solid #707070;
+    font-size: 20px;
   }
   td {
     border: 1px solid #707070;
-    padding: 10px;
+    padding: 20px;
+  }
+  td:first-child {
+    font-weight: bold;
   }
   .topLine {
     width: 50%;
@@ -560,31 +596,56 @@
 
   .section4image {
     position: absolute;
-    height: 75%;
+    height: 100%;
   }
 
   input,
   textarea {
-    width: 100%;
+    width: calc(100% - 30px);
     margin: 5px;
     padding: 10px;
     font-family: arial;
   }
   button {
     all: unset;
-    background-color: #6f8db1;
+    background-color: #d1a765;
     color: #ffffff;
     padding: 10px 20px;
     min-width: 150px;
     text-align: center;
     cursor: pointer;
     transition: 0.2s;
+    margin-top: 10px;
+    margin-right: 7px;
   }
   button:hover {
     background-color: #9bc8ff;
   }
   .sendMessageContainer {
-    width: 50%;
+    width: 100%;
+    max-width: 1000px;
+  }
+  .awardTitle {
+    font-family: lato;
+    text-transform: uppercase;
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+  .awardTitle:first-child {
+    margin-top: 0px;
+  }
+  .headerText {
+    font-size: 30px !important;
+    text-transform: uppercase;
+  }
+  .header {
+    margin-bottom: 40px;
+  }
+  .messageRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
 
   @media only screen and (max-width: 850px) {
@@ -594,6 +655,7 @@
     }
     .hybridImage1 {
       width: 100vw;
+      margin-top: 30px;
     }
     .blocks {
       flex-direction: column;
@@ -610,23 +672,66 @@
     .block2 {
       width: 100%;
     }
+
+    .block3_1,
+    .block3_2,
+    .block3_3 {
+      margin-left: 0px;
+    }
+
     .topLine {
       width: 100%;
       margin: 0px;
     }
 
     .sendMessageContainer {
-      width: 80%;
+      width: 100%;
     }
     .mainTitle {
       text-align: center;
       font-size: 26px;
+    }
+    .blocks3 {
+      margin-top: 0px;
+      padding-top: 0px;
     }
     .block3 {
       width: 80%;
     }
     .section4image {
       z-index: -1;
+    }
+    .messageRow {
+      flex-direction: column;
+    }
+    .awardTitle:first-child {
+      margin-top: 40px;
+    }
+    .awardTitle {
+      text-align: center;
+    }
+    .block2 {
+      margin-bottom: 40px;
+    }
+    .block2Image {
+      width: 80px;
+      height: 80px;
+    }
+    .headerText {
+      font-size: 26px !important;
+    }
+    .block {
+      border-left: none;
+    }
+    button {
+      margin-right: 0px;
+      width: calc(100% - 40px);
+    }
+    .header {
+      max-width: 100%;
+    }
+    table {
+      word-break: break-word;
     }
   }
 </style>

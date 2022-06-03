@@ -1,5 +1,5 @@
 <script>
-  import { Router, Route } from "svelte-routing";
+  import { Router, Route, navigate } from "svelte-routing";
   import { globalHistory } from "svelte-routing/src/history";
   import { onMount, onDestroy } from "svelte";
   import { fade } from "svelte/transition";
@@ -74,6 +74,23 @@
     }
   };
   authCheck();
+
+  let showFundsMenu = false;
+  let fundsMenuTimeout = false;
+
+  const closeBurgerMenu = async (click = true) => {
+    if (click) {
+      document.getElementsByTagName("button")[0].click();
+    }
+    setTimeout(() => {
+      document.getElementsByTagName("button")[0].style.color = [
+        "/",
+        "/hybridFund",
+      ].includes(pathname)
+        ? "#ffffff"
+        : "#000000";
+    }, 0);
+  };
 </script>
 
 <Router {url}>
@@ -87,7 +104,16 @@
       >
         <div class="navContainerInner">
           <div class="navTitle">
-            <NavLink to="/">
+            <a
+              on:click={(e) => {
+                e.preventDefault();
+                navigate("/");
+                if (isMobile) {
+                  closeBurgerMenu(false);
+                }
+              }}
+              href="/"
+            >
               <img
                 style="margin-right:10px;{['/', '/hybridFund'].includes(
                   pathname
@@ -113,7 +139,7 @@
                   GESTIÓN FINANCIERA
                 </div>
               </div>
-            </NavLink>
+            </a>
           </div>
           <div
             style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;"
@@ -131,6 +157,11 @@
                 backgroundColor="#284660"
               >
                 <a
+                  on:click={(e) => {
+                    e.preventDefault();
+                    navigate("/");
+                    closeBurgerMenu();
+                  }}
                   class="mobileLinks {pathname === '/'
                     ? 'activeMobileLink'
                     : ''}"
@@ -138,6 +169,11 @@
                 >
                 <p />
                 <a
+                  on:click={(e) => {
+                    e.preventDefault();
+                    navigate("/about");
+                    closeBurgerMenu();
+                  }}
                   class="mobileLinks {pathname === '/about'
                     ? 'activeMobileLink'
                     : ''}"
@@ -145,6 +181,11 @@
                 >
                 <p />
                 <a
+                  on:click={(e) => {
+                    e.preventDefault();
+                    navigate("/contactus");
+                    closeBurgerMenu();
+                  }}
                   class="mobileLinks {pathname === '/contactus'
                     ? 'activeMobileLink'
                     : ''}"
@@ -155,10 +196,47 @@
                   class="mobileLinks {pathname === '/funds'
                     ? 'activeMobileLink'
                     : ''}"
-                  href="/funds">{$_("app.funds")}</a
+                  href="#"
+                  on:click={() => {
+                    showFundsMenu = !showFundsMenu;
+                  }}>{$_("app.funds")}</a
                 >
+                {#if showFundsMenu}
+                  <div
+                    style="background-color:#000000;padding:20px;margin:20px;margin-right:0px;"
+                  >
+                    <a
+                      on:click={(e) => {
+                        e.preventDefault();
+                        navigate("/equityFund1");
+                        closeBurgerMenu();
+                      }}
+                      class="mobileLinks {pathname === '/equityFund1'
+                        ? 'activeMobileLink'
+                        : ''}"
+                      href="/equityFund1">{$_("app.equityFund1")}</a
+                    >
+                    <p />
+                    <a
+                      on:click={(e) => {
+                        e.preventDefault();
+                        navigate("/hybridFund");
+                        closeBurgerMenu();
+                      }}
+                      class="mobileLinks {pathname === '/hybridFund1'
+                        ? 'activeMobileLink'
+                        : ''}"
+                      href="/hybridFund">{$_("app.hybridFund")}</a
+                    >
+                  </div>
+                {/if}
                 <p />
                 <a
+                  on:click={(e) => {
+                    e.preventDefault();
+                    navigate("/team");
+                    closeBurgerMenu();
+                  }}
                   class="mobileLinks {pathname === '/team'
                     ? 'activeMobileLink'
                     : ''}"
@@ -167,43 +245,79 @@
               </BurgerMenu>
             {:else}
               <!-- <div
-                class="navLinks"
-                style="display:flex;flex-direction:row;align-items:center;justify-content:center;margin-bottom:-5px;margin-top:-5px;"
-              >
-                {#if authenticated}
-                  <div
-                    style="margin-right:5px;color:{pathname === '/'
-                      ? '#ffffff'
-                      : '#000000'}"
-                  >
-                    Welcome, {userData.given_name}!
-                  </div>
-                  <div style="background-color:#000000;margin-right:10px;">
-                    <NavLink to="/account">Account</NavLink>
-                  </div>
-                  <div style="background-color:#555555">
-                    <a
-                      class="authLink"
-                      href="javascript:void(0)"
-                      on:click={() => {
-                        authenticated = false;
-                      }}>Logout</a
-                    >
-                  </div>
-                {:else}
-                  <div style="background-color:#000000;margin-right:10px;">
-                    <NavLink to="/login">{$_("app.login")}</NavLink>
-                  </div>
-                  <div style="background-color:#555555">
-                    <NavLink to="/signup">{$_("app.signup")}</NavLink>
-                  </div>
-                {/if}
-              </div> -->
+								class="navLinks"
+								style="display:flex;flex-direction:row;align-items:center;justify-content:center;margin-bottom:-5px;margin-top:-5px;"
+							>
+								{#if authenticated}
+									<div
+										style="margin-right:5px;color:{pathname === '/'
+											? '#ffffff'
+											: '#000000'}"
+									>
+										Welcome, {userData.given_name}!
+									</div>
+									<div style="background-color:#000000;margin-right:10px;">
+										<NavLink to="/account">Account</NavLink>
+									</div>
+									<div style="background-color:#555555">
+										<a
+											class="authLink"
+											href="javascript:void(0)"
+											on:click={() => {
+												authenticated = false;
+											}}>Logout</a
+										>
+									</div>
+								{:else}
+									<div style="background-color:#000000;margin-right:10px;">
+										<NavLink to="/login">{$_("app.login")}</NavLink>
+									</div>
+									<div style="background-color:#555555">
+										<NavLink to="/signup">{$_("app.signup")}</NavLink>
+									</div>
+								{/if}
+							</div> -->
               <div class="navLinks">
                 <NavLink to="/">{$_("app.home")}</NavLink>
                 <NavLink to="/about">{$_("app.about")}</NavLink>
                 <NavLink to="/contactus">{$_("app.contact")}</NavLink>
-                <NavLink to="/funds">{$_("app.funds")}</NavLink>
+                <a
+                  href="#"
+                  style={["/", "/hybridFund"].includes(pathname)
+                    ? "color:#ffffff"
+                    : ""}
+                  on:blur={() => {}}
+                  on:mouseout={() => {
+                    fundsMenuTimeout = setTimeout(() => {
+                      showFundsMenu = false;
+                    }, 10);
+                  }}
+                  on:focus={() => {}}
+                  on:mouseover={() => {
+                    clearTimeout(fundsMenuTimeout);
+                    showFundsMenu = true;
+                  }}
+                  on:click={() => {
+                    showFundsMenu = !showFundsMenu;
+                  }}
+                  to="/funds"
+                  >{$_("app.funds")}
+                  {#if showFundsMenu}
+                    <div
+                      on:focus={() => {}}
+                      on:mouseover={() => {
+                        clearTimeout(fundsMenuTimeout);
+                        showFundsMenu = true;
+                      }}
+                      style="position:absolute;background-color:#000000;margin-top:10px;width:200px;"
+                    >
+                      <NavLink to="/equityFund1"
+                        >{$_("app.equityFund1")}</NavLink
+                      >
+                      <NavLink to="/hybridFund">{$_("app.hybridFund")}</NavLink>
+                    </div>
+                  {/if}</a
+                >
                 <NavLink to="/team">{$_("app.team")}</NavLink>
               </div>
             {/if}
@@ -246,7 +360,7 @@
           </p>
           <p style="margin-bottom:20px;font-size:12px;">
             {`No hay garantías de que los Fondos cumplirán sus objetivos de inversión o que sus estrategias GBH serán exitosas.
-              Los datos de rendimiento indicados representan el rendimiento pasado y no son garantía de rendimientos futuros. El rendimiento actual puede ser inferior o superior a los datos de rendimiento citados.`}
+							Los datos de rendimiento indicados representan el rendimiento pasado y no son garantía de rendimientos futuros. El rendimiento actual puede ser inferior o superior a los datos de rendimiento citados.`}
           </p>
         </div>
         <div class="blocksInner">
@@ -301,7 +415,7 @@
     </div>
     <div
       class="navContainer"
-      style="height:60px;background-color:#d1a765;padding:0px;margin:0px;color:#ffffff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;"
+      style="height:60px;background-color:#1D355E;padding:0px;margin:0px;color:#ffffff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;"
     >
       {$_("app.copyright")} © {new Date().getFullYear()} Guardian Brothers Holdings
       LLC

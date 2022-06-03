@@ -5,8 +5,8 @@
   onMount(() => {
     window.scrollTo(0, 0);
     const isMobile = window.matchMedia(
-        "only screen and (max-width: 760px)"
-      ).matches;
+      "only screen and (max-width: 760px)"
+    ).matches;
     document.querySelectorAll("#body")[0].style.backgroundImage =
       "url('images/background_about.jpg')";
     document.querySelectorAll("#body")[0].style.backgroundPosition = `50% ${
@@ -183,16 +183,24 @@
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
-        <img alt="" src="images/tdameritrade.jpg" />
-      </div>
-      <div class="teamBlocksInner">
         <img alt="" src="images/interactivebrokers.jpg" />
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/prodisma.jpg" />
+        <img alt="" src="images/paxos.jpg" />
       </div>
       <div class="teamBlocksInner">
         <img alt="" src="images/investmentlawgroup.jpg" />
+      </div>
+    </div>
+    <div class="teamBlocks" in:fade>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/nav.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/summit.jpg" />
+      </div>
+      <div class="teamBlocksInner">
+        <img alt="" src="images/prodisma.jpg" />
       </div>
     </div>
   </div>

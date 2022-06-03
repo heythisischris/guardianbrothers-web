@@ -451,6 +451,7 @@ table td {
 .headerText {
   font-size: 20px;
   text-align: center;
+  font-family: 'Merriweather';
 }
 
 .headerLine {
@@ -662,6 +663,9 @@ table td {
   button {
     top: 23px !important;
     left: 10px !important;
+  }
+  .pageContainerInner {
+    width: calc(100% - 20px);
   }
 
 }

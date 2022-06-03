@@ -137,6 +137,8 @@
       <div class="teamBlocksInner">
         <img alt="" src="images/investmentlawgroup.jpg" />
       </div>
+    </div>
+    <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
         <img alt="" src="images/nav.jpg" />
       </div>

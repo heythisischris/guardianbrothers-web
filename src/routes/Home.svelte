@@ -9,28 +9,6 @@
       "url('images/background_home.jpg')";
     document.querySelectorAll("#body")[0].style.backgroundPosition = "50% 0px";
   });
-  async function loadAPI(url) {
-    let data = await fetch(url);
-    let response = await data.json();
-    return response;
-  }
-  var equityFund1Stats = loadAPI(
-    "https://lambda.guardianbrothers.com/stats/equityFund1"
-  );
-  equityFund1Stats.then((innerStats) => {
-    equityFund1Stats = innerStats;
-  });
-  var hybridFundStats = loadAPI(
-    "https://lambda.guardianbrothers.com/stats/hybridFund"
-  );
-  hybridFundStats.then((innerStats) => {
-    hybridFundStats = innerStats;
-  });
-
-  let formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
 
   let mailingListEmail = "";
   let addedToMailingList = false;
@@ -50,15 +28,13 @@
     class="pageContainerInner"
     style="color:#ffffff;font-size:22px;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
   >
-    <div
-      class="mainTitle"
-      style="margin-top:-20px;"
-      in:fade={{ delay: 250, duration: 500 }}
-    >
+    <div class="mainTitle" in:fade={{ delay: 250, duration: 500 }}>
       {$_("home.main.title")}
     </div>
-    <div in:fade={{ delay: 250, duration: 500 }} class="mainSubtitle">
-      <div class="subtitle">{$_("home.main.subtitle")}</div>
+    <div class="subtitleContainer" in:fade={{ delay: 350, duration: 500 }}>
+      <div class="mainSubtitle">
+        {$_("home.main.subtitle")}
+      </div>
       <div class="dynamicSubtitle">
         <div class="subtitle1">{$_("home.main.subtitle1")}</div>
         <div class="subtitle2">{$_("home.main.subtitle2")}</div>
@@ -136,7 +112,7 @@
         <p class="blocksDescription">{$_("home.section2.box1.description")}</p>
         <div
           on:click={() => {
-            navigate("/funds");
+            navigate("/hybridFund");
           }}
           class="blocksButton"
         >
@@ -150,7 +126,7 @@
         <p class="blocksDescription">{$_("home.section2.box2.description")}</p>
         <div
           on:click={() => {
-            navigate("/funds");
+            navigate("/hybridFund");
           }}
           class="blocksButton"
         >
@@ -163,7 +139,7 @@
         <p class="blocksDescription">{$_("home.section2.box3.description")}</p>
         <div
           on:click={() => {
-            navigate("/funds");
+            navigate("/hybridFund");
           }}
           class="blocksButton"
         >
@@ -173,19 +149,16 @@
     </div>
   </div>
 </div>
-
-<div class="pageContainer sectionFunds">
-  <div
-    class="pageContainerInner"
-    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
-  >
+<div class="fundsContainer">
+  <div class="pageContainer sectionFunds">
     <div
-      class="pageContainerInner sectionFundsInner"
-      style="color:#ffffff;font-size:22px;"
+      class="pageContainerInner"
+      style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
     >
-      {#await equityFund1Stats}
-        <div />
-      {:then equityFund1Stats}
+      <div
+        class="pageContainerInner sectionFundsInner"
+        style="color:#ffffff;font-size:22px;"
+      >
         <div class="sectionFundsTopContainer">
           <div class="sectionFundsTitle">
             {$_("home.sectionFunds.equityFund1.title")}
@@ -211,60 +184,19 @@
             </a>
           </div>
         </div>
-        <div id="stats" in:fade>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("equityFund1.main.fundAssets")}</div>
-              <div>{formatter.format(equityFund1Stats[0].value)}</div>
-            </div>
-            <div class="infoBorder">
-              <div>{$_("equityFund1.main.sharesOutstanding")}</div>
-              <div>{formatter.format(equityFund1Stats[0].shares).slice(1)}</div>
-            </div>
-          </div>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("equityFund1.main.nav")}</div>
-              <div>
-                {formatter.format(
-                  equityFund1Stats[0].value / equityFund1Stats[0].shares
-                )}
-              </div>
-            </div>
-            <div class="infoBorder">
-              <div>{$_("equityFund1.main.navChange")}</div>
-              <div>
-                {formatter.format(
-                  equityFund1Stats[0].value / equityFund1Stats[0].shares -
-                    equityFund1Stats[1].value / equityFund1Stats[1].shares
-                )}
-                ({(
-                  ((equityFund1Stats[0].value / equityFund1Stats[0].shares -
-                    equityFund1Stats[1].value / equityFund1Stats[1].shares) /
-                    (equityFund1Stats[1].value / equityFund1Stats[1].shares)) *
-                  100
-                ).toFixed(2) + "%"})
-              </div>
-            </div>
-          </div>
-        </div>
-      {/await}
+      </div>
     </div>
   </div>
-</div>
 
-<div class="pageContainer sectionFunds2">
-  <div
-    class="pageContainerInner"
-    style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
-  >
+  <div class="pageContainer sectionFunds2">
     <div
-      class="pageContainerInner sectionFundsInner"
-      style="color:#ffffff;font-size:22px;"
+      class="pageContainerInner"
+      style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;"
     >
-      {#await hybridFundStats}
-        <div />
-      {:then hybridFundStats}
+      <div
+        class="pageContainerInner sectionFundsInner"
+        style="color:#ffffff;font-size:22px;"
+      >
         <div class="sectionFundsTopContainer">
           <div class="sectionFundsTitle">
             {$_("home.sectionFunds.hybridFund.title")}
@@ -290,48 +222,10 @@
             </a>
           </div>
         </div>
-        <!-- <div id="stats" in:fade>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.fundAssets")}</div>
-              <div>{formatter.format(hybridFundStats[0].value)}</div>
-            </div>
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.sharesOutstanding")}</div>
-              <div>{formatter.format(hybridFundStats[0].shares).slice(1)}</div>
-            </div>
-          </div>
-          <div class="statsContainer">
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.nav")}</div>
-              <div>
-                {formatter.format(
-                  hybridFundStats[0].value / hybridFundStats[0].shares
-                )}
-              </div>
-            </div>
-            <div class="infoBorder">
-              <div>{$_("hybridFund.main.navChange")}</div>
-              <div>
-                {formatter.format(
-                  hybridFundStats[0].value / hybridFundStats[0].shares -
-                    hybridFundStats[1].value / hybridFundStats[1].shares
-                )}
-                ({(
-                  ((hybridFundStats[0].value / hybridFundStats[0].shares -
-                    hybridFundStats[1].value / hybridFundStats[1].shares) /
-                    (hybridFundStats[1].value / hybridFundStats[1].shares)) *
-                  100
-                ).toFixed(2) + "%"})
-              </div>
-            </div>
-          </div>
-        </div> -->
-      {/await}
+      </div>
     </div>
   </div>
 </div>
-
 <div class="pageContainer">
   <div class="pageContainerInner">
     <div class="row">
@@ -503,6 +397,8 @@
 <style>
   .mainTitle {
     font-size: 30px;
+    margin-top: -80px;
+    margin-bottom: 20px;
   }
   .containerOne {
     display: flex;
@@ -560,9 +456,14 @@
 
   .sectionFunds {
     min-height: 200px;
-    background: linear-gradient(#354558ee, #354558ee), url("images/gbfund1.svg");
+    background: linear-gradient(#35455899, #35455899),
+      url("images/equityBackground.jpg");
     background-size: cover;
     color: #ffffff;
+    width: calc(50% + 160px);
+    padding: 20px;
+    margin-right: -160px;
+    clip-path: polygon(0% 0%, 100% 0, 85% 100%, 0% 100%);
   }
 
   .sectionFunds2 {
@@ -570,6 +471,9 @@
     background: url("images/hybrid_cover.jpg");
     background-size: cover;
     color: #ffffff;
+    width: calc(50% + 160px);
+    padding: 20px;
+    padding-left: 150px;
   }
 
   .blocks {
@@ -685,7 +589,6 @@
     animation: subtitleAnimation 15s infinite;
     transition: all;
     position: absolute;
-    text-decoration-line: underline !important;
   }
   .subtitle1 {
     animation-delay: 0s;
@@ -696,18 +599,22 @@
   .subtitle3 {
     animation-delay: 10s;
   }
-
+  .subtitleContainer {
+    border-left: 2px solid #c49c4b;
+    height: 140px;
+    padding-left: 20px;
+    margin-left: 20px;
+  }
   .mainSubtitle {
+    font-size: 30px;
+  }
+  .dynamicSubtitle {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    font-size: 50px;
-  }
-
-  .dynamicSubtitle {
-    margin-left: 15px;
-    font-weight: bold;
+    font-size: 80px;
+    margin-top: -10px;
   }
 
   .sectionFundsTopContainer {
@@ -715,16 +622,13 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-top: 20px;
+    margin-top: 100px;
   }
   .sectionFundsButtonContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-  }
-  #stats {
-    margin-top: 100px;
   }
   .sectionFundsInner {
     height: 410px;
@@ -755,6 +659,10 @@
     align-items: center;
     margin-top: 40px;
     width: 600px;
+  }
+  .fundsContainer {
+    display: flex;
+    flex-direction: row;
   }
 
   @media only screen and (max-width: 850px) {
@@ -787,6 +695,7 @@
       background-size: 250%;
       background-position: -250px 0px;
       min-height: 300px;
+      clip-path: none;
     }
     .sectionFundsTitle {
       font-size: 30px;
@@ -799,9 +708,6 @@
     .sectionFundsTopContainer {
       flex-direction: column;
       margin-top: 0px;
-    }
-    #stats {
-      margin-top: 20px;
     }
     .sectionFundsInner {
       height: 100%;
@@ -836,14 +742,28 @@
       width: 100%;
       margin-bottom: 200px;
     }
+    .mainTitle {
+      font-size: 24px;
+      text-align: left !important;
+    }
     .mainSubtitle {
-      font-size: 26px !important;
+      font-size: 24px;
+      text-align: left !important;
     }
     .dynamicSubtitle {
-      margin-left: 7px !important;
+      font-size: 50px;
     }
-    .mainTitle {
-      text-align: left !important;
+    .fundsContainer {
+      flex-direction: column;
+    }
+    .sectionFunds,
+    .sectionFunds2 {
+      width: 100%;
+      padding: 0px;
+      margin: 0px;
+    }
+    .subtitleContainer {
+      height: 100px;
     }
   }
 </style>
