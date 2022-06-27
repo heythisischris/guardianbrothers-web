@@ -106,13 +106,6 @@
           <span>Growth Lead at Mano Pagos</span>
         </div>
       </div>
-      <div class="teamBlocksInner">
-        <img alt="" src="images/juan.jpg" />
-        <div class="teamBlocksInnerText">
-          <h2>Juan Carlos Paniagua</h2>
-          <span>Board member</span>
-        </div>
-      </div>
     </div>
   </div>
 </div>
