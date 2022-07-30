@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8" />
+    <title>Guardian Brothers - Upload CSV Tool</title>
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;font-size:28px;"><img style="height:100px;width:100px"
+                 src="https://guardianbrothers.com/images/logo.svg" />Guardian Brothers - Upload CSV Tool</div>
+        <a href="/gb_upload_template.csv">Download example CSV template here</a>
+        <div style="height:40px"></div>
+        <form action="javascript:void(0);"
+              id="form">
+            <input type="file"
+                   id="file"
+                   required="required"
+                   accept=".csv" />
+            <input type="submit"
+                   value="Upload" />
+        </form>
+        <div id="file_info"></div>
+    </div>
+    <script>
+
+        function fileInfo(e) {
+            var file = e.target.files[0];
+            if (file.name.split(".")[1].toUpperCase() != "CSV") {
+                alert('Invalid CSV!');
+                e.target.parentNode.reset();
+                return;
+            } else {
+                document.getElementById('file_info').innerHTML = "<p>File Name: " + file.name + " | " + file.size + " Bytes.</p>";
+            }
+        }
+        function handleFileSelect() {
+            var file = document.getElementById("file").files[0];
+            var reader = new FileReader();
+            reader.onload = async function (file) {
+                document.getElementById('file_info').innerHTML = "<div style='display: flex;flex-direction: column;align-items: center;'><p>Please wait, file processing...<div class='loader'></div></p></div>";
+                var content = file.target.result;
+                let response = await fetch('https://lambda.guardianbrothers.com/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: content
+                });
+                response = await response.json();
+                alert("Success! Your file was processed");
+                document.getElementById('file_info').innerHTML = "<p>Success! Your file was processed</p>";
+            };
+            reader.readAsText(file);
+        }
+        document.getElementById('form').addEventListener('submit', handleFileSelect, false);
+        document.getElementById('file').addEventListener('change', fileInfo, false);
+    </script>
+</body>
+
+</html>

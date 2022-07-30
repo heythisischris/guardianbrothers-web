@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "run-p watch server",
-    "build": "rollup -c",
+    "build": "rollup -c && aws s3 --profile guardianbrothers sync --delete ./public s3://guardianbrothers-prod --exclude \"*.js\" && aws s3 --profile guardianbrothers sync --delete ./public s3://guardianbrothers-prod --include \"*.js\" --content-type \"application/javascript\" && aws --profile guardianbrothers cloudfront create-invalidation --distribution-id E211LL59HFMCHW --paths \"/*\"",
     "watch": "rollup -c -w",
     "server": "nodemon server.js --watch server.js --watch public/App.js"
   },
