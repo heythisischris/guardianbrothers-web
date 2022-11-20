@@ -183,10 +183,10 @@
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
-        <img alt="" src="images/interactivebrokers.jpg" />
+        <img alt="" src="images/tradestation.jpg" />
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/paxos.jpg" />
+        <img alt="" src="images/gemini.jpg" />
       </div>
       <div class="teamBlocksInner">
         <img alt="" src="images/investmentlawgroup.jpg" />

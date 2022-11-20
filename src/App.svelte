@@ -128,7 +128,7 @@
                 class="titleContainer"
                 style="display:flex;flex-direction:column;justify-content:center;color:#333333;"
               >
-                <div id="title">Guardian Brothers Holdings</div>
+                <div id="title">Guardian Brothers</div>
                 <div id="titleLine" />
                 <div
                   id="subtitle"
@@ -136,7 +136,7 @@
                     ? "color:#ffffff"
                     : ""}
                 >
-                  GESTIÓN FINANCIERA
+                  CAPITAL MANAGEMENT
                 </div>
               </div>
             </a>
@@ -348,15 +348,15 @@
               style="display:flex;flex-direction:column;justify-content:center;color:#333333;"
             >
               <div style="font-size:18px;">
-                Guardian Brothers{isMobile ? "" : " Holdings"}
+                Guardian Brothers
               </div>
               <div style="font-size:12px;font-family:arial;text-align:right;">
-                GESTIÓN FINANCIERA
+                CAPITAL MANAGEMENT
               </div>
             </div>
           </a>
           <p style="margin-bottom:10px;font-size:12px;width:99%;">
-            © 2010-2022 Guardian Brothers Fund
+            © 2010-2022 Guardian Brothers Capital LLC
           </p>
           <p style="margin-bottom:20px;font-size:12px;">
             {`No hay garantías de que los Fondos cumplirán sus objetivos de inversión o que sus estrategias GBH serán exitosas.
@@ -417,8 +417,7 @@
       class="navContainer"
       style="height:60px;background-color:#1D355E;padding:0px;margin:0px;color:#ffffff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:12px;"
     >
-      {$_("app.copyright")} © {new Date().getFullYear()} Guardian Brothers Holdings
-      LLC
+      {$_("app.copyright")} © {new Date().getFullYear()} Guardian Brothers Capital LLC
     </div>
   </div>
 </Router>

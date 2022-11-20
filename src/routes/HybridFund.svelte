@@ -63,7 +63,23 @@
       in:fade={{ delay: 250, duration: 500 }}
       class="topButton"
     >
-      {$_("hybridFund.main.button")}
+      {$_("hybridFund.main.button1")}
+    </a>
+    <a
+      target="_blank"
+      href="https://guardianbrothers.com"
+      in:fade={{ delay: 250, duration: 500 }}
+      class="topButton"
+    >
+      {$_("hybridFund.main.button2")}
+    </a>
+    <a
+      target="_blank"
+      href="https://guardianbrothers.com"
+      in:fade={{ delay: 250, duration: 500 }}
+      class="topButton"
+    >
+      {$_("hybridFund.main.button3")}
     </a>
   </div>
 </div>

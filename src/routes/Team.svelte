@@ -47,21 +47,21 @@
         <img alt="" src="images/fernando.jpg" />
         <div class="teamBlocksInnerText">
           <h2>Fernando Guardia</h2>
-          <span>Founder & CEO</span>
+          <span>Chief Executive Officer</span>
         </div>
       </div>
       <div class="teamBlocksInner">
         <img alt="" src="images/sebastian.jpg" />
         <div class="teamBlocksInnerText">
           <h2>Sebastian Ewel</h2>
-          <span>Chairman & Chief Financial Officer</span>
+          <span>Chief Financial Officer</span>
         </div>
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/matias.jpg" />
+        <img alt="" src="images/juan.jpg" />
         <div class="teamBlocksInnerText">
-          <h2>Matias Martinez</h2>
-          <span>Chief Sales Officer</span>
+          <h2>Juan Carlos Paniagua</h2>
+          <span>Chief Operating Officer</span>
         </div>
       </div>
       <div class="teamBlocksInner">
@@ -86,6 +86,13 @@
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
+        <img alt="" src="images/manuel.jpg" />
+        <div class="teamBlocksInnerText">
+          <h2>Manuel Sauma</h2>
+          <span>Growth Lead at Mano Pagos</span>
+        </div>
+      </div>
+      <div class="teamBlocksInner">
         <img alt="" src="images/luis.jpg" />
         <div class="teamBlocksInnerText">
           <h2>Luis Fernando Guardia</h2>
@@ -100,10 +107,10 @@
         </div>
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/manuel.jpg" />
+        <img alt="" src="images/ronald.jpg" />
         <div class="teamBlocksInnerText">
-          <h2>Manuel Sauma</h2>
-          <span>Growth Lead at Mano Pagos</span>
+          <h2>Ronald Iriarte</h2>
+          <span />
         </div>
       </div>
     </div>
@@ -122,10 +129,10 @@
     </div>
     <div class="teamBlocks" in:fade>
       <div class="teamBlocksInner">
-        <img alt="" src="images/interactivebrokers.jpg" />
+        <img alt="" src="images/tradestation.jpg" />
       </div>
       <div class="teamBlocksInner">
-        <img alt="" src="images/paxos.jpg" />
+        <img alt="" src="images/gemini.jpg" />
       </div>
       <div class="teamBlocksInner">
         <img alt="" src="images/investmentlawgroup.jpg" />

@@ -32,7 +32,7 @@
     "section1": {
       "title": "Acerca de Nosotros",
       "subtitle": "Quienes Somos",
-      "paragraph1": "Guardian Brothers Holdings es una empresa gestora de inversiones alternativas, constituida en Miami, Florida. La firma emplea un enfoque en la preservación y crecimiento sostenible del patrimonio de nuestros inversionistas.",
+      "paragraph1": "Guardian Brothers es una empresa gestora de inversiones alternativas, constituida en Miami, Florida. La firma emplea un enfoque en la preservación y crecimiento sostenible del patrimonio de nuestros inversionistas.",
       "paragraph2": "La firma combina la experiencia desarrollada a lo largo de su historia en creación de carteras y habilidades de gestión de riesgo para ofrecer atractivos rendimientos ajustados al riesgo de forma sostenible.",
       "paragraph3": "Un pionero en inversión en LATAM impulsada por eventos macro, estrategias en corto, largo y diversificación de activos globales.",
       "paragraph4": "Guardian Brothers ha ganado una reputación por su compromiso con la integridad, transparencia y simplicidad con sus inversionistas.",
@@ -120,7 +120,7 @@
       "subtitle": "Somos una firma de inversión dedicada a su crecimiento financiero."
     },
     "section1": {
-      "title": "GUARDIAN BROTHERS HOLDINGS",
+      "title": "GUARDIAN BROTHERS",
       "subtitle": "¿Por qué elegirnos?",
       "paragraph1": "Creemos que los fondos de inversión no son exclusivos del inversionista sofisticado o con un gran patrimonio, son una herramienta que debe estar al alcance de todos sin importar cuánto dinero tengas.",
       "paragraph2": "Creamos portafolios alternativos a la medida con inversiones a partir de $10,000 USD y ponemos a tu alcance mercados financieros y bursátiles de EE. UU., considerando tu estilo de vida, tus necesidades, tus proyectos y objetivos a mediano y largo plazo.",
@@ -146,7 +146,7 @@
     "section3": {
       "title": "Our story",
       "subtitle": "Nuestra Historia",
-      "paragraph1": "Guardian Brothers Holdings LLC (GBH) surgió con el objetivo de poner al alcance de inversores en Latinoamérica, mercados bursátiles de EE. UU., de forma segura, simple e interesante.",
+      "paragraph1": "Guardian Brothers LLC (GBH) surgió con el objetivo de poner al alcance de inversores en Latinoamérica, mercados bursátiles de EE. UU., de forma segura, simple e interesante.",
       "paragraph2": "Fernando Guardia, nuestro Fundador y Director Ejecutivo, empezó su carrera como gestor de inversiones a la temprana edad de 18 años gestionando carteras de por encima $1MM AUM, demostrando que invertir es un ejercicio que puede ser para todos y para todo tipo de presupuestos.",
       "paragraph3": "En su trayectoria fue responsable de la construcción de los algoritmos de Alegra, y fondos estudiantiles donde destaco por su gestion de riesgo y liderazgo en toma de decisiones en momentos de crisis, pues estamos convencidos de que garantizar la seguridad en cada inversión es el mejor aliado.",
       "paragraph4": "Sobre estos principios fundamos GBH, una compañía creadora y administradora de fondos de inversión alternativos, constituida en Florida, EE. UU., que actualmente cuenta con clientes en EE.UU., Bolivia y Paraguay, y continúa buscando llegar a más inversionistas en países de Latinoamérica que tengan interés de invertir en mercados internacionales."
@@ -256,7 +256,7 @@
       "title": "Como funciona",
       "block1": {
         "title": "Compramos",
-        "description": "Guardian Brothers Holdings encuentra oportunidades en el mercado de valores. Crea una cartera sólida para todos nuestros inversores."
+        "description": "Guardian Brothers encuentra oportunidades en el mercado de valores. Crea una cartera sólida para todos nuestros inversores."
       },
       "block2": {
         "title": "Tu inviertes",
@@ -350,7 +350,9 @@
     "main": {
       "title": "Guardian Hybrid Fund, LP",
       "subtitle": "Alternativa De Inversión En Criptomonedas Y Acciones",
-      "button": "Start Investing"
+      "button1": "EMPIEZE A INVERTIR",
+      "button2": "DESCARGAR FACT SHEET",
+      "button3": "DESCARGAR PRESENTACION"
     },
     "section1": {
       "title": "GENERAL",
@@ -407,7 +409,7 @@
       }
     },
     "section4": {
-      "title": "Processo de inversión",
+      "title": "Proceso de inversión",
       "block1": {
         "title": "Estrategia de gestión activa",
         "description": "Nos concentramos en los valores que consideran que ofrecen el mejor valor en relación con el riesgo, incluimos muchos de los índices y empresas de mediano-alto capital.  Con esta estrategia activa, podemos trabajar para evitar industrias y valores que pueden enfrentar problemas en el futuro y así posicionarse para un entorno y perspectiva macroeconómicos determinadas"
