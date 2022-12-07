@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { navigate } from "svelte-routing";
   import { _ } from "svelte-i18n";
   onMount(() => {
     window.scrollTo(0, 0);
@@ -13,12 +12,11 @@
   let lastName = "";
   let telephone = "";
   let email = "";
-  let mailingListEmail = "";
   let message = "";
   let messageSent = false;
-  let addedToMailingList = false;
+  let showModal;
   async function sendMessage() {
-    await fetch(`https://lambda.guardianbrothers.com/contact`, {
+    await fetch(`https://lambda.guardianbrothers.com/hybridcontact`, {
       method: "post",
       body: JSON.stringify({
         firstName: firstName,
@@ -29,15 +27,6 @@
       }),
     });
     messageSent = true;
-  }
-  async function addToMailingList() {
-    await fetch(`https://lambda.guardianbrothers.com/mailinglist`, {
-      method: "post",
-      body: JSON.stringify({
-        email: mailingListEmail,
-      }),
-    });
-    addedToMailingList = true;
   }
 </script>
 
@@ -57,25 +46,31 @@
     <div in:fade={{ delay: 250, duration: 500 }} class="mainSubtitle">
       <div class="subtitle">{$_("hybridFund.main.subtitle")}</div>
     </div>
+    <div class="groupedTopButtons">
+      <a
+        target="_blank"
+        href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad"
+        in:fade={{ delay: 250, duration: 500 }}
+        class="topButton"
+      >
+        {$_("hybridFund.main.button1")}
+      </a>
+      <a
+        on:click={() => {
+          showModal = !showModal;
+        }}
+        href="javascript:void(0)"
+        in:fade={{ delay: 250, duration: 500 }}
+        class="topButton"
+      >
+        {$_("hybridFund.main.button2")}
+      </a>
+    </div>
     <a
-      target="_blank"
-      href="https://meetings.hubspot.com/guardianbrothers/llamada-de-oportunidad-gbh"
-      in:fade={{ delay: 250, duration: 500 }}
-      class="topButton"
-    >
-      {$_("hybridFund.main.button1")}
-    </a>
-    <a
-      target="_blank"
-      href="https://guardianbrothers.com"
-      in:fade={{ delay: 250, duration: 500 }}
-      class="topButton"
-    >
-      {$_("hybridFund.main.button2")}
-    </a>
-    <a
-      target="_blank"
-      href="https://guardianbrothers.com"
+      on:click={() => {
+        showModal = !showModal;
+      }}
+      href="javascript:void(0)"
       in:fade={{ delay: 250, duration: 500 }}
       class="topButton"
     >
@@ -399,7 +394,86 @@
   </div>
 </div>
 
+<div
+  style={!showModal ? "display:none" : ""}
+  class="modalOuter"
+  on:click={(e) => {
+    if (e.target.className.startsWith("modalOuter")) {
+      showModal = !showModal;
+    }
+  }}
+>
+  <div class="modalInner">
+    <div class="modalTitle">
+      ACCEDE A LA PRESENTACION DEL FONDO GUARDIAN HYBRID FUND, LP
+    </div>
+    <div class="modalContent">
+      Proporcione su nombre y direccion de correo electronico en el siguiente
+      formulario para acceder a este docuemento (pdf). Si tiene preguntas o
+      solicita una copia, envie un correo electronico a
+      invest@guardianbrothers.com
+    </div>
+    <div class="modalInputs">
+      <input
+        bind:value={email}
+        placeholder={$_("contact.section2.form.email")}
+      />
+      <input
+        bind:value={firstName}
+        placeholder={$_("contact.section2.form.firstName")}
+      />
+      <input
+        bind:value={lastName}
+        placeholder={$_("contact.section2.form.lastName")}
+      />
+      <input
+        bind:value={telephone}
+        placeholder={$_("contact.section2.form.telephone")}
+      />
+    </div>
+    <button
+      on:click={() => {
+        sendMessage();
+        alert($_("contact.section2.form.success"));
+        showModal = !showModal;
+      }}
+      style="float:right;">{$_("contact.section2.form.submit")}</button
+    >
+  </div>
+</div>
+
 <style>
+  .modalOuter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    padding: 20px;
+    color: #666;
+    background-color: #eee;
+  }
+  .modalTitle {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  .modalContent {
+    margin-bottom: 20px;
+  }
   .topButton {
     color: #ffffff;
     text-transform: uppercase;
@@ -664,7 +738,20 @@
     width: 100%;
   }
 
+  .groupedTopButtons {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%;
+  }
+
   @media only screen and (max-width: 850px) {
+    .groupedTopButtons {
+      flex-direction: column;
+      gap: 0px;
+    }
+
     .topButton {
       margin-left: auto;
       margin-right: auto;
